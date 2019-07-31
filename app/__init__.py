@@ -7,8 +7,14 @@ from flask_sqlalchemy import SQLAlchemy
 # import login
 from flask_login import LoginManager
 
+# import csrf protections
+from flask_wtf.csrf import CSRFProtect, CSRFError
+
 # Define the WSGI application object
 app = Flask(__name__)
+
+# initialize csrf protection
+csrf = CSRFProtect(app)
 
 # define login manager
 login = LoginManager(app)
@@ -33,6 +39,14 @@ def load_user(id):
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template('500.html'), 500
+
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    return render_template('400.html', reason=e.description), 400
 
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.mod_auth.controllers import mod_auth as auth_module

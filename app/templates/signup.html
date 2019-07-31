@@ -19,6 +19,7 @@
                     <span class="black-text"><h1>SIGN UP</h1></span>
                     <div class="row">
                         <form class="col s12" method="POST" action="{{ url_for('auth.signup') }}">
+			  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                           <div class="row">
                             <div class="input-field col s12">
                               <input id="email" name="email" type="text" class="validate description">
