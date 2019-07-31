@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+
+.sub-text {
+    font-family: 'Amatic SC', cursive;
+    letter-spacing: 0.1em;
+    font-size: 1.5em;
+}
+
+.link {
+    letter-spacing: 0.1em;
+}
+

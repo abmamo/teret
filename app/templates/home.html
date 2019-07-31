@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            teret
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <script src="https://kit.fontawesome.com/d11a9ce67f.js"></script>
+    </head>
+    <body>
+        <header>
+            <section class="header-content valign-wrapper">
+                <span class="white-text"><h1>TERET</h1></span>
+                <div class="tagline"><span class="white-text sub-text"> chronicles of a young adult African </span></div>
+
+                <div class="row nav-wrapper">
+                    <div class="col s4 m4 l4">
+                        <a href="{{ url_for('base.stories') }}" class="center-align link"> <span>STORIES</span></a>
+                    </div>
+                    <div class="col s4 m4 l4">
+                        <a href="{{ url_for('base.about') }}" class="right-align link"> <span>ABOUT</span></a>
+                    </div>
+                    <div class="col s4 m4 l4">
+                        <a href="{{ url_for('base.music') }}" class="center-align link"> <span>MUSIC </span></a>
+                    </div>
+                </div>
+            </section>
+        </header>
+        <footer class="page-footer white">
+            <div class="footer-copyright white">
+                <div class="row">
+                     <div class="col s6 m6 l6">
+                         <a href="https://www.instagram.com/ab_dreads"> <i class="fab fa-instagram"></i> </a>
+                     </div>
+                     <div class="col s6 m6 l6">
+                         <a href="https://twitter.com/abmmamo"> <i class="fab fa-twitter"></i> </a>
+                     </div>
+                 </div>
+            </div>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>

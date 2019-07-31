@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            teret
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <script src="https://kit.fontawesome.com/d11a9ce67f.js"></script>
+    </head>
+    <body>
+        <header>
+            <section class="header-content valign-wrapper">
+                <div class="container">
+                    <span class="black-text"><h1>STORY</h1></span>
+                    <div class="row">
+                        <form class="col s12" method="POST" action="{{ url_for('cms.save') }}" enctype=multipart/form-data>
+                          <div class="row">
+                            <div class="input-field col s12">
+                                <input id="title" name="title" type="text" class="validate description" value="{{ story.title }}">
+                              <label for="title">Title</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="content" name="content" class="materialize-textarea">{{ story.content }}</textarea>
+                              <label for="content">Content</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                                <input id="tags" name="tags" type="text" class="validate description" value="{{ story.tags }}">
+                              <label for="tags">Tags</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="file-field col s12">
+                                <div class="btn black ligthen-4">
+                                    <span>Image</span>
+                                    <input type="file" name="image">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                          </div>
+                          <button class="btn waves-effect waves-light black lighten-4" type="submit" name="action">SAVE</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </header>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+
+header {
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  transform-style: preserve-3d;
+  perspective: 100px;
+}
+
+header:before {
+    background: white;
+  background-size: cover;
+  content: "";
+  position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  z-index: -1;
+}
+
+.header-title, .header-subtitle {
+  color: #fff;
+}
+
+.header-subtitle {
+  text-transform: uppercase;
+  margin-bottom: 5rem;
+}
+
+.header-button {
+  transform: translateZ(.1px);
+  position: relative;
+  z-index: 10;
+}
+
+a.link:hover {
+    color: #F8F8FF;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.sub-text {
+      font-family: 'Amatic SC', cursive;
+      letter-spacing: 0.1em;
+      font-size: 1.5em;
+}
+
+.link {
+      letter-spacing: 0.1em;
+}
+
+.nav-wrapper {
+      margin-top: 2.5em;
+}
+
+.fa-instagram, .fa-twitter {
+    font-size: 2em;
+    color: #333;
+}
+
+.fa-instagram:hover, .fa-twitter:hover{
+    color: blue;
+}
