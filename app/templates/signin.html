@@ -38,6 +38,15 @@
                 </div>
             </section>
         </header>
+	{% with messages = get_flashed_messages() %}
+           {% if messages %}
+              {% for message in messages %}
+	         <script type="text/javascript">
+			 Materialize.toast('{{ alert }}', 4000)
+                 </script>
+	      {% endfor %}
+	   {% endif %}
+        {% endwith %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
 </html>

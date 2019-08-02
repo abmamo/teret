@@ -18,6 +18,7 @@
                     <span class="black-text"><h1>STORY</h1></span>
                     <div class="row">
                         <form class="col s12" method="POST" action="{{ url_for('cms.save') }}" enctype=multipart/form-data>
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                           <div class="row">
                             <div class="input-field col s12">
                                 <input id="title" name="title" type="text" class="validate description" value="{{ story.title }}">

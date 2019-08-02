@@ -30,6 +30,7 @@ def signin():
         if not next_page or url_parse(next_page).netloc != '' or next_page == "/":
             next_page = url_for('cms.editor')
         return redirect(url_for('cms.home'))
+    flash("You need to sign in!")
     return render_template("signin.html")
 
 @mod_auth.route('/signup', methods=['GET', 'POST'])

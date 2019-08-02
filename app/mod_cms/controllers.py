@@ -36,14 +36,22 @@ def save():
         content = request.form['content']
         tags = request.form['tags']
         image = request.files['image']
-        # create post
-        post = Post(title=title, slug=slug, content=content, tags=tags, image="NULL")
-        # add to database
-        db.session.add(post)
+        # check if post already exists if so update
+        if Post.query.filter_by(slug=slug).first():
+            post = Post.query.filter_by(slug=slug).first()
+            post.title = title
+            post.slug = slug
+            post.content = content
+            post.tags = tags
+        else:
+            # create post
+            post = Post(title=title, slug=slug, content=content, tags=tags, image="NULL")
+            # add to database
+            db.session.add(post)
+        # commit the changes
         db.session.commit()
         db.session.close()
-        return redirect(url_for('base.stories'))
-    return redirect(url_for('cms.home'))
+        return redirect(url_for('cms.home'))
 
 @mod_cms.route('/edit/<string:slug>', methods=['GET', 'POST'])
 @login_required
