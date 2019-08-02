@@ -10,6 +10,9 @@ from flask_login import LoginManager
 # import csrf protections
 from flask_wtf.csrf import CSRFProtect, CSRFError
 
+# import image upload plugins
+from flask_uploads import UploadSet, IMAGES, configure_uploads
+
 # Define the WSGI application object
 app = Flask(__name__)
 
@@ -26,6 +29,11 @@ app.config.from_object('config')
 # Define the database object which is imported
 # by modules and controllers
 db = SQLAlchemy(app)
+
+# Configure the image uploading via Flask-Uploads
+images = UploadSet('photos', IMAGES)
+configure_uploads(app, images)
+
 
 # import model
 from app.mod_auth.models import User

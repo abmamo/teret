@@ -26,3 +26,12 @@ CSRF_SESSION_KEY = "secret"
 
 # Secret key for signing cookies
 SECRET_KEY = "secret"
+
+# Uploads
+#UPLOADS_DEFAULT_DEST = BASE_DIR + 'app/static/images/'
+UPLOADS_DEFAULT_DEST = "./app/static/images"
+UPLOADS_DEFAULT_URL = 'http://localhost:8080/static/images/'
+
+#UPLOADED_IMAGES_DEST = os.path.join(BASE_DIR, '/app/static/images/')
+UPLOADS_IMAGES_DEST = "./app/static/images"
+UPLOADED_IMAGES_URL = 'http://localhost:8080/static/images/'

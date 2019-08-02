@@ -5,11 +5,11 @@ from flask import Blueprint, request, render_template, \
 # import login manager
 from flask_login import login_required
 # import post model
-from app.mod_auth.models import Post
+from app.mod_cms.models import Post
 # import slug creation libs
 from slugify import slugify
 # import db session
-from app import db
+from app import db, images
 
 # Define the blueprint: 'auth', set its url prefix: mod_cms.url/auth
 mod_cms = Blueprint('cms', __name__, url_prefix='/cms')
@@ -35,7 +35,9 @@ def save():
         slug = slugify(title)
         content = request.form['content']
         tags = request.form['tags']
-        image = request.files['image']
+        image_filename = images.save(request.files['image'])
+        image_url = images.url(image_filename)
+        print(image_url)
         # check if post already exists if so update
         if Post.query.filter_by(slug=slug).first():
             post = Post.query.filter_by(slug=slug).first()
@@ -43,9 +45,11 @@ def save():
             post.slug = slug
             post.content = content
             post.tags = tags
+            post.image_filename = image_filename
+            post.image_url = image_url
         else:
             # create post
-            post = Post(title=title, slug=slug, content=content, tags=tags, image="NULL")
+            post = Post(title=title, slug=slug, content=content, tags=tags, image_filename = image_filename, image_url = image_url)
             # add to database
             db.session.add(post)
         # commit the changes
