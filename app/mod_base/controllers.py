@@ -2,7 +2,7 @@
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for
 #import post model for querying stories
-from app.mod_auth.models import Post
+from app.mod_cms.models import Post
 
 # Define the blueprint: 'auth', set its url prefix: mod_base.url/auth
 mod_base = Blueprint('base', __name__, url_prefix='/')
