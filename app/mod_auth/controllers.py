@@ -39,6 +39,12 @@ def signup():
         # get data from forms
         email = request.form['email']
         password = request.form['password']
+        # find user
+        user = User.query.filter_by(email = email).first()
+        # check email has been found
+        if user != None:
+            # return to sign up page
+            return redirect(url_for('auth.signup'))
         # initialize user
         user = User(email=email)
         user.set_password(password)
