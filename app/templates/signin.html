@@ -23,13 +23,13 @@
                           <div class="row">
                             <div class="input-field col s12">
                               <input id="email" name="email" type="text" class="validate description">
-                              <label for="email">Email</label>
+                              <label for="email"><p>email</p></label>
                             </div>
                           </div>
                           <div class="row">
                             <div class="input-field col s12">
                               <input id="password" name="password" type="password" class="validate description">
-                              <label for="password">Password</label>
+                              <label for="password"><p>password</p></label>
                             </div>
                           </div>
                           <button class="btn waves-effect waves-light black ligthen-4" type="submit" name="action">Log In</button>
@@ -38,14 +38,15 @@
                 </div>
             </section>
         </header>
-	{% with messages = get_flashed_messages() %}
+        
+        {% with messages = get_flashed_messages() %}
            {% if messages %}
               {% for message in messages %}
-	         <script type="text/javascript">
-			 Materialize.toast('{{ alert }}', 4000)
-                 </script>
-	      {% endfor %}
-	   {% endif %}
+                <script type="text/javascript">
+                    Materialize.toast('{{ alert }}', 4000)
+                </script>
+	            {% endfor %}
+	         {% endif %}
         {% endwith %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>

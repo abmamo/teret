@@ -4,12 +4,11 @@
         <title>
             teret
         </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-         <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
-         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-         <script src="https://kit.fontawesome.com/d11a9ce67f.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/d11a9ce67f.js"></script>
     </head>
     <body>
         <header>
@@ -22,25 +21,25 @@
                           <div class="row">
                             <div class="input-field col s12">
                               <input id="title" name="title" type="text" class="validate description">
-                              <label for="title">Title</label>
+                              <label for="title"><p>title</p></label>
                             </div>
                           </div>
                           <div class="row">
                             <div class="input-field col s12">
                               <textarea id="content" name="content" class="materialize-textarea"></textarea>
-                              <label for="content">Content</label>
+                              <label for="content"><p>content</p></label>
                             </div>
                           </div>
                           <div class="row">
                             <div class="input-field col s12">
                               <input id="tags" name="tags" type="text" class="validate description">
-                              <label for="tags">Tags</label>
+                              <label for="tags"><p>tags</p></label>
                             </div>
                           </div>
                           <div class="row">
                             <div class="file-field col s12">
                                 <div class="btn black ligthen-4">
-                                    <span>Image</span>
+                                    <span>image</span>
                                     <input type="file" name="image">
                                 </div>
                                 <div class="file-path-wrapper">

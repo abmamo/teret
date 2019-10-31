@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 header {
   align-items: center;
   display: flex;
@@ -14,8 +24,7 @@ header {
 }
 
 header:before {
-  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.8)),
-              url('../images/landing.jpg') no-repeat bottom;
+  background: #333;
   background-size: cover;
   content: "";
   position: absolute;
@@ -26,7 +35,7 @@ header:before {
   z-index: -1;
 }
 
-.header-title, .header-subtitle {
+.header-title, .header-subtitle, .logo-text, .sub-text, link {
   color: #fff;
 }
 
@@ -35,26 +44,11 @@ header:before {
   margin-bottom: 5rem;
 }
 
-.header-button {
-  transform: translateZ(.1px);
-  position: relative;
-  z-index: 10;
-}
-
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-main {
-    flex: 1 0 auto;
-}
-
 .sub-text {
     font-family: 'Amatic SC', cursive;
     letter-spacing: 0.1em;
     font-size: 1.5em;
+    color: #f4f4f4;
 }
 
 .link {
@@ -76,6 +70,9 @@ main {
 }
 
 .fa-instagram:hover, .fa-twitter:hover {
-    color: blue;
+    color: purple;
 }
 
+.social-icon {
+  color: #333;
+}

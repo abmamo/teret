@@ -10,3 +10,26 @@
     letter-spacing: 0.1em;
 }
 
+.tag-text {
+    color: #333;
+    letter-spacing: 0.1em;
+    font-family: 'Amatic SC', cursive;
+}
+
+.tag-text:hover {
+    cursor: pointer;
+    color: purple;
+}
+
+.fa-instagram, .fa-twitter {
+    font-size: 2em;
+    color: #333;
+}
+
+.fa-instagram:hover, .fa-twitter:hover {
+    color: purple;
+}
+
+.social-icon {
+  color: #333;
+}

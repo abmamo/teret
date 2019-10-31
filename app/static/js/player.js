@@ -281,6 +281,11 @@ var player = new Player([
     file: 'pray_with_me',
     howl: null
   },
+  {
+    title: 'froze',
+    file: 'froze',
+    howl: null 
+  },
 ]);
 
 // Bind our player controls.

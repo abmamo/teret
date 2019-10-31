@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 header {
   align-items: center;
   display: flex;
@@ -40,18 +50,12 @@ header:before {
   z-index: 10;
 }
 
+.nav-wrapper {
+  margin-top: 2.5em;
+}
+
 a.link:hover {
     color: #F8F8FF;
-}
-
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-main {
-    flex: 1 0 auto;
 }
 
 .sub-text {
@@ -64,15 +68,11 @@ main {
       letter-spacing: 0.1em;
 }
 
-.nav-wrapper {
-      margin-top: 2.5em;
-}
-
 .fa-instagram, .fa-twitter {
     font-size: 2em;
     color: #333;
 }
 
 .fa-instagram:hover, .fa-twitter:hover{
-    color: blue;
+    color: purple;
 }
