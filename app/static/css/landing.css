@@ -24,7 +24,7 @@ header {
 }
 
 header:before {
-  background: #333;
+  background-image: linear-gradient(to top, #f4f4f4, #bfbfbf, #8d8d8d, #5e5e5e, #333333);
   background-size: cover;
   content: "";
   position: absolute;
@@ -57,7 +57,7 @@ header:before {
 }
 
 .link:hover {
-    color: #999999;
+    color: purple;
 }
 
 .nav-wrapper {
