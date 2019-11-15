@@ -1,4 +1,5 @@
 *.db
+app/static/images/uploads/
 /env
 /teretenv
 __pycahce__
