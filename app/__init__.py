@@ -31,8 +31,8 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 
 # Configure the image uploading via Flask-Uploads
-images = UploadSet('photos', IMAGES)
-configure_uploads(app, images)
+uploads = UploadSet('uploads', IMAGES)
+configure_uploads(app, uploads)
 
 
 # import model
