@@ -9,7 +9,8 @@ from app.mod_cms.models import Post
 # import slug creation libs
 from slugify import slugify
 # import db session
-from app import db, images
+from app import db, uploads
+
 
 # Define the blueprint: 'auth', set its url prefix: mod_cms.url/auth
 mod_cms = Blueprint('cms', __name__, url_prefix='/cms')
@@ -35,9 +36,10 @@ def save():
         slug = slugify(title)
         content = request.form['content']
         tags = request.form['tags']
-        image_filename = images.save(request.files['image'])
-        image_url = images.url(image_filename)
+        image_filename = uploads.save(request.files['image'])
+        image_url = uploads.url(image_filename)
         print(image_url)
+        print(image_filename)
         # check if post already exists if so update
         if Post.query.filter_by(slug=slug).first():
             post = Post.query.filter_by(slug=slug).first()
