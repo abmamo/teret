@@ -36,10 +36,13 @@ def save():
         slug = slugify(title)
         content = request.form['content']
         tags = request.form['tags']
-        image_filename = uploads.save(request.files['image'])
-        image_url = uploads.url(image_filename)
-        print(image_url)
-        print(image_filename)
+        # try and get images if not just keep it empty
+        try:
+            image_filename = uploads.save(request.files['image'])
+            image_url = uploads.url(image_filename)
+        except:
+            image_filename = ""
+            image_url = ""
         # check if post already exists if so update
         if Post.query.filter_by(slug=slug).first():
             post = Post.query.filter_by(slug=slug).first()
