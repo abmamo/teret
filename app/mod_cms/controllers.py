@@ -10,6 +10,8 @@ from app.mod_cms.models import Post
 from slugify import slugify
 # import db session
 from app import db, uploads
+# import os to remove files
+import os
 
 
 # Define the blueprint: 'auth', set its url prefix: mod_cms.url/auth
@@ -90,6 +92,9 @@ def unpublish(slug):
 @login_required
 def delete(slug):
     post = Post.query.filter_by(slug=slug).first()
+    path = os.path.join(os.getcwd(), "app/static/images/uploads", post.image_filename)
+    # delete the image associated with the post stored on disk
+    os.remove(path)
     db.session.delete(post)
     db.session.commit()
     db.session.close()
