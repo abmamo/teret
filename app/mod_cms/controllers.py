@@ -92,9 +92,12 @@ def unpublish(slug):
 @login_required
 def delete(slug):
     post = Post.query.filter_by(slug=slug).first()
-    path = os.path.join(os.getcwd(), "app/static/images/uploads", post.image_filename)
-    # delete the image associated with the post stored on disk
-    os.remove(path)
+    try:
+        path = os.path.join(os.getcwd(), "app/static/images/uploads", post.image_filename)
+        # delete the image associated with the post stored on disk
+        os.remove(path)
+    except:
+        pass
     db.session.delete(post)
     db.session.commit()
     db.session.close()
