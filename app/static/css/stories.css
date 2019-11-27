@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Mono&display=swap');
 
 .sub-text {
     font-family: 'Amatic SC', cursive;
@@ -32,4 +33,8 @@
 
 .social-icon {
   color: #333;
+}
+
+p {
+    font-family: 'PT Mono', monospace !important;
 }
