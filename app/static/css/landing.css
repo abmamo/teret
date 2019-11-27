@@ -24,7 +24,8 @@ header {
 }
 
 header:before {
-  background-image: linear-gradient(to top, #f4f4f4, #bfbfbf, #8d8d8d, #5e5e5e, #333333);
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(78,9,121,1) 48%, rgba(0,212,255,1) 100%);
   background-size: cover;
   content: "";
   position: absolute;
@@ -57,7 +58,8 @@ header:before {
 }
 
 .link:hover {
-    color: purple;
+    text-transform: lowercase;
+    text-decoration: underline;
 }
 
 .nav-wrapper {
