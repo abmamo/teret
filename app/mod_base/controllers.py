@@ -10,18 +10,23 @@ mod_base = Blueprint('base', __name__, url_prefix='/')
 # basic routes
 @mod_base.route('/', methods=['GET'])
 def home():
+    # render the landing page
     return render_template('home.html')
 
 @mod_base.route('/stories', methods=['GET'])
 def stories():
+    # server side render of tags and stories
     tags = Post.query.filter_by(published=True).distinct(Post.tags).all()
-    stories = Post.query.filter_by(published=True).all()
-    return render_template('stories.html', tags = tags, stories = stories)
+    # sort posts by latest
+    stories = Post.query.filter_by(published=True).all()[::-1]
+    return render_template('stories.html', tags=tags, stories=stories)
 
 @mod_base.route('/about', methods=['GET'])
 def about():
+    # render about page
     return render_template('about.html')
 
 @mod_base.route('/music', methods=['GET'])
 def music():
-     return render_template('music.html')
+    # render javascript music player
+    return render_template('music.html')

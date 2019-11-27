@@ -1,3 +1,4 @@
+# import database session
 from app import db
 
 class Post(db.Model):
@@ -11,7 +12,6 @@ class Post(db.Model):
      image_url = db.Column(db.String, default=None, nullable=True)
      published = db.Column(db.Boolean, default=False)
      user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
 
      def __repr__(self):
          return '<Post {}>'.format(self.slug)

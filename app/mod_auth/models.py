@@ -1,8 +1,11 @@
 from datetime import datetime
+# import database and login manager from application
 from app import db, login
+# import hashing and hash checking functions
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+# define flask login user loader by id
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
