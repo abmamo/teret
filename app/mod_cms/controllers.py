@@ -30,6 +30,16 @@ def home():
 def editor():
     return render_template('editor.html')
 
+@mod_cms.route('/upload', methods=['POST'])
+@login_required
+def upload():
+    try:
+        image_filename = uploads.save(request.files['image'])
+        image_url = uploads.url(image_filename)
+        return image_url
+    except:
+        return ''
+
 @mod_cms.route('/save', methods=['POST'])
 @login_required
 def save():
