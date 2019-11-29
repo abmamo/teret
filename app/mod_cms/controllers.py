@@ -21,24 +21,41 @@ mod_cms = Blueprint('cms', __name__, url_prefix='/cms')
 @mod_cms.route('/', methods=['GET'])
 @login_required
 def home():
+    # get tags and stories 
     tags = Post.query.distinct(Post.tags).all()
-    stories = Post.query.all()
+    # sort stories by creation date
+    stories = Post.query.all()[::-1]
     return render_template('cms.html', tags=tags, stories=stories)
 
 @mod_cms.route('/editor', methods=['GET'])
 @login_required
 def editor():
+    # render summernote editor page
     return render_template('editor.html')
+
+@mod_cms.route('/upload', methods=['POST'])
+@login_required
+def upload():
+    # image upload url doesn't render anything
+    try:
+        # try saving image and return url on disk
+        image_filename = uploads.save(request.files['image'])
+        image_url = uploads.url(image_filename)
+        return image_url
+    except:
+        # if image can't be saved returned empty string as url
+        return ''
 
 @mod_cms.route('/save', methods=['POST'])
 @login_required
 def save():
     if request.method == 'POST':
+        # get post data from form
         title = request.form['title']
         slug = slugify(title)
         content = request.form['content']
         tags = request.form['tags']
-        # try and get images if not just keep it empty
+        # try and get main image if not just keep it empty
         try:
             image_filename = uploads.save(request.files['image'])
             image_url = uploads.url(image_filename)
@@ -62,19 +79,24 @@ def save():
         # commit the changes
         db.session.commit()
         db.session.close()
+        # redirect to cms homepage
         return redirect(url_for('cms.home'))
 
 @mod_cms.route('/edit/<string:slug>', methods=['GET', 'POST'])
 @login_required
 def edit(slug):
+    # edit specific story 
     story = Post.query.filter_by(slug=slug).first()
     return render_template('edit.html', story=story)
 
 @mod_cms.route('/publish/<string:slug>', methods=['POST'])
 @login_required
 def publish(slug):
+    # get post by id
     post = Post.query.filter_by(slug=slug).first()
+    # set published to True
     post.published = True
+    # commit changes to database
     db.session.commit()
     db.session.close()
     return redirect(url_for('cms.home'))
@@ -82,8 +104,11 @@ def publish(slug):
 @mod_cms.route('/unpublish/<string:slug>', methods=['POST'])
 @login_required
 def unpublish(slug):
+    # get post by id
     post = Post.query.filter_by(slug=slug).first()
+    # set published to false
     post.published = False
+    # commit changes to database
     db.session.commit()
     db.session.close()
     return redirect(url_for('cms.home'))
@@ -91,10 +116,14 @@ def unpublish(slug):
 @mod_cms.route('/delete/<string:slug>', methods=['POST'])
 @login_required
 def delete(slug):
+    # need to add ways to depelete post images
     post = Post.query.filter_by(slug=slug).first()
-    path = os.path.join(os.getcwd(), "app/static/images/uploads", post.image_filename)
-    # delete the image associated with the post stored on disk
-    os.remove(path)
+    try:
+        path = os.path.join(os.getcwd(), "app/static/images/uploads", post.image_filename)
+        # delete the image associated with the post stored on disk
+        os.remove(path)
+    except:
+        pass
     db.session.delete(post)
     db.session.commit()
     db.session.close()

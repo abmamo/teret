@@ -63,7 +63,7 @@
             <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}">
                  <div class="gallery-curve-wrapper">
                       <a class="gallery-cover gray" style="height: 300px;">
-                           <img src="https://source.unsplash.com/random/1280x500" alt="placeholder">
+                           <img src="{{ story.image_url }}" alt="placeholder">
                       </a>
                       <div class="gallery-header">
                           <span>{{ story.title }}</span>
@@ -72,10 +72,10 @@
                            <div class="title-wrapper">
                                <h3>{{ story.title }}</h3>
                            </div>
-                           <p class="description"> {{ story.content }} </p>
+                           <p class="description"> {{ story.content | safe }} </p>
                       </div>
                       <div class="gallery-action">
-                           <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">favorite</i></a>
+                           <a class="btn-floating btn-large waves-effect waves-light purple"><i class="material-icons">favorite</i></a>
                       </div>
                  </div>
             </div>

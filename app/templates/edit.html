@@ -1,59 +1,38 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            teret
-        </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-         <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
-         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-         <script src="https://kit.fontawesome.com/d11a9ce67f.js"></script>
-    </head>
-    <body>
-        <header>
-            <section class="header-content valign-wrapper">
-                <div class="container">
-                    <span class="black-text"><h1>STORY</h1></span>
-                    <div class="row">
-                        <form class="col s12" method="POST" action="{{ url_for('cms.save') }}" enctype=multipart/form-data>
-				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                          <div class="row">
-                            <div class="input-field col s12">
-                                <input id="title" name="title" type="text" class="validate description" value="{{ story.title }}">
-                              <label for="title">Title</label>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="content" name="content" class="materialize-textarea">{{ story.content }}</textarea>
-                              <label for="content">Content</label>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="input-field col s12">
-                                <input id="tags" name="tags" type="text" class="validate description" value="{{ story.tags }}">
-                              <label for="tags">Tags</label>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="file-field col s12">
-                                <div class="btn black ligthen-4">
-                                    <span>Image</span>
-                                    <input type="file" name="image">
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text">
-                                </div>
-                            </div>
-                          </div>
-                          <button class="btn waves-effect waves-light black lighten-4" type="submit" name="action">SAVE</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </header>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    </body>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link href="{{ url_for('static', filename='summernote/summernote-bs4.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='summernote/summernote-bs4.min.js') }}"></script>
+  </head>
+  <body>
+    <div class="container">
+    <form method="post" action="{{ url_for('cms.save') }}" enctype=multipart/form-data>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-group">
+        <label for="title">title</label>
+        <input id="title" name="title" type="text" class="form-control" value="{{ story.title }}">
+      </div>
+      <div class="form-group">
+          <label for="title">tags</label>
+          <input id="tags" name="tags" type="text" class="form-control" value="{{ story.tags }}">
+      </div>
+      <div class="form-group">
+          <label for="title">image</label>
+          <input type = "file" name = "image" placeholder = "file" class="form-control"/>
+      </div>
+      <textarea id="summernote" name="content">{{ story.content }}</textarea>
+      <button class="btn waves-effect waves-light black lighten-4" type="submit" name="action">SAVE</button>
+    </form>
+    </div>
+    <script>
+      $(document).ready(function() {
+        $('#summernote').summernote();
+      });
+    </script>
+  </body>
 </html>

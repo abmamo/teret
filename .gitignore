@@ -2,5 +2,5 @@
 app/static/images/uploads/
 /env
 /teretenv
-__pycahce__
+__pycache__
 /app/static/images/photos
