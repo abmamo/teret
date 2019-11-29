@@ -116,6 +116,7 @@ def unpublish(slug):
 @mod_cms.route('/delete/<string:slug>', methods=['POST'])
 @login_required
 def delete(slug):
+    # need to add ways to depelete post images
     post = Post.query.filter_by(slug=slug).first()
     try:
         path = os.path.join(os.getcwd(), "app/static/images/uploads", post.image_filename)
