@@ -63,7 +63,7 @@
             <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}">
                  <div class="gallery-curve-wrapper">
                       <a class="gallery-cover gray" style="height: 300px;">
-                           <img src="{{ url_for('static', filename='images/uploads/' + story.image_filename) }}" alt="{{ story.image_filename }}">
+                           <img class="responsive-img" src="{{ url_for('static', filename='images/uploads/' + story.image_filename) }}" alt="{{ story.image_filename }}">
                       </a>
                       <div class="gallery-header">
                           <span>{{ story.title }}</span>
@@ -72,7 +72,7 @@
                            <div class="title-wrapper">
                                <h3>{{ story.title }}</h3>
                            </div>
-                           <p class="description"> {{ story.content | safe }} </p>
+                           <p class="content"> {{ story.content | safe }} </p>
                       </div>
                       <div class="gallery-action">
                            <div class="row">
