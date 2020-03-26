@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
     <title>stories</title>
 
     <!-- Lato Font -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link
+      href="http://fonts.googleapis.com/css?family=Lato:300,400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
 
     <!-- Stylesheet -->
-    <link href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}" rel="stylesheet">
+    <link
+      href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}"
+      rel="stylesheet"
+    />
 
-    <link href="{{ url_for('static', filename='css/stories.css') }}" rel="stylesheet">
+    <link
+      href="{{ url_for('static', filename='css/stories.css') }}"
+      rel="stylesheet"
+    />
 
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
 
   <body class="blog">
@@ -27,10 +40,13 @@
         <div class="pattern active" style="background: white;"></div>
       </div>
       <div class="nav-wrapper container">
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text"
+          ><i class="material-icons">menu</i></a
+        >
         <ul class="right hide-on-med-and-down">
-            <li><a href="{{ url_for('base.about') }}" class="black-text">ABOUT</a></li>
-            <li><a href="{{ url_for('base.music') }}" class="black-text">MUSIC</a></li>
+          <li>
+            <a href="{{ url_for('base.about') }}" class="black-text">ABOUT</a>
+          </li>
         </ul>
 
         <div class="nav-header center white">
@@ -43,46 +59,59 @@
       <div class="categories-wrapper white darken-1">
         <div class="categories-container">
           <ul class="categories container">
-              <li class="active description"><a class="black-text" href="#all">All</a></li>
-              {% for tag in tags %}
-              <li><a class="tag-text" href="#{{ tag.tags.lower() }}">{{ tag.tags }}</a></li>
-              {% endfor %}
+            <li class="active description">
+              <a class="black-text" href="#all">All</a>
+            </li>
+            {% for tag in tags %}
+            <li>
+              <a class="tag-text" href="#{{ tag.tags.lower() }}"
+                >{{ tag.tags }}</a
+              >
+            </li>
+            {% endfor %}
           </ul>
         </div>
       </div>
     </nav>
     <ul class="sidenav" id="nav-mobile">
-        <li><a href="{{ url_for('base.about') }}" class="black-text">ABOUT</a></li>
-        <li><a href="{{ url_for('base.music') }}" class="black-text">MUSIC</a></li>
+      <li>
+        <a href="{{ url_for('base.about') }}" class="black-text">ABOUT</a>
+      </li>
     </ul>
 
     <div id="portfolio" class="section gray">
       <div class="container">
         <div class="gallery row">
-            {% for story in stories %}
-            <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}">
-                 <div class="gallery-curve-wrapper">
-                      <a class="gallery-cover gray" style="height: 300px;">
-                           <img src="{{ story.image_url }}" alt="placeholder">
-                      </a>
-                      <div class="gallery-header">
-                          <span>{{ story.title }}</span>
-                      </div>
-                      <div class="gallery-body">
-                           <div class="title-wrapper">
-                               <h3>{{ story.title }}</h3>
-                           </div>
-                           <p class="description"> {{ story.content | safe }} </p>
-                      </div>
-                      <div class="gallery-action">
-                           <a class="btn-floating btn-large waves-effect waves-light purple"><i class="material-icons">favorite</i></a>
-                      </div>
-                 </div>
+          {% for story in stories %}
+          <div
+            class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}"
+          >
+            <div class="gallery-curve-wrapper">
+              <a class="gallery-cover gray" style="height: 300px;">
+                <img src="{{ story.image_url }}" alt="placeholder" />
+              </a>
+              <div class="gallery-header">
+                <span>{{ story.title }}</span>
+              </div>
+              <div class="gallery-body">
+                <div class="title-wrapper">
+                  <h3>{{ story.title }}</h3>
+                </div>
+                <p class="description">{{ story.content | safe }}</p>
+              </div>
+              <div class="gallery-action">
+                <a
+                  class="btn-floating btn-large waves-effect waves-light purple"
+                  ><i class="material-icons">favorite</i></a
+                >
+              </div>
             </div>
-            {% endfor %}
+          </div>
+          {% endfor %}
         </div>
       </div>
-    </div><!-- /.container -->
+    </div>
+    <!-- /.container -->
 
     <!-- Core Javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -92,6 +121,5 @@
     <script src="{{ url_for('static', filename='js/color-thief.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/galleryExpand.js') }}"></script>
     <script src="{{ url_for('static', filename='js/init.js') }}"></script>
-
   </body>
 </html>
