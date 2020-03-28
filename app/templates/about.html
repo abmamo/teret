@@ -1,45 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            about
-        </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/d11a9ce67f.js"></script>
-    </head>
-    <body>
-        <header>
-            <section class="header-content valign-wrapper">
-                <div class="container">
-                    <span class="black-text"><h1>ABOUT</h1></span>
-                    <p class="description">
-                       thoughts and musings on this journey as an international student / computer scientist living + studying abroad in the US. topics include but are not limited to music, culture, fashion, lifestyle, opinions on the direction of tech, and various escapades + experiences. 
-                    </p>
-                    <p class="description">
-                       this project orignally started as a journal for recording various experiences to share with friends back home @ አዲስ አበባ
-                    </p>
-                    <p class="description">
-                        into music & an amateur musician. listen to some tunes @ <a href="{{ url_for('base.music') }}">HERE</a>
-                    </p>
-                </div>
-            </section>
-        </header>
-        <footer class="page-footer white">
-             <div class="footer-copyright white">
-                 <div class="row">
-                      <div class="col s6 m6 l6">
-                          <a href="https://www.instagram.com/ab_dreads"> <i class="fab fa-instagram"></i> </a>
-                      </div>
-                      <div class="col s6 m6 l6">
-                          <a href="https://www.twitter.com/abmamo"> <i class="fab fa-twitter"></i> </a>
-                      </div>
-                  </div>
-             </div>
-         </footer>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    </body>
+  <head>
+    <title>
+      about
+    </title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/about.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="http://fonts.googleapis.com/css?family=Lato:300,400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/d11a9ce67f.js"></script>
+  </head>
+  <body>
+    <header>
+      <section class="header-content valign-wrapper">
+        <div class="container">
+          <span class="black-text"><h1>ABOUT</h1></span>
+          <p class="description">
+            thoughts and musings on this journey as an international student /
+            computer scientist living + studying abroad in the US. topics
+            include but are not limited to music, culture, fashion, lifestyle,
+            opinions on the direction of tech, and various escapades +
+            experiences.
+          </p>
+          <p class="description">
+            this project orignally started as a journal for recording various
+            experiences to share with friends back home @ አዲስ አበባ
+          </p>
+          <p class="description">
+            into music & an amateur musician. listen to some tunes @
+            <a href="https://music.abmamo.com">HERE</a>
+          </p>
+        </div>
+      </section>
+    </header>
+    <footer class="page-footer white">
+      <div class="footer-copyright white">
+        <div class="row">
+          <div class="col s6 m6 l6">
+            <a href="https://www.instagram.com/ab_dreads">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+          <div class="col s6 m6 l6">
+            <a href="https://www.twitter.com/abmamo">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
 </html>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC&display=swap");
 
 body {
   display: flex;
@@ -24,20 +24,23 @@ header {
 }
 
 header:before {
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(78,9,121,1) 48%, rgba(0,212,255,1) 100%);
+  background: #f4f4f4;
   background-size: cover;
   content: "";
   position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: -1;
 }
 
-.header-title, .header-subtitle, .logo-text, .sub-text, link {
-  color: #fff;
+.header-title,
+.header-subtitle,
+.logo-text,
+.sub-text,
+link {
+  color: #333;
 }
 
 .header-subtitle {
@@ -46,33 +49,35 @@ header:before {
 }
 
 .sub-text {
-    font-family: 'Amatic SC', cursive;
-    letter-spacing: 0.1em;
-    font-size: 1.5em;
-    color: #f4f4f4;
+  font-family: "Amatic SC", cursive;
+  letter-spacing: 0.1em;
+  font-size: 1.5em;
+  color: #333;
 }
 
 .link {
-    letter-spacing: 0.15em;
-    color: white;
+  letter-spacing: 0.15em;
+  color: #333;
 }
 
 .link:hover {
-    text-transform: lowercase;
-    text-decoration: underline;
+  text-transform: lowercase;
+  text-decoration: underline;
 }
 
 .nav-wrapper {
-     margin-top: 2.5em;
+  margin-top: 2.5em;
 }
 
-.fa-instagram, .fa-twitter {
-    font-size: 2em;
-    color: #333;
+.fa-instagram,
+.fa-twitter {
+  font-size: 2em;
+  color: #333;
 }
 
-.fa-instagram:hover, .fa-twitter:hover {
-    color: purple;
+.fa-instagram:hover,
+.fa-twitter:hover {
+  color: purple;
 }
 
 .social-icon {
