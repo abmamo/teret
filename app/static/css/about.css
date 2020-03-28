@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC&display=swap");
 
 body {
   display: flex;
@@ -24,18 +24,19 @@ header {
 }
 
 header:before {
-    background: white;
+  background: #f4f4f4;
   background-size: cover;
   content: "";
   position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: -1;
 }
 
-.header-title, .header-subtitle {
+.header-title,
+.header-subtitle {
   color: #fff;
 }
 
@@ -45,7 +46,7 @@ header:before {
 }
 
 .header-button {
-  transform: translateZ(.1px);
+  transform: translateZ(0.1px);
   position: relative;
   z-index: 10;
 }
@@ -55,24 +56,26 @@ header:before {
 }
 
 a.link:hover {
-    color: #F8F8FF;
+  color: #f8f8ff;
 }
 
 .sub-text {
-      font-family: 'Amatic SC', cursive;
-      letter-spacing: 0.1em;
-      font-size: 1.5em;
+  font-family: "Amatic SC", cursive;
+  letter-spacing: 0.1em;
+  font-size: 1.5em;
 }
 
 .link {
-      letter-spacing: 0.1em;
+  letter-spacing: 0.1em;
 }
 
-.fa-instagram, .fa-twitter {
-    font-size: 2em;
-    color: #333;
+.fa-instagram,
+.fa-twitter {
+  font-size: 2em;
+  color: #333;
 }
 
-.fa-instagram:hover, .fa-twitter:hover{
-    color: purple;
+.fa-instagram:hover,
+.fa-twitter:hover {
+  color: purple;
 }
