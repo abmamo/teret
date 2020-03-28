@@ -1,18 +1,17 @@
 # teret
-### technical overview
-my blogging application built in flask + HTML/CSS/JavaScript. currently using a sqlite database on a digitalocean server to store content but can be integrated and has been tested with PostgreSQL.
 
-can use any rich text editing JavaScript code as the application is modularized and the editor is independent from other parts of the application.
+The word ተረት(tenet) in Amharic translates to story. Stories have been an integral part of human existence and civilizations. They have provided and continue to provide a medium to transfer important survival and social information through time and space. In addition stories can serve as a communication device and a bridge between different cultures. Teret therefore is a platform built to create and manage stories with rich media such as images, embedded social media links, videos, text, and much more. It was inspired by the desire to chronicle my experiences as an international student in Portland and minority in tech. 
 
-Stylistically the site uses the material design language. It also has an integrated JavaScript music player.
+Teret is a responsive web application built to create and manage rich text content. It is built using a tech stack that includes but is not limited to Flask/JavaScript/HTML/CSS/PostgreSQL/Elasticsearch/Jinja/SummernoteJS. It is comprised of three main modules: the user accessible base module, the authentication module, and the content management module. The base module mainly serves published stories and information about the project while the authentication module handles authentication and authorization to access the CMS. This is done through a combination of python decorators and Flask Login. The CMS module is comprised of a dashboard for managing stories and a rich text editor. 
 
-The application backend is built in Flask and uses libraries such as Flask-SQLAlchemy. To install all requirements you can 
+### Quickstart
+The application was built using Flask and needs python installed to work. To run the application:
 
 1. Create a virtual environment
   ```
-      python -m venv env
+      python3 -m venv env
   ```
-2. Install all the requirements recursively
+2. Install all the requirements listed in the requirements file
   ```
       pip install -r requirements.txt
   ```
@@ -20,7 +19,13 @@ The application backend is built in Flask and uses libraries such as Flask-SQLAl
    ```
       python wsgi.py
    ```
-### the why
 
-the app was inspired by the urge to chronicle my experiences as an international student and a young coder in Portland. the core vision is sharing real-life stories and experiences to bridgen the gap between the various cultural spaces I have existed in. especially as a computer science major existing in a time where technology has played and plays such a significant role in shaping the world
-  
+### Technical Overview:
+
+#### Backend
+
+Teret uses Flask to serve various application and a combination of SQLAlchemy + PostgreSQL + Elasticsearch to manage users and index stories in a database. It can also work with a locally stored SQLite database for storage.
+
+#### Frontend
+
+The UI  is fully responsive across devices and follows material design principles. It is built using HTML/CSS/JavaScript/Jinja2. A very neat feature implemented using colortheif.js allows the color palette of a story to match the primary colors of its image to give the reader a richer experience.
