@@ -78,33 +78,29 @@
         <a href="{{ url_for('base.about') }}" class="black-text">ABOUT</a>
       </li>
     </ul>
-
+ 
     <div id="portfolio" class="section gray">
       <div class="container">
         <div class="gallery row">
-          {% for story in stories %}
-          <div
-            class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}"
-          >
-            <div class="gallery-curve-wrapper">
-              <a class="gallery-cover gray" style="height: 300px;">
-                <img src="{{ story.image_url }}" alt="placeholder" />
-              </a>
-              <div class="gallery-header">
-                <span>{{ story.title }}</span>
-              </div>
-              <div class="gallery-body">
-                <div class="title-wrapper">
-                  <h3>{{ story.title }}</h3>
-                </div>
-                <p class="description">{{ story.content | safe }}</p>
-              </div>
-              <div class="gallery-action">
-                <a
-                  class="btn-floating btn-large waves-effect waves-light purple"
-                  ><i class="material-icons">favorite</i></a
-                >
-              </div>
+            {% for story in stories %}
+            <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}">
+                 <div class="gallery-curve-wrapper">
+                      <a class="gallery-cover gray" style="height: 300px;">
+                           <img class="responsive-img" src="{{ story.image_url }}" alt="placeholder">
+                      </a>
+                      <div class="gallery-header">
+                          <span>{{ story.title }}</span>
+                      </div>
+                      <div class="gallery-body">
+                           <div class="title-wrapper">
+                               <h3>{{ story.title }}</h3>
+                           </div>
+                           <p class="description"> {{ story.content | safe }} </p>
+                      </div>
+                      <!--<div class="gallery-action">
+                           <a class="btn-floating btn-large waves-effect waves-light purple"><i class="material-icons">favorite</i></a>
+                      </div>-->
+                 </div>
             </div>
           </div>
           {% endfor %}

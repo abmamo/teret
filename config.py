@@ -30,8 +30,8 @@ SECRET_KEY = "secret"
 # Uploads
 #UPLOADS_DEFAULT_DEST = BASE_DIR + 'app/static/images/'
 UPLOADS_DEFAULT_DEST = "./app/static/images/"
-UPLOADS_DEFAULT_URL = 'http://localhost:5000/static/images/'
+UPLOADS_DEFAULT_URL = 'http://teret.abmamo.com/static/images/'
 
 #UPLOADED_IMAGES_DEST = os.path.join(BASE_DIR, '/app/static/images/')
 UPLOADS_IMAGES_DEST = "./app/static/images/"
-UPLOADED_IMAGES_URL = 'http://localhost:5000/static/images/'
+UPLOADED_IMAGES_URL = 'http://teret.abmamo.com/static/images/'
