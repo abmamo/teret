@@ -140,7 +140,7 @@ def reset_with_token(token):
         # get user using email
         user = User.query.filter_by(email=email).first_or_404()
         # set hashed password in database
-        user.update_password(password)
+        user.set_password(password)
         # save changes in database
         db.session.commit()
         db.session.close()

@@ -21,9 +21,9 @@
                       message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
                       %}
                     </div>
-                    <span class="black-text"><h1>Change Password</h1></span>
+                    <span class="black-text"><h1>Change Passwordc</h1></span>
                     <div class="row">
-                        <form class="col s12" method="POST" action="{{ url_for('auth.signin') }}">
+                        <form class="col s12" method="POST" action="{{ url_for('auth.reset_with_token', token=token) }}">
 			                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                           <div class="row">
                             <div class="input-field col s12">
