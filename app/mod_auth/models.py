@@ -18,6 +18,10 @@ class User(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 
+    def __init__(self, email, password):
+        self.email = email
+        self.password = generate_password_hash(password)
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 

@@ -1,6 +1,5 @@
 import pytest
 from app import app, db
-from app.mod_auth import User
 
 
 @pytest.fixture(scope='module')
