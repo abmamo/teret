@@ -29,6 +29,11 @@
   </head>
   <body>
     <header>
+     <div id="snackbar">
+                      {% with messages = get_flashed_messages() %} {% if messages %} {% for
+                      message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
+                      %}
+                    </div>
       <section class="header-content valign-wrapper">
         <span class="logo-text"><h1>TERET / ተረት</h1></span>
         <div class="tagline">
@@ -66,5 +71,23 @@
       </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for
+    message in messages %} {% if message is defined and message|length %}
+    <script>
+      function showAlert() {
+        // Get the snackbar DIV
+        var x = document.getElementById("snackbar");
+
+        // Add the "show" class to DIV
+        x.className = "show";
+
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 3000);
+      }
+      window.onload = showAlert;
+    </script>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
   </body>
 </html>

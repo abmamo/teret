@@ -7,7 +7,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Define the database - we are working with
 # SQLite for this example
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'teret.db')
 DATABASE_CONNECT_OPTIONS = {}
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -35,3 +35,13 @@ UPLOADS_DEFAULT_URL = 'http://teret.abmamo.com/static/images/'
 #UPLOADED_IMAGES_DEST = os.path.join(BASE_DIR, '/app/static/images/')
 UPLOADS_IMAGES_DEST = "./app/static/images/"
 UPLOADED_IMAGES_URL = 'http://teret.abmamo.com/static/images/'
+
+# email configuration
+MAIL_SERVER = 'smtp.googlemail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = 'abenezer.mammo@gmail.com'
+MAIL_PASSWORD = '!@#$QWERt5'
+# set max users
+MAX_USERS_NOT_REACHED = True

@@ -7,8 +7,14 @@ from flask_sqlalchemy import SQLAlchemy
 # import login
 from flask_login import LoginManager
 
+# import mail manager
+from flask_mail import Mail, Message
+
 # import csrf protections
 from flask_wtf.csrf import CSRFProtect, CSRFError
+
+# import serializer for generating tokens
+from itsdangerous import URLSafeTimedSerializer
 
 # import image upload plugins
 from flask_uploads import UploadSet, IMAGES, configure_uploads
@@ -30,9 +36,20 @@ app.config.from_object('config')
 # by modules and controllers
 db = SQLAlchemy(app)
 
+# initialize mail
+mail = Mail(app)
 # Configure the image uploading via Flask-Uploads
 uploads = UploadSet('uploads', IMAGES)
 configure_uploads(app, uploads)
+
+# initialize serializer with the app secret key
+ts = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+
+
+def send_mail(subject, sender, recipients, text_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    mail.send(msg)
 
 
 # import model
