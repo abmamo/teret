@@ -18,7 +18,8 @@
                 <div class="container">
                     <div id="snackbar">
                       {% with messages = get_flashed_messages() %} {% if messages %} {% for
-                      message in messages %} {% if message is defined and message|length %}
+                      message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
+                      %}
                     </div>
                     <span class="black-text"><h1>RESET PASSWORD</h1></span>
                     <div class="row">

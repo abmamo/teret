@@ -94,13 +94,13 @@ def confirm_email(token):
         db.session.close()
         # alert user
         flash("Email address confirmed.")
-        return redirect(url_for('signin'))
+        return redirect(url_for('auth.signin'))
     except:
         abort(500)
 
 @mod_auth.route('/reset', methods=['GET', 'POST'])
 def request_reset():
-    try:
+        #try:
         if request.method == 'POST':
             # get email from form
             email = request.form['email']
@@ -120,11 +120,10 @@ def request_reset():
                       [email], recover_url)
             # alert user
             flash("Reset link sent.")
-            return redirect(url_for('auth.home'))
-        print('here')
-        return render_template('request_reset.html')
-    except:
-        abort(500)
+            return redirect(url_for('base.home'))
+        return render_template("request_reset.html")
+        #except:
+        #abort(500)
 
 
 @mod_auth.route('/reset/<token>', methods=['GET', 'POST'])
