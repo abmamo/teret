@@ -21,7 +21,7 @@ The application was built using Flask and needs python installed to work. To run
 4. Head over to http://localhost:5000/signup to create an account
 5. Once you sign up a confirmation email will be sent to the email account used for signup. Once you confirm your account you will be redirected to the signin page.
    
-### Technical Overview:
+### Technical Overview
 
 ##### Backend
 
@@ -110,7 +110,7 @@ Currently working on setting up Travis-CLI integration and writing more tests.
 
 The UI is fully responsive across devices and follows material design principles. It is built using HTML/CSS/JavaScript/Jinja2. Each story is presented as a material card which opens a modal when clicked which contains the contents of the story. There is a colorthief plugin that matches the navbar to the primary color of the primary story image.
 
-##### Challenges
+### Challenges
 
 Challenge: creating a platform for creating, editing, and manipulating rich text content. Rich text content usually includes text formatting information, images, tables and so on.
 
