@@ -1,7 +1,7 @@
 # teret
-The word ተረት(teret) in Amharic translates to story. Stories have been an integral part of human existence. They have provided and continue to provide a medium to transfer important social information through time and space. Teret is a platform built to create and manage stories containing rich media such as images, embedded social media links, videos, text, and much more. 
+The word ተረት(teret) in Amharic translates to story. Stories have been an integral part of human existence. They have provided and continue to provide a medium to transfer important social information. Teret is a platform built to create and manage short stories containing rich media such as images, embedded social media links, videos, text, animations, and so more. 
 
-It is built using a tech stack that includes but is not limited to Flask/JavaScript/HTML/CSS/PostgreSQL/Elasticsearch/Jinja/SummernoteJS. It is comprised of three main modules: the user accessible base module, the authentication module, and the content management module. The base module mainly serves published stories and information about the project while the authentication module handles authentication and authorization to access the CMS. This is done through a combination of python decorators and Flask Login. The CMS module is comprised of a dashboard for managing stories and a rich text editor.  
+It is built using a tech stack that includes but is not limited to Flask/JavaScript/HTML/CSS/PostgreSQL/Elasticsearch/Jinja/SummernoteJS. 
 
 ### Quickstart
 The application was built using Flask and needs python installed to work. To run the application:
@@ -18,85 +18,102 @@ The application was built using Flask and needs python installed to work. To run
    ```
       python wsgi.py
    ```
+4. Head over to http://localhost:5000/signup to create an account
+5. Once you sign up a confirmation email will be sent to the email account used for signup. Once you confirm your account you will be redirected to the signin page.
    
 ### Technical Overview:
 
 ##### Backend
 
-Teret uses the Flask web framework and a combination of SQLAlchemy + PostgreSQL + Elasticsearch to manage users and stories in a database. It can also work with a locally stored SQLite database. 
+Teret is built using the Flask web framework. It uses Flask Blueprints to divide the application into three main blueprints/modules: the user accessible base module, the authentication module, and the content management module. The base module mainly serves published stories and information about the project. The authentication module handles account creation and recovery methods whilc the CMS module provides a simple dashboard to edit, publish, unpublish, and delete stories.
 
 ###### Database
 
-The database is PostgreSQL. This is because SQLite is super light and considering there is going to be a lot of rich content it is not sturdy enough.
+The database used in production is PostgreSQL but the application can also run with a locally stored SQLite database. This can be changed in the config.py
+```
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
+```
 
-Sqlalchemy provides a ORM to modify data easily by creating defined models. There are defined models: post and user.
-
-At the lowest level there is the DBAPI which interacts with the database at the lowest level and is used by the ORM. The engine is a python object which manages connections to the database. Since a database is designed to be accessed by many users at a time the engine controls and manages the database’s resources and DBAPI connections. An engine is created once when an application is initialized and stays alive for the duration of the application. A session is the abstraction layer which represents a series of transactions with a database as well as holds all objects that have not yet been written to the database. A session can be thought of as a staging area. 
+SQLAlchemy provides a ORM to modify data easily from this database by creating defined models. The two models in use here are the post and user models.
 
 The post model allows the modification of stories. It has defined fields of
-- Id
-- Title
-- Slug
-- Content
-- Tags
-- image_filename
-- image_url
-- Published
+- id -> unique identifier
+- title -> title of story
+- slug -> url friendly slug of the title
+- content -> rich blob content of the story
+- tags -> tag of each story
+- image_filename -> filename for primary image to be displayed on card
+- image_url -> url for primary image to be displayed on card
+- published -> boolean value 
 - user_id -> relationship
 
 The user model allows the management of users such as authentication and authorization.
-- Id
-- Email
-- password_hash
-- Posts -> relationship 
+- id -> unique identifier for users
+- email -> email associated with account
+- password_hash -> sha256 hash of the users password
+- posts -> relationship 
 
 These two models are inherently linked since posts are created and managed by users. I decided this to be a many to many relationship / followed database design
 
-CMS
+###### CMS
 
-The cms module uses the flask uploads module in addition to http routes to manage content. There is an asynchronous request made to the server when a user uploads an image since it would be inefficient to store it as a base64 image the image is uploaded to the server temporarily and saved permanently once the post is saved.
+The CMS module uses the Flask Uploads module in conjunction with the database to manage stories. Stories are created using a HTML form initialized with summernote.js editor. The majority of the rich text editing capabilities are handled through summernote. However, since by default summernote stores all uploaded images as a base64 image, I had to implement an asynchronuous uploader that returns the URL of the uploaded image.
 
 The CMS has 5 main methods:
+
 - Save
 - Edit
 - Publish
 - Unpublished
 - Delete
 
-All four utilize dynamic routes i.e. save/<id> where id is the id of the post in question. 
+All four utilize dynamic Flask routes i.e. save/<id> where id is the id of the post in question. 
 
-Auth
+###### Auth
 
-Authentication module utilizes the flask login module in conjunction with SQLAlchemy to manage users. Whenever credentials are provided the email is queried and if it is appropriate (doesn’t already exist in the database for signup or is not a valid email address in the database for signing)
+The authentication module utilizes Flask Login to manage user sessions and the database to store user information. It has 5 primary methods: 
 
-- Signin
-- Signup -> what kind of vibe 
+- signup
+- signin
+- signout
+- reset
+- confirm
 
-Testing
+The signup method allows users to register themselves. There is a variable MAX_USERS_NOT_REACHED in the application configuration that currently limits the number of users signing up. If this is unwanted it can be removed by deleting the
+```
+app.config['MAX_USERS_NOT_REACHED'] = False
+```
+line in the controllers.py of the auth module.
 
-The testing for the application is handled by purest. It follows the design guidelines set by Brian Okken. There is a separation between functional and unit tests. How to test flask apps was another challenge with the lack of online resources.
+Once a user signs up an account, a short lived unique confirmation email is sent to the email address associated with their account. This is done using the itsdangerous module which generates a short lived token by doing
+```
+token = ts.dumps(email, salt='salt-key')
+```
+Once a user confirms the email address associated with their account they are redirected to the signin method. The authentication module utilizes Flask Login in conjunction with SQLAlchemy to manage users. Using python decorators, Flask Login allows us to protect routes that need authorization by doing
+```
+@login_required
+app.route('/cms')
+```
+for instance.
 
-Frontend
+The reset method works similarly to the email confirmation in that it generates a short lived token and sends it to the email address of the user who then has to use that link to access the password change page.
 
-The UI  is fully responsive across devices and follows material design principles. It is built using HTML/CSS/JavaScript/Jinja2. A very neat feature implemented using colortheif.js allows the color palette of a story to match the primary colors of its image to give the reader a richer experience.
+###### Testing
 
-The editor uses summer note.js in conjunction with asynchronous Ajax requests to upload rich content. The design follows material design principles.
+The testing for the application is handled by pytest. The tests are located in the tests directory and are divided into two main parts: unit tests and procedural test. The unit tests test individual functions while functional tests test procedures such as logging in and loggin out. To run tests:
+```
+python -m pytests --cov tests/
+```
+Currently working on setting up Travis-CLI integration and writing more tests.
 
+##### Frontend
 
-Challenges:
+The UI is fully responsive across devices and follows material design principles. It is built using HTML/CSS/JavaScript/Jinja2. Each story is presented as a material card which opens a modal when clicked which contains the contents of the story. There is a colorthief plugin that matches the navbar to the primary color of the primary story image.
 
-The Challenge: creating a platform for creating, editing, and manipulating rich text content. Rich text content usually includes text formatting information, images, tables and so on.
+##### Challenges
 
-The Solution: using a wysiwyg editor that allows you to store the text as a blog in a PostgreSQL database. This solution came short for images as storing images as base64 text files in database affected load times and efficiency adversely. 
+Challenge: creating a platform for creating, editing, and manipulating rich text content. Rich text content usually includes text formatting information, images, tables and so on.
 
-The workaround: Added an asynchronous upload event to the editor using JavaScript and Flask that allows the user to upload images and videos to the server and continue on editing without stopping.
+Current Solution: using a wysiwyg editor that allows you to store the text as a blog in a PostgreSQL database. This solution came short for images as storing images as base64 text files in database affected load times and efficiency adversely. 
 
-### Technical Overview:
-
-#### Backend
-
-Teret uses Flask to serve various application and a combination of SQLAlchemy + PostgreSQL + Elasticsearch to manage users and index stories in a database. It can also work with a locally stored SQLite database for storage.
-
-#### Frontend
-
-The UI  is fully responsive across devices and follows material design principles. It is built using HTML/CSS/JavaScript/Jinja2. A very neat feature implemented using colortheif.js allows the color palette of a story to match the primary colors of its image to give the reader a richer experience.
+The Workaround: Added an asynchronous upload event to the editor using JavaScript and Flask that allows the user to upload images and videos to the server and continue on editing without stopping.
