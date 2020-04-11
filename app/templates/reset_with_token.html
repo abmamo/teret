@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            teret
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <script src="https://kit.fontawesome.com/d11a9ce67f.js"></script>
+    </head>
+    <body>
+        <header>
+            <section class="header-content valign-wrapper">
+                <div class="container">
+                    <div id="snackbar">
+                      {% with messages = get_flashed_messages() %} {% if messages %} {% for
+                      message in messages %} {% if message is defined and message|length %}
+                    </div>
+                    <span class="black-text"><h1>SIGN IN</h1></span>
+                    <div class="row">
+                        <form class="col s12" method="POST" action="{{ url_for('auth.signin') }}">
+			  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="email" name="email" type="text" class="validate description">
+                              <label for="email"><p>email</p></label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="password" name="password" type="password" class="validate description">
+                              <label for="password"><p>password</p></label>
+                            </div>
+                          </div>
+                          <button class="btn waves-effect waves-light black ligthen-4" type="submit" name="action">Log In</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </header>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for
+        message in messages %} {% if message is defined and message|length %}
+        <script>
+          function showAlert() {
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar");
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () {
+              x.className = x.className.replace("show", "");
+            }, 3000);
+          }
+          window.onload = showAlert;
+        </script>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+    </body>
+</html>
