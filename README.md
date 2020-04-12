@@ -4,9 +4,14 @@ The word ተረት(teret) in Amharic translates to story. Stories have been an i
 It is built using a tech stack that includes but is not limited to Flask/JavaScript/HTML/CSS/PostgreSQL/Elasticsearch/Jinja/SummernoteJS. 
 
 ### Quickstart
-The application was built using Flask and needs python installed to work. To run the application:
+The application was built using Flask and needs python3 installed to work. To run the application:
 
-1. Create a virtual environment
+1. Clone the respository and navigate to folder
+  ```
+  git clone git@github.com:abmamo/teret.git &&
+  cd teret
+  ```
+2. Create a virtual environment 
   ```
       python3 -m venv env
   ```
@@ -18,8 +23,7 @@ The application was built using Flask and needs python installed to work. To run
    ```
       python wsgi.py
    ```
-4. Head over to http://localhost:5000/signup to create an account
-5. Once you sign up a confirmation email will be sent to the email account used for signup. Once you confirm your account you will be redirected to the signin page.
+4. Head over to http://localhost:5000/auth/signup to create an account. An email will be sent to the account used for signing up. Once you confirm your account you will be redirected to the signin page and afterwards to the CMS/editor.
    
 ### Technical Overview
 
@@ -31,7 +35,7 @@ Teret is built using the Flask web framework. It uses Flask Blueprints to divide
 
 The database used in production is PostgreSQL but the application can also run with a locally stored SQLite database. This can be changed in the config.py
 ```
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'teret.db')
 ```
 
 SQLAlchemy provides a ORM to modify data easily from this database by creating defined models. The two models in use here are the post and user models.
