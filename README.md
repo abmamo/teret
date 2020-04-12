@@ -20,9 +20,9 @@ The application was built using Flask and needs python3 installed to work. To ru
       pip install -r requirements.txt
   ```
 3. Run the application. It will open in your browser at 127.0.0.1
-   ```
+  ```
       python wsgi.py
-   ```
+  ```
 4. Head over to http://localhost:5000/auth/signup to create an account. An email will be sent to the account used for signing up. Once you confirm your account you will be redirected to the signin page and afterwards to the CMS/editor.
    
 ### Technical Overview
