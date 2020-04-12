@@ -1,8 +1,8 @@
 # Statement for enabling the development environment
+import os
 DEBUG = True
 
 # Define the application directory
-import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Define the database - we are working with
@@ -18,7 +18,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 THREADS_PER_PAGE = 2
 
 # Enable protection agains *Cross-site Request Forgery (CSRF)*
-CSRF_ENABLED     = True
+CSRF_ENABLED = True
 
 # Use a secure, unique and absolutely secret key for
 # signing the data.
@@ -41,7 +41,7 @@ MAIL_SERVER = 'smtp.googlemail.com'
 MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
-MAIL_USERNAME = 'abenezer.mammo@gmail.com'
-MAIL_PASSWORD = '!@#$QWERt5'
+MAIL_USERNAME = 'YOUR EMAIL ADDRESS HERE'
+MAIL_PASSWORD = 'YOUR EMAIL PASSWORD HERE'
 # set max users
 MAX_USERS_NOT_REACHED = True
