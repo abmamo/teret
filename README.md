@@ -8,8 +8,8 @@ The application was built using Flask and needs python3 installed to work. To ru
 
 1. Clone the respository and navigate to folder
   ```
-  git clone git@github.com:abmamo/teret.git &&
-  cd teret
+    git clone git@github.com:abmamo/teret.git &&
+    cd teret
   ```
 2. Create a virtual environment 
   ```
