@@ -1,4 +1,4 @@
-# teret
+# teret [![Build Status](https://travis-ci.org/abmamo/teret.svg?branch=master)](https://travis-ci.org/abmamo/teret)
 The word ተረት(teret) in Amharic translates to story. Stories have been an integral part of human existence. They have provided and continue to provide a medium to transfer important social information. Teret is a platform built to create and manage short stories containing rich media such as images, embedded social media links, videos, text, animations, and so more. 
 
 It is built using a tech stack that includes but is not limited to Flask/JavaScript/HTML/CSS/PostgreSQL/Elasticsearch/Jinja/SummernoteJS. 
@@ -106,7 +106,7 @@ The reset method works similarly to the email confirmation in that it generates 
 
 The testing for the application is handled by pytest. The tests are located in the tests directory and are divided into two main parts: unit tests and procedural test. The unit tests test individual functions while functional tests test procedures such as logging in and loggin out. To run tests:
 ```
-python -m pytests --cov tests/
+python -m pytest tests/
 ```
 Currently working on setting up Travis-CLI integration and writing more tests.
 
