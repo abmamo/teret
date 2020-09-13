@@ -97,11 +97,25 @@
                 />
               </a>
               <div class="gallery-header">
-                <span>{{ story.title }}</span>
+                <div class="row">
+                  <span class="card-title">{{ story.title }}</span>
+                </div>
+                <div class="row">
+                  <span class="card-time"
+                    >{{ story.created_on | format_datetime("short") }}</span
+                  >
+                </div>
               </div>
               <div class="gallery-body">
                 <div class="title-wrapper">
-                  <h3>{{ story.title }}</h3>
+                  <div class="row">
+                    <h3 class="card-title">{{ story.title }}</h3>
+                  </div>
+                  <div class="row">
+                    <span class="card-time"
+                      >{{ story.created_on | format_datetime("short") }}</span
+                    >
+                  </div>
                 </div>
                 <p class="content">{{ story.content | safe }}</p>
               </div>

@@ -3,10 +3,13 @@
 .header-title,
 .header-subtitle,
 .logo-text,
-.sub-text,
-link {
+.sub-text {
   color: #ffb140;
   font-family: "Source Code Pro", monospace !important;
+}
+
+.link {
+  margin-top: 2.5%;
 }
 
 input {
@@ -42,6 +45,7 @@ button {
   font-family: "Source Code Pro", monospace !important;
   padding: 1.5%;
   color: #333333 !important;
+  margin-bottom: 2.5% !important;
 }
 
 /* Alert */

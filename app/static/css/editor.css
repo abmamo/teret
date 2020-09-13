@@ -1,67 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,400;1,200&display=swap");
 
-.nav-extended,
-.nav-header {
-  background: #291528 !important;
+body {
+  background-color: #291528;
 }
 
-.header-title,
-.header-subtitle,
-.logo-text,
-.sub-text,
-.link {
-  color: #ffb140 !important;
-  font-family: "Source Code Pro", monospace !important;
-}
-
-.card-title {
-  font-size: 1.5em;
-  font-family: "Source Code Pro", monospace !important;
-  border-bottom: #ffb140 2px solid;
-}
-
-.time {
-  color: #666666 !important;
-  font-family: "Source Code Pro", monospace !important;
-  font-size: 0.5em !important;
-}
-
-.sub-text {
+label {
+  color: #f4f4f4;
   font-family: "Source Code Pro", monospace;
-  color: #f4f4f4 !important;
-  letter-spacing: 0.1em;
-  font-size: 1em;
-}
-
-.link {
-  letter-spacing: 0.1em;
-}
-
-.sidenav-trigger,
-.link a {
-  color: #ffb140 !important;
-}
-
-.tag-text {
-  color: #333;
-  letter-spacing: 0.1em;
-  font-family: "Amatic SC", cursive;
-}
-
-.tag-text:hover {
-  cursor: pointer;
-  color: purple;
-}
-
-.fa-instagram,
-.fa-twitter {
-  font-size: 2em;
-  color: #333;
-}
-
-.fa-instagram:hover,
-.fa-twitter:hover {
-  color: purple;
 }
 
 /* Alert */
@@ -69,8 +14,8 @@
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 250px; /* Set a default minimum width */
   margin-left: -125px; /* Divide value of min-width by 2 */
-  background-color: #f4f4f4; /* Black background color */
-  color: #713b58; /* White text color */
+  background-color: transparent; /* Black background color */
+  color: #ffb140; /* White text color */
   text-align: center; /* Centered text */
   border-radius: 2px; /* Rounded borders */
   padding: 16px; /* Padding */
@@ -78,7 +23,6 @@
   z-index: 1; /* Add a z-index if needed */
   left: 50%; /* Center the snackbar */
   top: 30px; /* 30px from the bottom */
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
@@ -135,13 +79,7 @@
   }
 }
 
-.social-icon {
-  color: #333;
-}
-
-p,
-.content {
-  font-family: "Source Code Pro", monospace;
-  letter-spacing: 1.1px !important;
-  font-size: 1.15em !important;
+.material-icons {
+  display: inline-flex;
+  vertical-align: top;
 }

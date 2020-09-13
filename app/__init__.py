@@ -12,6 +12,8 @@ from flask_wtf.csrf import CSRFProtect, CSRFError
 from itsdangerous import URLSafeTimedSerializer
 # import image upload plugins
 from flask_uploads import UploadSet, IMAGES, configure_uploads
+# date utils
+import babel
 # global variables
 uploads = None
 ts = None
@@ -62,6 +64,16 @@ def create_app():
         @app.errorhandler(CSRFError)
         def handle_csrf_error(e):
             return render_template('400.html', reason=e.description), 400
+        
+        @app.template_filter()
+        def format_datetime(value, format='medium'):
+            if format == 'full':
+                format="EEEE, d. MMMM y 'at' HH:mm"
+            elif format == 'medium':
+                format="EE dd.MM.y HH:mm"
+            elif format == 'short':
+                format="MMM d. y"
+            return babel.dates.format_datetime(value, format)
         # Import a module / component using its blueprint handler variable (mod_auth)
         from app.mod_auth.controllers import mod_auth as auth_module
         from app.mod_base.controllers import mod_base as base_module
