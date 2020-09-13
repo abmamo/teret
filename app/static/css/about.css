@@ -13,7 +13,7 @@ main {
 header {
   align-items: center;
   display: flex;
-  font-size: 18px;
+  font-size: 16px;
   height: 100vh;
   justify-content: center;
   overflow: hidden;
@@ -50,15 +50,20 @@ link {
   color: #f4f4f4;
 }
 
+.links-wrapper {
+  padding-left: 25%;
+  margin-top: 2.5%;
+}
+
 .link {
   letter-spacing: 0.15em;
   color: #f4f4f4;
+  transition: 0.5s;
 }
 
 .link:hover {
   text-transform: lowercase;
-  text-decoration: underline;
-  text-decoration-color: #ffb140;
+  color: #ffb140;
 }
 
 .nav-wrapper {
@@ -152,4 +157,9 @@ link {
     bottom: 0;
     opacity: 0;
   }
+}
+
+.material-icons {
+  display: inline-flex;
+  vertical-align: top;
 }

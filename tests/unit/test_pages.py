@@ -1,5 +1,5 @@
 import pytest
-from app import User
+from app.mod_auth.models import User
 
 
 def test_home_page(test_client):

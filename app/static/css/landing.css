@@ -59,6 +59,7 @@ link {
   text-transform: lowercase;
   text-decoration: underline;
   text-decoration-color: #ffb140;
+  text-decoration-thickness: 5px;
 }
 
 .nav-wrapper {
