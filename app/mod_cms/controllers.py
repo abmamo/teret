@@ -9,7 +9,8 @@ from app.mod_cms.models import Post
 # import slug creation libs
 from slugify import slugify
 # import db session
-from app import db, uploads
+from app.extensions import db
+from app import uploads
 # import os to remove files
 import os
 

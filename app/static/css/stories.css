@@ -1,34 +1,55 @@
-@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,400;1,200&display=swap");
+
+.nav-extended,
+.nav-header {
+  background: #291528 !important;
+}
+
+.header-title,
+.header-subtitle,
+.logo-text,
+.sub-text,
+.link {
+  color: #ffb140 !important;
+  font-family: "Source Code Pro", monospace !important;
+}
 
 .sub-text {
-    font-family: 'Amatic SC', cursive;
-    letter-spacing: 0.1em;
-    font-size: 1.5em;
+  font-family: "Source Code Pro", monospace;
+  color: #f4f4f4 !important;
+  letter-spacing: 0.1em;
+  font-size: 1em;
 }
 
 .link {
-    letter-spacing: 0.1em;
+  letter-spacing: 0.1em;
+}
+
+.sidenav-trigger,
+.link a {
+  color: #ffb140 !important;
 }
 
 .tag-text {
-    color: #333;
-    letter-spacing: 0.1em;
-    font-family: 'Amatic SC', cursive;
+  color: #333;
+  letter-spacing: 0.1em;
+  font-family: "Amatic SC", cursive;
 }
 
 .tag-text:hover {
-    cursor: pointer;
-    color: purple;
+  cursor: pointer;
+  color: purple;
 }
 
-.fa-instagram, .fa-twitter {
-    font-size: 2em;
-    color: #333;
+.fa-instagram,
+.fa-twitter {
+  font-size: 2em;
+  color: #333;
 }
 
-.fa-instagram:hover, .fa-twitter:hover {
-    color: purple;
+.fa-instagram:hover,
+.fa-twitter:hover {
+  color: purple;
 }
 
 /* Alert */
@@ -106,8 +127,9 @@
   color: #333;
 }
 
-p, .content {
-    font-family: 'Source Code Pro', monospace;
-    letter-spacing: 1.1px !important;
-    font-size: 1.15em !important;
+p,
+.content {
+  font-family: "Source Code Pro", monospace;
+  letter-spacing: 1.1px !important;
+  font-size: 1.15em !important;
 }

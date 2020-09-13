@@ -1,12 +1,17 @@
 # Import flask dependencies
 from flask import Blueprint, request, render_template, \
-    flash, g, session, redirect, url_for, abort
+    flash, g, session, redirect, url_for, abort, current_app
 # import flask login functions
 from flask_login import current_user, login_user, logout_user
 # import user model
 from app.mod_auth.models import User
 # import db
-from app import db, send_mail, app, ts, mail
+from app.extensions import db
+# send mail functions
+from app.mail import send_mail
+from app.extensions import mail
+# import serializer
+from app import ts
 
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
@@ -31,13 +36,13 @@ def signin():
         if not next_page or url_parse(next_page).netloc != '' or next_page == "/":
             next_page = url_for('cms.editor')
         return redirect(url_for('cms.home'))
-    flash("You need to sign in!")
+    flash("you need to sign in!")
     return render_template("signin.html")
 
 
 @mod_auth.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if app.config['MAX_USERS_NOT_REACHED']:
+    if current_app.config['MAX_USERS_NOT_REACHED']:
         if request.method == 'POST':
             # get data from forms
             email = request.form['email']
@@ -55,7 +60,7 @@ def signup():
             db.session.commit()
             db.session.close()
             # prepare email
-            subject = "Confirm your email address"
+            subject = "confirm account."
             # generate token
             token = ts.dumps(email, salt='email-confirm-key')
             # build recover url
@@ -64,12 +69,12 @@ def signup():
                 token=token,
                 _external=True)
             # send the emails
-            send_mail(subject, app.config['MAIL_USERNAME'],
+            send_mail(subject, current_app.config['MAIL_USERNAME'],
                       [email], confirm_url)
             # update user
-            flash('Account created. Confirm your email.')
+            flash('account created. confirm your email.')
             # update user count
-            app.config['MAX_USERS_NOT_REACHED'] = False
+            current_app.config['MAX_USERS_NOT_REACHED'] = False
             # return to login
             return redirect(url_for('auth.signin'))
         return render_template('signup.html')
@@ -93,7 +98,7 @@ def confirm_email(token):
         db.session.commit()
         db.session.close()
         # alert user
-        flash("Email address confirmed.")
+        flash("email address confirmed.")
         return redirect(url_for('auth.signin'))
     except:
         abort(500)
@@ -117,10 +122,10 @@ def request_reset():
             token=token,
             _external=True)
         # send the email
-        send_mail(subject, app.config['MAIL_USERNAME'],
+        send_mail(subject, current_app.config['MAIL_USERNAME'],
                   [email], recover_url)
         # alert user
-        flash("Reset link sent.")
+        flash("reset link sent.")
         return redirect(url_for('base.home'))
     return render_template("request_reset.html")
     # except:
@@ -146,7 +151,7 @@ def reset_with_token(token):
         db.session.commit()
         db.session.close()
         # alert user
-        flash("Password successfully reset.")
+        flash("password successfully reset.")
         return redirect(url_for('auth.signin'))
     return render_template('reset_with_token.html', token=token)
 

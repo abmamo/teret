@@ -1,6 +1,5 @@
 # Import flask dependencies
-from flask import Blueprint, request, render_template, \
-    flash, g, session, redirect, url_for
+from flask import Blueprint, render_template
 # import post model for querying stories
 from app.mod_cms.models import Post
 
@@ -10,7 +9,7 @@ mod_base = Blueprint('base', __name__, url_prefix='/')
 # basic routes
 @mod_base.route('/', methods=['GET'])
 def home():
-    # render the landing page
+    # render the home page
     return render_template('home.html')
 
 
@@ -20,6 +19,7 @@ def stories():
     tags = Post.query.filter_by(published=True).distinct(Post.tags).all()
     # sort stories by latest
     stories = Post.query.filter_by(published=True).all()[::-1]
+    # render stories page
     return render_template('stories.html', tags=tags, stories=stories)
 
 

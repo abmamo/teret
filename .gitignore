@@ -3,4 +3,5 @@ app/static/images/uploads/
 /env
 /teretenv
 __pycache__
+migrations/
 /app/static/images/photos

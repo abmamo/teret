@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      teret | ተረት
-    </title>
+    <title>teret | ተረት</title>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/landing.css') }}"
@@ -29,15 +31,15 @@
   </head>
   <body>
     <header>
-     <div id="snackbar">
-                      {% with messages = get_flashed_messages() %} {% if messages %} {% for
-                      message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
-                      %}
-                    </div>
+      <div id="snackbar">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for
+        message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
+        %}
+      </div>
       <section class="header-content valign-wrapper">
         <span class="logo-text"><h1>TERET / ተረት</h1></span>
         <div class="tagline">
-          <span class="sub-text"> :- story with a moral </span>
+          <span class="sub-text"> :- stories / thoughts </span>
         </div>
 
         <div class="row nav-wrapper">

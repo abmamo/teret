@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      about
-    </title>
+    <title>about</title>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/about.css') }}"
@@ -29,21 +31,26 @@
   </head>
   <body>
     <header>
+      <div id="snackbar">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for
+        message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
+        %}
+      </div>
       <section class="header-content valign-wrapper">
         <div class="container">
-          <span class="black-text"><h1>ABOUT</h1></span>
-          <p class="description">
+          <span class="header-title"><h1>ABOUT</h1></span>
+          <p class="sub-text">
             thoughts and musings on this journey as an international student /
             computer scientist living + studying abroad in the US. topics
             include but are not limited to music, culture, fashion, lifestyle,
             opinions on the direction of tech, and various escapades +
             experiences.
           </p>
-          <p class="description">
+          <p class="sub-text">
             this project orignally started as a journal for recording various
             experiences to share with friends back home @ አዲስ አበባ
           </p>
-          <p class="description">
+          <p class="sub-text">
             into music & an amateur musician. listen to some tunes @
             <a href="https://music.abmamo.com">HERE</a>
           </p>
