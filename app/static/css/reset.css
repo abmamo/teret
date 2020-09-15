@@ -106,4 +106,5 @@ header:before {
 .material-icons {
   display: inline-flex;
   vertical-align: top;
+  color: #ffb140 !important;
 }
