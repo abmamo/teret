@@ -1,91 +1,69 @@
-input {
-     width: 100%;
-     padding: 12px 20px;
-     margin: 8px 0;
-     box-sizing: border-box;
-     font-family: monospace, monospace;
-     font-size: 1.5em;
-     outline: none;
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,400;1,200&display=swap");
+
+.header-title,
+.header-subtitle,
+.logo-text,
+.sub-text {
+  color: #ffb140;
+  font-family: "Source Code Pro", monospace !important;
 }
 
+.link {
+  margin-top: 2.5%;
+}
+
+input {
+  width: 100%;
+  padding: 16px 20px;
+  margin: 16px 16px;
+  box-sizing: border-box;
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.5em;
+  outline: none;
+}
+
+.input-field input {
+  border-bottom: 2px solid #f4f4f4 !important;
+}
+
+.input-field input + label {
+  color: #f4f4f4 !important;
+}
 
 .input-field input:focus + label {
-    color: purple !important;
+  color: #ffb140 !important;
+  font-family: "Source Code Pro", monospace !important;
 }
 
 .row .input-field input:focus {
-    border-bottom: 1px solid purple !important;
-    box-shadow: 0 1px 0 0 purple !important
+  border-bottom: 1px solid #ffb140 !important;
+  box-shadow: 0 1px 0 0 #ffb140 !important;
 }
 
+button {
+  background: #ffb140 !important;
+  font-family: "Source Code Pro", monospace !important;
+  padding: 1.5%;
+  color: #333333 !important;
+  margin-bottom: 2.5% !important;
+}
 
 /* Alert */
-#snackbar {
-  visibility: hidden; /* Hidden by default. Visible on click */
-  min-width: 250px; /* Set a default minimum width */
-  margin-left: -125px; /* Divide value of min-width by 2 */
-  background-color: #f4f4f4; /* Black background color */
-  color: #333; /* White text color */
-  text-align: center; /* Centered text */
-  border-radius: 2px; /* Rounded borders */
-  padding: 16px; /* Padding */
-  position: fixed; /* Sit on top of the screen */
-  z-index: 1; /* Add a z-index if needed */
-  left: 45%; /* Center the snackbar */
-  top: 30px; /* 30px from the bottom */
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+#toast-container {
+  top: 10% !important;
+  left: 45% !important;
+  bottom: auto !important;
+  right: auto !important;
+  background: transparent !important;
 }
 
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
-#snackbar.show {
-  visibility: visible; /* Show the snackbar */
-  /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
-  However, delay the fade out process for 2.5 seconds */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+#toast-container .toast {
+  background: #ffb140 !important;
+  color: #f4f4f4 !important;
 }
 
-/* Animations to fade the snackbar in and out */
-@-webkit-keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-  to {
-    bottom: 30px;
-    opacity: 1;
-  }
-}
-
-@keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-  to {
-    bottom: 30px;
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeout {
-  from {
-    bottom: 30px;
-    opacity: 1;
-  }
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    bottom: 30px;
-    opacity: 1;
-  }
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
+.material-icons {
+  display: inline-flex;
+  vertical-align: top;
+  color: #ffb140 !important;
 }

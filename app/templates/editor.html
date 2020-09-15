@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>teret | editor</title>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
@@ -8,6 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet"> 
     <link href="{{ url_for('static', filename='summernote/summernote-bs4.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/editor.css') }}" rel="stylesheet">
     <script src="{{ url_for('static', filename='summernote/summernote-bs4.min.js') }}"></script>
     <style>
         body {
@@ -34,8 +40,8 @@
           <input type = "file" name = "image" placeholder = "file" class="form-control"/>
       </div>
       <textarea id="summernote" name="content"></textarea>
-      <div class="row">
-            <button class="btn btn-dark" type="submit" name="action">SAVE</button>
+      <div class="row submit-container">
+            <button class="submit-buttom" type="submit" name="action">SAVE</button>
       </div>
     </form>
     </div>

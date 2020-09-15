@@ -5,6 +5,11 @@
   background: #7776bc !important;
 }
 
+.content {
+  font-family: "Source Code Pro", monospace !important;
+  font-size: 1.15em !important;
+}
+
 .header-title,
 .header-subtitle,
 .logo-text,
@@ -27,7 +32,7 @@
 .card-time {
   color: #333 !important;
   font-family: "Source Code Pro", monospace !important;
-  font-size: 0.75em !important;
+  font-size: 0.875em !important;
   letter-spacing: 0.05em;
 }
 
@@ -82,6 +87,7 @@
   background: #ffb140 !important;
   color: #f4f4f4 !important;
 }
+
 .material-icons {
   display: inline-flex;
   vertical-align: top;

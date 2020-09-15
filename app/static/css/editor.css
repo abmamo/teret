@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,400;1,200&display=swap");
+
+body {
+  background-color: #7776bc;
+  padding-top: 5%;
+}
+
+label {
+  color: #f4f4f4;
+  font-family: "Source Code Pro", monospace;
+}
+
+.submit-container {
+  padding-left: 45% !important;
+  margin-top: 2.5%;
+}
+
+.submit-container button {
+  padding: 2.5%;
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
+  background-color: #ffb140 !important;
+  color: #f4f4f4 !important;
+  cursor: pointer;
+}
+
+/* Alert */
+#toast-container {
+  top: 10% !important;
+  left: 45% !important;
+  bottom: auto !important;
+  right: auto !important;
+  background: transparent !important;
+}
+
+#toast-container .toast {
+  background: #ffb140 !important;
+  color: #f4f4f4 !important;
+}
+
+.material-icons {
+  display: inline-flex;
+  vertical-align: top;
+  color: #ffb140 !important;
+}
