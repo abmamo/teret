@@ -39,7 +39,7 @@ header:before {
 .header-subtitle,
 .logo-text,
 .sub-text,
-link {
+.link {
   color: #ffb140;
   font-family: "Source Code Pro", monospace !important;
 }
@@ -101,4 +101,9 @@ link {
 #toast-container .toast {
   background: #ffb140 !important;
   color: #f4f4f4 !important;
+}
+
+.material-icons {
+  display: inline-flex;
+  vertical-align: top;
 }

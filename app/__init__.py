@@ -53,18 +53,46 @@ def create_app():
             return User.query.get(int(id))
 
         # Sample HTTP error handling
+        @app.errorhandler(400)
+        def not_found(error):
+            # error code
+            status_code = 400
+            # message
+            message = "bad request."
+            # return error page
+            return render_template('error.html', message=message, status_code=status_code), 400
+
         @app.errorhandler(404)
         def not_found(error):
-            return render_template('404.html'), 404
+            # error code
+            status_code = 404
+            # message
+            message = "resource not found."
+            # return error page
+            return render_template('error.html', message=message, status_code=status_code), 404
 
         @app.errorhandler(500)
         def server_error(error):
-            return render_template('500.html'), 500
-
+            # error code
+            status_code = 500
+            # message
+            message = "internal server error."
+            # return error page
+            return render_template('error.html', message=message, status_code=status_code), 500
+        
+        @app.errorhandler(502)
+        def server_error(error):
+            # error code
+            status_code = 502
+            # message
+            message = "bad gateway."
+            # return error page
+            return render_template('error.html', message=message, status_code=status_code), 502
+    
         @app.errorhandler(CSRFError)
         def handle_csrf_error(e):
-            return render_template('400.html', reason=e.description), 400
-        
+            return render_template('error.html', message=e.description, status_code=400), 400
+        # date formatting
         @app.template_filter()
         def format_datetime(value, format='medium'):
             if format == 'full':
@@ -84,6 +112,5 @@ def create_app():
         app.register_blueprint(cms_module)
         # create all schema
         db.create_all()
-
     # return app
     return app

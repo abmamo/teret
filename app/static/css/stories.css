@@ -8,9 +8,13 @@
 .header-title,
 .header-subtitle,
 .logo-text,
-.sub-text,
-.link {
+.sub-text {
   color: #ffb140 !important;
+  font-family: "Source Code Pro", monospace !important;
+}
+
+.link {
+  color: #f4f4f4 !important;
   font-family: "Source Code Pro", monospace !important;
 }
 
@@ -77,4 +81,8 @@
 #toast-container .toast {
   background: #ffb140 !important;
   color: #f4f4f4 !important;
+}
+.material-icons {
+  display: inline-flex;
+  vertical-align: top;
 }

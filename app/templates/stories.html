@@ -98,20 +98,33 @@
           >
             <div class="gallery-curve-wrapper">
               <a class="gallery-cover gray" style="height: 300px">
+                {% if story.image_filename %}
                 <img
                   class="responsive-img"
                   src="{{ url_for('static', filename='images/uploads/' + story.image_filename) }}"
                   alt="{{ story.image_filename }}"
                 />
+                {% endif %}
               </a>
               <div class="gallery-header">
                 <div class="row">
                   <span class="card-title">{{ story.title }}</span>
                 </div>
                 <div class="row">
-                  <span class="card-time"
-                    >{{ story.created_on | format_datetime("short") }}</span
-                  >
+                  <div class="col s12m6l6">
+                    <span class="card-time"
+                      ><i class="material-icons">create</i>{{ story.created_on |
+                      format_datetime("short") }}</span
+                    >
+                  </div>
+                  {% if story.published %}
+                  <div class="col s12m6l6">
+                    <span
+                      ><i class="material-icons">publish</i>{{
+                      story.published_on | format_datetime("short") }}</span
+                    >
+                  </div>
+                  {% endif %}
                 </div>
               </div>
               <div class="gallery-body">

@@ -38,8 +38,7 @@ header:before {
 .header-title,
 .header-subtitle,
 .logo-text,
-.sub-text,
-link {
+.sub-text {
   color: #ffb140;
   font-family: "Source Code Pro", monospace !important;
 }

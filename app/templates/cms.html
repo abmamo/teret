@@ -3,9 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-
     <title>teret | cms</title>
     <link
       rel="shortcut icon"
@@ -98,30 +95,32 @@
           >
             <div class="gallery-curve-wrapper">
               <a class="gallery-cover gray" style="height: 300px">
+                {% if story.image_filename %}
                 <img
                   class="responsive-img"
                   src="{{ url_for('static', filename='images/uploads/' + story.image_filename) }}"
                   alt="{{ story.image_filename }}"
                 />
+                {% endif %}
               </a>
               <div class="gallery-header">
                 <div class="row">
                   <span class="card-title">{{ story.title }}</span>
                 </div>
                 <div class="row">
-                  <span class="card-time"
-                    >{{ story.created_on | format_datetime("short") }}</span
-                  >
-                </div>
-                <div class="row">
-                  {% if story.published %}
-                      <button
-                      class="btn-floating btn-small waves-effect waves-light green"
+                  <div class="col s12m6l6">
+                    <span class="card-time"
+                      ><i class="material-icons">create</i>{{ story.created_on |
+                      format_datetime("short") }}</span
                     >
-                  {% else %}
-                    <button
-                    class="btn-floating btn-small waves-effect waves-light yellow"
-                  >
+                  </div>
+                  {% if story.published %}
+                  <div class="col s12m6l6">
+                    <span
+                      ><i class="material-icons green-text">publish</i>{{
+                      story.published_on | format_datetime("short") }}</span
+                    >
+                  </div>
                   {% endif %}
                 </div>
               </div>
@@ -129,8 +128,6 @@
                 <div class="container">
                   <div class="row">
                     <h1 class="card-title">{{ story.title }}</h1>
-                  </div>
-                  <div class="row">
                     <span class="card-time"
                       >{{ story.created_on | format_datetime("short") }}</span
                     >
