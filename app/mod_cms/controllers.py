@@ -26,6 +26,7 @@ def home():
     tags = Post.query.distinct(Post.tags).all()
     # sort stories by creation date
     stories = Post.query.all()[::-1]
+    flash("welcome.")
     return render_template('cms.html', tags=tags, stories=stories)
 
 @mod_cms.route('/editor', methods=['GET'])
@@ -80,6 +81,8 @@ def save():
         # commit the changes
         db.session.commit()
         db.session.close()
+        # alert user
+        flash("saved.")
         # redirect to cms homepage
         return redirect(url_for('cms.home'))
 
@@ -100,6 +103,8 @@ def publish(slug):
     # commit changes to database
     db.session.commit()
     db.session.close()
+    # alert user
+    flash("published.")
     return redirect(url_for('cms.home'))
 
 @mod_cms.route('/unpublish/<string:slug>', methods=['POST'])
@@ -112,6 +117,7 @@ def unpublish(slug):
     # commit changes to database
     db.session.commit()
     db.session.close()
+    flash("unpublished.")
     return redirect(url_for('cms.home'))
 
 @mod_cms.route('/delete/<string:slug>', methods=['POST'])
@@ -128,5 +134,6 @@ def delete(slug):
     db.session.delete(post)
     db.session.commit()
     db.session.close()
+    flash("deleted.")
     return redirect(url_for('cms.home'))
 

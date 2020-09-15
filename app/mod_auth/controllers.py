@@ -34,12 +34,14 @@ def signin():
         # get next from argument
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '' or next_page == "/":
-            flash("signed in.")
             next_page = url_for('cms.editor')
+        # alert user
         flash("signed in.")
-        return redirect(url_for('cms.home'))
+        # return response
+        return redirect(url_for('cms.home')), 201
+    # alert user
     flash("please sign in!")
-    return render_template("signin.html")
+    return render_template("signin.html"), 200
 
 
 @mod_auth.route('/signup', methods=['GET', 'POST'])
@@ -76,10 +78,9 @@ def signup():
             # update user count
             current_app.config['MAX_USERS_NOT_REACHED'] = False
             # update user
-            flash('account created. confirm your email and sign in.')
+            flash('account created. confirm email address.')
             # return to login
             return redirect(url_for('auth.signin'))
-        flash("please sign up.")
         return render_template('signup.html')
     flash("signup not active.")
     return redirect(url_for('signin'))
@@ -131,7 +132,7 @@ def request_reset():
         # alert user
         flash("reset link sent.")
         return redirect(url_for('base.home'))
-    flash("forgot password.")
+    flash("reset password.")
     return render_template("request_reset.html")
     # except:
     # abort(500)
@@ -157,8 +158,7 @@ def reset_with_token(token):
         db.session.close()
         # alert user
         flash("password successfully reset.")
-        return redirect(url_for('auth.signin'))
-    
+        return redirect(url_for('auth.signin'))   
     return render_template('reset_with_token.html', token=token)
 
 
