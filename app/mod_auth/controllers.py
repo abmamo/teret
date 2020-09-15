@@ -38,10 +38,10 @@ def signin():
         # alert user
         flash("signed in.")
         # return response
-        return redirect(url_for('cms.home')), 201
+        return redirect(url_for('cms.home'))
     # alert user
     flash("please sign in!")
-    return render_template("signin.html"), 200
+    return render_template("signin.html")
 
 
 @mod_auth.route('/signup', methods=['GET', 'POST'])

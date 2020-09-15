@@ -109,11 +109,22 @@
                     >{{ story.created_on | format_datetime("short") }}</span
                   >
                 </div>
+                <div class="row">
+                  {% if story.published %}
+                      <button
+                      class="btn-floating btn-small waves-effect waves-light green"
+                    >
+                  {% else %}
+                    <button
+                    class="btn-floating btn-small waves-effect waves-light yellow"
+                  >
+                  {% endif %}
+                </div>
               </div>
               <div class="gallery-body">
-                <div class="title-wrapper">
+                <div class="container">
                   <div class="row">
-                    <h3 class="card-title">{{ story.title }}</h3>
+                    <h1 class="card-title">{{ story.title }}</h1>
                   </div>
                   <div class="row">
                     <span class="card-time"
@@ -121,7 +132,11 @@
                     >
                   </div>
                 </div>
-                <p class="content">{{ story.content | safe }}</p>
+                <div class="container">
+                  <div class="row">
+                    <p class="content">{{ story.content | safe }}</p>
+                  </div>
+                </div>
               </div>
               <div class="gallery-action">
                 <div class="row">

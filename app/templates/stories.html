@@ -53,8 +53,8 @@
         </ul>
         <div id="snackbar">
           {% with messages = get_flashed_messages() %} {% if messages %} {% for
-          message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
-          %}
+          message in messages %} {{ message }} {% endfor %} {% endif %} {%
+          endwith %}
         </div>
         <div class="nav-header center white">
           <h1 class="header-title">TERET / ተረት</h1>
@@ -71,7 +71,7 @@
             </li>
             {% for tag in tags %}
             <li>
-              <a class="tag-text" href="#{{ tag.tags.lower() }}"
+              <a class="description black-text" href="#{{ tag.tags.lower() }}"
                 >{{ tag.tags }}</a
               >
             </li>
@@ -85,29 +85,49 @@
         <a href="{{ url_for('base.about') }}" class="black-text">ABOUT</a>
       </li>
     </ul>
- 
+
     <div id="portfolio" class="section gray">
       <div class="container">
         <div class="gallery row">
-            {% for story in stories %}
-            <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}">
-                 <div class="gallery-curve-wrapper">
-                      <a class="gallery-cover gray" style="height: 300px;">
-                           <img class="responsive-img" src="{{ story.image_url }}" alt="placeholder">
-                      </a>
-                      <div class="gallery-header">
-                          <span>{{ story.title }}</span>
-                      </div>
-                      <div class="gallery-body">
-                           <div class="title-wrapper">
-                               <h3>{{ story.title }}</h3>
-                           </div>
-                           <p class="description"> {{ story.content | safe }} </p>
-                      </div>
-                      <!--<div class="gallery-action">
-                           <a class="btn-floating btn-large waves-effect waves-light purple"><i class="material-icons">favorite</i></a>
-                      </div>-->
-                 </div>
+          {% for story in stories %}
+          <div
+            class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}"
+          >
+            <div class="gallery-curve-wrapper">
+              <a class="gallery-cover gray" style="height: 300px">
+                <img
+                  class="responsive-img"
+                  src="{{ url_for('static', filename='images/uploads/' + story.image_filename) }}"
+                  alt="{{ story.image_filename }}"
+                />
+              </a>
+              <div class="gallery-header">
+                <div class="row">
+                  <span class="card-title">{{ story.title }}</span>
+                </div>
+                <div class="row">
+                  <span class="card-time"
+                    >{{ story.created_on | format_datetime("short") }}</span
+                  >
+                </div>
+              </div>
+              <div class="gallery-body">
+                <div class="container">
+                  <div class="row">
+                    <h1 class="card-title">{{ story.title }}</h1>
+                  </div>
+                  <div class="row">
+                    <span class="card-time"
+                      >{{ story.created_on | format_datetime("short") }}</span
+                    >
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <p class="content">{{ story.content | safe }}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           {% endfor %}

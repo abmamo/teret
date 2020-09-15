@@ -26,7 +26,6 @@ def home():
     tags = Post.query.distinct(Post.tags).all()
     # sort stories by creation date
     stories = Post.query.all()[::-1]
-    flash("welcome.")
     return render_template('cms.html', tags=tags, stories=stories)
 
 @mod_cms.route('/editor', methods=['GET'])
