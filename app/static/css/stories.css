@@ -2,7 +2,7 @@
 
 .nav-extended,
 .nav-header {
-  background: #291528 !important;
+  background: #7776bc !important;
 }
 
 .header-title,
@@ -144,4 +144,17 @@ p,
   font-family: "Source Code Pro", monospace;
   letter-spacing: 1.1px !important;
   font-size: 1.15em !important;
+}
+
+#toast-container {
+  top: 15% !important;
+  left: 45% !important;
+  bottom: auto !important;
+  right: auto !important;
+  background: transparent !important;
+}
+
+#toast-container .toast {
+  background: #ffb140 !important;
+  color: #f4f4f4 !important;
 }

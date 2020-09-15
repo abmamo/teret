@@ -34,9 +34,11 @@ def signin():
         # get next from argument
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '' or next_page == "/":
+            flash("signed in.")
             next_page = url_for('cms.editor')
+        flash("signed in.")
         return redirect(url_for('cms.home'))
-    flash("you need to sign in!")
+    flash("please sign in!")
     return render_template("signin.html")
 
 
@@ -71,13 +73,15 @@ def signup():
             # send the emails
             send_mail(subject, current_app.config['MAIL_USERNAME'],
                       [email], confirm_url)
-            # update user
-            flash('account created. confirm your email.')
             # update user count
             current_app.config['MAX_USERS_NOT_REACHED'] = False
+            # update user
+            flash('account created. confirm your email and sign in.')
             # return to login
             return redirect(url_for('auth.signin'))
+        flash("please sign up.")
         return render_template('signup.html')
+    flash("signup not active.")
     return redirect(url_for('signin'))
 
 
@@ -127,6 +131,7 @@ def request_reset():
         # alert user
         flash("reset link sent.")
         return redirect(url_for('base.home'))
+    flash("forgot password.")
     return render_template("request_reset.html")
     # except:
     # abort(500)
@@ -153,10 +158,12 @@ def reset_with_token(token):
         # alert user
         flash("password successfully reset.")
         return redirect(url_for('auth.signin'))
+    
     return render_template('reset_with_token.html', token=token)
 
 
 @mod_auth.route('/signout')
 def signout():
     logout_user()
+    flash("signed out.")
     return redirect(url_for('base.home'))

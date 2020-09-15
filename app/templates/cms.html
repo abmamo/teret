@@ -22,7 +22,7 @@
     />
 
     <link
-      href="{{ url_for('static', filename='css/stories.css') }}"
+      href="{{ url_for('static', filename='css/cms.css') }}"
       rel="stylesheet"
     />
 
@@ -51,7 +51,11 @@
             <a class="link" href="{{ url_for('auth.signout') }}">SIGN OUT</a>
           </li>
         </ul>
-
+        <div id="snackbar">
+          {% with messages = get_flashed_messages() %} {% if messages %} {% for
+          message in messages %} {{ message }} {% endfor %} {% endif %} {%
+          endwith %}
+        </div>
         <div class="nav-header center white">
           <h1 class="header-title">TERET / ተረት</h1>
           <div class="tagline sub-text black-text">:- stories / thoughts</div>
@@ -207,5 +211,21 @@
     <script src="{{ url_for('static', filename='js/color-thief.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/galleryExpand.js') }}"></script>
     <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      // get snackbar
+      var snackbar = document.getElementById("snackbar");
+      // get message
+      var snackbar_message = snackbar.textContent;
+      // check if message found
+      if (/\S/.test(snackbar_message)) {
+        console.log("here");
+        // run materialize toast
+        M.toast({ html: snackbar_message, classes: "rounded" });
+        // remove message
+        snackbar.innerHTML = "";
+      }
+    </script>
   </body>
 </html>
