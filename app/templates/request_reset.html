@@ -43,36 +43,58 @@
             endwith %}
           </div>
           <span class="black-text"><h1>RESET PASSWORD</h1></span>
-          <div class="row">
-            <form
-              class="col s12"
-              method="POST"
-              action="{{ url_for('auth.request_reset') }}"
-            >
-              <input
-                type="hidden"
-                name="csrf_token"
-                value="{{ csrf_token() }}"
-              />
-              <div class="row">
-                <div class="input-field col s12">
-                  <input
-                    id="email"
-                    name="email"
-                    type="text"
-                    class="validate description"
-                  />
-                  <label for="email"><p>email</p></label>
-                </div>
-              </div>
-              <button
-                class="btn waves-effect waves-light black ligthen-4"
-                type="submit"
-                name="action"
+          <div class="container">
+            <div class="row">
+              <form
+                class="col s12"
+                method="POST"
+                action="{{ url_for('auth.request_reset') }}"
               >
-                Request
-              </button>
-            </form>
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  value="{{ csrf_token() }}"
+                />
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input
+                      id="email"
+                      name="email"
+                      type="text"
+                      class="validate description"
+                    />
+                    <label for="email"><p>email</p></label>
+                  </div>
+                </div>
+                <button
+                  class="btn waves-effect waves-light"
+                  type="submit"
+                  name="action"
+                >
+                  Request
+                </button>
+                <div class="row center-align">
+                  <a
+                    href="{{ url_for('auth.signin') }}"
+                    class="center-align link"
+                  >
+                    <span
+                      ><i class="material-icons">add_box</i> SIGN IN</span
+                    ></a
+                  >
+                </div>
+                <div class="row center-align">
+                  <a
+                    href="{{ url_for('auth.signup') }}"
+                    class="center-align link"
+                  >
+                    <span
+                      ><i class="material-icons">add_box</i> SIGN UP</span
+                    ></a
+                  >
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </section>

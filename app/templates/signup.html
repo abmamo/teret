@@ -84,6 +84,27 @@
                 >
                   Sign Up
                 </button>
+                <div class="row center-align">
+                  <a
+                    href="{{ url_for('auth.signin') }}"
+                    class="center-align link"
+                  >
+                    <span
+                      ><i class="material-icons">add_box</i> SIGN IN</span
+                    ></a
+                  >
+                </div>
+                <div class="row center-align">
+                  <a
+                    href="{{ url_for('auth.request_reset') }}"
+                    class="center-align link"
+                  >
+                    <span
+                      ><i class="material-icons">add_box</i> FORGOT
+                      PASSWORD</span
+                    ></a
+                  >
+                </div>
               </form>
             </div>
           </div>

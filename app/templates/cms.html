@@ -116,7 +116,7 @@
                   </div>
                   {% if story.published %}
                   <div class="col s12m6l6">
-                    <span
+                    <span class="card-time"
                       ><i class="material-icons green-text">publish</i>{{
                       story.published_on | format_datetime("short") }}</span
                     >
@@ -128,9 +128,22 @@
                 <div class="container">
                   <div class="row">
                     <h1 class="card-title">{{ story.title }}</h1>
-                    <span class="card-time"
-                      >{{ story.created_on | format_datetime("short") }}</span
-                    >
+                  </div>
+                  <div class="row">
+                    <div class="col s12m6l6">
+                      <span class="card-time"
+                        ><i class="material-icons">create</i>{{ story.created_on
+                        | format_datetime("short") }}</span
+                      >
+                    </div>
+                    {% if story.published %}
+                    <div class="col s12m6l6">
+                      <span class="card-time"
+                        ><i class="material-icons">publish</i>{{
+                        story.published_on | format_datetime("short") }}</span
+                      >
+                    </div>
+                    {% endif %}
                   </div>
                 </div>
                 <div class="container">
