@@ -112,3 +112,8 @@ link {
   background: #ffb140 !important;
   color: #f4f4f4 !important;
 }
+
+.material-icons {
+  display: inline-flex;
+  vertical-align: top;
+}
