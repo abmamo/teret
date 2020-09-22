@@ -12,6 +12,8 @@ from flask import (
     current_app,
 )
 
+from urllib.parse import urlparse
+
 # import flask login functions
 from flask_login import current_user, login_user, logout_user
 
@@ -49,7 +51,7 @@ def signin():
         login_user(user)
         # get next from argument
         next_page = request.args.get("next")
-        if not next_page or url_parse(next_page).netloc != "" or next_page == "/":
+        if not next_page or urlparse(next_page).netloc != "" or next_page == "/":
             next_page = url_for("cms.editor")
         # alert user
         flash("signed in.")
