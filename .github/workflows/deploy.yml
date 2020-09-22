@@ -29,6 +29,8 @@ jobs:
       - name: test with pytest
         run: |
           python3 -m pytest ./tests
+        env:
+          DOMAIN: localhost:5000
       - name: push to server
         uses: appleboy/ssh-action@master
         with:
