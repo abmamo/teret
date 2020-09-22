@@ -24,7 +24,7 @@ header {
 }
 
 header:before {
-  background: #7776bc;
+  background: #372f4b;
   background-size: cover;
   content: "";
   position: absolute;
@@ -39,7 +39,7 @@ header:before {
 .header-subtitle,
 .logo-text,
 .sub-text {
-  color: #ffb140;
+  color: #ced375;
   font-family: "Source Code Pro", monospace !important;
 }
 
@@ -62,7 +62,7 @@ header:before {
 
 .link:hover {
   text-transform: lowercase;
-  color: #ffb140;
+  color: #ced375;
 }
 
 .nav-wrapper {
@@ -108,12 +108,12 @@ header:before {
 }
 
 #toast-container .toast {
-  background: #ffb140 !important;
+  background: #ced375 !important;
   color: #f4f4f4 !important;
 }
 
 .material-icons {
   display: inline-flex;
   vertical-align: top;
-  color: #ffb140 !important;
+  color: #ced375 !important;
 }

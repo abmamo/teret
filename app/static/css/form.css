@@ -4,7 +4,7 @@
 .header-subtitle,
 .logo-text,
 .sub-text {
-  color: #ffb140;
+  color: #ced375;
   font-family: "Source Code Pro", monospace !important;
 }
 
@@ -31,17 +31,17 @@ input {
 }
 
 .input-field input:focus + label {
-  color: #ffb140 !important;
+  color: #ced375 !important;
   font-family: "Source Code Pro", monospace !important;
 }
 
 .row .input-field input:focus {
-  border-bottom: 1px solid #ffb140 !important;
-  box-shadow: 0 1px 0 0 #ffb140 !important;
+  border-bottom: 1px solid #ced375 !important;
+  box-shadow: 0 1px 0 0 #ced375 !important;
 }
 
 button {
-  background: #ffb140 !important;
+  background: #ced375 !important;
   font-family: "Source Code Pro", monospace !important;
   padding: 1.5%;
   color: #333333 !important;
@@ -58,12 +58,12 @@ button {
 }
 
 #toast-container .toast {
-  background: #ffb140 !important;
+  background: #ced375 !important;
   color: #f4f4f4 !important;
 }
 
 .material-icons {
   display: inline-flex;
   vertical-align: top;
-  color: #ffb140 !important;
+  color: #ced375 !important;
 }

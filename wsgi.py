@@ -4,4 +4,4 @@ from app import create_app
 app = create_app()
 # run app
 if __name__ == "__main__":
-    app.run()
+    app.run(port=5001)

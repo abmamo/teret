@@ -2,14 +2,14 @@
 
 .nav-extended,
 .nav-header {
-  background: #7776bc !important;
+  background: #372f4b !important;
 }
 
 .header-title,
 .header-subtitle,
 .logo-text,
 .sub-text {
-  color: #ffb140 !important;
+  color: #ced375 !important;
   font-family: "Source Code Pro", monospace !important;
 }
 
@@ -21,7 +21,7 @@
 .card-title {
   font-size: 1.5em;
   font-family: "Source Code Pro", monospace !important;
-  border-bottom: #ffb140 2px solid;
+  border-bottom: #ced375 2px solid;
 }
 
 .card-time {
@@ -44,7 +44,7 @@
 
 .sidenav-trigger,
 .link a {
-  color: #ffb140 !important;
+  color: #ced375 !important;
 }
 
 .tag-text {
@@ -79,11 +79,11 @@
 }
 
 #toast-container .toast {
-  background: #ffb140 !important;
+  background: #ced375 !important;
   color: #f4f4f4 !important;
 }
 .material-icons {
   display: inline-flex;
   vertical-align: top;
-  color: #ffb140 !important;
+  color: #ced375 !important;
 }
