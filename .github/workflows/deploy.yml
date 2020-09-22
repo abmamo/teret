@@ -28,7 +28,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: test with pytest
         run: |
-          pytest
+          python3 -m pytest ./tests
       - name: push to server
         uses: appleboy/ssh-action@master
         with:
