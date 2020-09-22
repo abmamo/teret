@@ -1,15 +1,17 @@
 # env management
 from dotenv import load_dotenv
+
 # load env
 load_dotenv()
 # Statement for enabling the development environment
 import os
+
 DEBUG = True
 # Define the application directory
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # Define the database - we are working with
 # SQLite for this example
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'teret.db')
+SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BASE_DIR, "teret.db")
 DATABASE_CONNECT_OPTIONS = {}
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 # Application threads. A common general assumption is
@@ -25,10 +27,10 @@ CSRF_SESSION_KEY = os.urandom(256)
 # Secret key for signing cookies
 SECRET_KEY = os.urandom(256)
 # Uploads
-#UPLOADS_DEFAULT_DEST = BASE_DIR + 'app/static/images/'
+# UPLOADS_DEFAULT_DEST = BASE_DIR + 'app/static/images/'
 UPLOADS_DEFAULT_DEST = "./app/static/images/"
 UPLOADS_DEFAULT_URL = os.environ.get("DOMAIN") + "/static/images/"
-#UPLOADED_IMAGES_DEST = os.path.join(BASE_DIR, '/app/static/images/')
+# UPLOADED_IMAGES_DEST = os.path.join(BASE_DIR, '/app/static/images/')
 UPLOADS_IMAGES_DEST = "./app/static/images/"
 UPLOADED_IMAGES_URL = os.environ.get("DOMAIN") + "/static/images/"
 # email configuration

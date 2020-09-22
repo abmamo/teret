@@ -1,7 +1,9 @@
 import pytest
 from app import create_app
+from app.mod_auth.models import User
 
-@pytest.fixture(scope='module')
+
+@pytest.fixture(scope="module")
 def test_client():
     # create app
     app = create_app()
@@ -16,15 +18,19 @@ def test_client():
     ctx.pop()
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def init_database():
-    from app.extensions import db
+    # create app
+    app = create_app()
+
     with app.app_context():
+        from app.extensions import db
+
         # create database tables
         db.create_all()
         # insert user data
-        user_one = User('test_one@test.com', 'testonepassword')
-        user_two = User('test_two@test.com', 'testtwopassword')
+        user_one = User("test_one@test.com", "testonepassword")
+        user_two = User("test_two@test.com", "testtwopassword")
         # add users to database
         db.session.add(user_one)
         db.session.add(user_two)
