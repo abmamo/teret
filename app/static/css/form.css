@@ -4,8 +4,8 @@
 .header-subtitle,
 .logo-text,
 .sub-text {
-  color: #ced375;
-  font-family: "Source Code Pro", monospace !important;
+  color: #f4f4f4;
+  font-family: "Fira Code", monospace !important;
 }
 
 .link {
@@ -17,7 +17,7 @@ input {
   padding: 16px 20px;
   margin: 16px 16px;
   box-sizing: border-box;
-  font-family: "Source Code Pro", monospace;
+  font-family: "Fira Code", monospace !important;
   font-size: 1.5em;
   outline: none;
 }
@@ -32,7 +32,7 @@ input {
 
 .input-field input:focus + label {
   color: #ced375 !important;
-  font-family: "Source Code Pro", monospace !important;
+  font-family: "Fira Code", monospace !important;
 }
 
 .row .input-field input:focus {
@@ -42,9 +42,9 @@ input {
 
 button {
   background: #ced375 !important;
-  font-family: "Source Code Pro", monospace !important;
+  font-family: "Fira Code", monospace !important;
   padding: 1.5%;
-  color: #333333 !important;
+  color: #333 !important;
   margin-bottom: 2.5% !important;
 }
 
@@ -58,8 +58,8 @@ button {
 }
 
 #toast-container .toast {
-  background: #ced375 !important;
-  color: #f4f4f4 !important;
+  background: #f4f4f4 !important;
+  color: #ced375 !important;
 }
 
 .material-icons {
