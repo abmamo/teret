@@ -80,14 +80,14 @@ header:before {
   font-family: "Fira Code", monospace !important;
 }
 
-.fa-instagram,
-.fa-twitter {
+.fa-github,
+.fa-linkedin {
   font-size: 2em;
   color: #333;
 }
 
-.fa-instagram:hover,
-.fa-twitter:hover {
+.fa-github:hover,
+.fa-linkedin:hover {
   color: blue;
 }
 
@@ -200,4 +200,12 @@ input {
   font-family: "Fira Code", monospace;
   font-size: 1em !important;
   line-height: 0.25em;
+}
+
+.tagline {
+  border-bottom: 2px solid #ced375 !important;
+}
+
+.tagline a {
+  color: #f4f4f4 !important;
 }
