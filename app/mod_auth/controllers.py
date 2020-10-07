@@ -73,7 +73,7 @@ def signin():
         # alert user
         flash("signed in.")
         # return response
-        return redirect(url_for(next_page)
+        return redirect(next_page)
     # return sign in page
     return render_template("signin.html")
 

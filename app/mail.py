@@ -7,7 +7,7 @@ from app.extensions import mail
 # logging
 import logging
 # configure
-logger = logging.getLogger(__name___)
+logger = logging.getLogger(__name__)
 
 
 def send_mail(subject, sender, recipients, text_body):
