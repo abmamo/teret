@@ -168,7 +168,7 @@ input {
 /* Alert */
 #toast-container {
   top: 10% !important;
-  left: 45% !important;
+  left: 10% !important;
   bottom: auto !important;
   right: auto !important;
   background: transparent !important;
@@ -176,7 +176,7 @@ input {
 
 #toast-container .toast {
   background: #f4f4f4 !important;
-  color: #ced375 !important;
+  color: #333 !important;
 }
 
 .material-icons {
@@ -198,5 +198,6 @@ input {
 
 .content {
   font-family: "Fira Code", monospace;
-  font-size: 1.15em !important;
+  font-size: 1em !important;
+  line-height: 0.25em;
 }
