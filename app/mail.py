@@ -6,6 +6,7 @@ from app.extensions import mail
 
 # logging
 import logging
+import traceback
 # configure
 logger = logging.getLogger(__name__)
 

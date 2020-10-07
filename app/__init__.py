@@ -1,5 +1,5 @@
 # Import flask and template operators
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
@@ -24,6 +24,9 @@ import app.config as config
 
 # date utils
 import babel
+
+# sys
+import sys
 
 # global variables
 uploads = None
@@ -149,6 +152,6 @@ def create_app():
         return app
     except Exception as e:
         # log
-        current_app.logger.warning("factory failed.")
-        # return error page
-        abort(500)
+        print("factory failed.")
+        # exit
+        sys.exit(1)
