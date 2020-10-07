@@ -25,7 +25,7 @@
     />
 
     <link
-      href="{{ url_for('static', filename='css/stories.css') }}"
+      href="{{ url_for('static', filename='css/base.css') }}"
       rel="stylesheet"
     />
 
@@ -61,7 +61,6 @@
         </div>
         <div class="nav-header center white">
           <h1 class="header-title">TERET / ተረት</h1>
-          <div class="tagline sub-text">:- stories / thoughts</div>
         </div>
       </div>
 
@@ -135,7 +134,7 @@
                   <div class="row">
                     <h1 class="card-title">{{ story.title }}</h1>
                   </div>
-                  <div class="row">
+                  <div class="row no-padding-top">
                     <div class="col s12m6l6">
                       <span class="card-time"
                         ><i class="material-icons">create</i>{{ story.created_on
@@ -154,7 +153,9 @@
                 </div>
                 <div class="container">
                   <div class="row">
-                    <p class="content">{{ story.content | safe }}</p>
+                    <div class="col s12m12l12 content">
+                      {{ story.content | safe }}
+                    </div>
                   </div>
                 </div>
               </div>

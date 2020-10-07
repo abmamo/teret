@@ -23,7 +23,7 @@
     />
 
     <link
-      href="{{ url_for('static', filename='css/cms.css') }}"
+      href="{{ url_for('static', filename='css/base.css') }}"
       rel="stylesheet"
     />
 
@@ -127,7 +127,9 @@
               <div class="gallery-body">
                 <div class="container">
                   <div class="row">
-                    <h1 class="card-title">{{ story.title }}</h1>
+                    <div class="col s12m12l12">
+                      <h1 class="card-title">{{ story.title }}</h1>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col s12m6l6">
@@ -135,15 +137,15 @@
                         ><i class="material-icons">create</i>{{ story.created_on
                         | format_datetime("short") }}</span
                       >
+                      {% if story.published %}
+                      <div class="col s12m6l6">
+                        <span class="card-time"
+                          ><i class="material-icons">publish</i>{{
+                          story.published_on | format_datetime("short") }}</span
+                        >
+                      </div>
+                      {% endif %}
                     </div>
-                    {% if story.published %}
-                    <div class="col s12m6l6">
-                      <span class="card-time"
-                        ><i class="material-icons">publish</i>{{
-                        story.published_on | format_datetime("short") }}</span
-                      >
-                    </div>
-                    {% endif %}
                   </div>
                 </div>
                 <div class="container">

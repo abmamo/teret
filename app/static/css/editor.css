@@ -1,13 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,400;1,200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@200&display=swap");
 
 body {
-  background-color: #372f4b;
+  background-color: #346873;
   padding-top: 5%;
 }
 
 label {
   color: #f4f4f4;
-  font-family: "Source Code Pro", monospace;
+  font-family: "Fira Code", monospace;
 }
 
 .submit-container {
@@ -17,7 +18,7 @@ label {
 
 .submit-container button {
   padding: 2.5%;
-  font-family: "Source Code Pro", monospace;
+  font-family: "Fira Code", monospace;
   font-size: 1.1em;
   letter-spacing: 0.1em;
   background-color: #ced375 !important;
@@ -42,5 +43,5 @@ label {
 .material-icons {
   display: inline-flex;
   vertical-align: top;
-  color: #ced375 !important;
+  color: #f4f4f4 !important;
 }
