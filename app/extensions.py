@@ -1,21 +1,33 @@
-# import login
+# auth
 from flask_login import LoginManager
 
-# import mail manager
+# mail
 from flask_mail import Mail, Message
 
-# import csrf protections
+# csrf 
 from flask_wtf.csrf import CSRFProtect
 
-# import db migration plugins
+# db migration
 from flask_migrate import Migrate
 
-# Import SQLAlchemy
+# db orm
 from flask_sqlalchemy import SQLAlchemy
 
-# init extensions
-csrf = CSRFProtect()
-login = LoginManager()
-mail = Mail()
-migrate = Migrate()
-db = SQLAlchemy()
+# logging
+import logging
+import traceback
+# configure logging
+logger = logging.getLogger(__name__)
+
+try:
+    # init extensions
+    csrf = CSRFProtect()
+    login = LoginManager()
+    mail = Mail()
+    migrate = Migrate()
+    db = SQLAlchemy()
+except Exception as e:
+    # log
+    logger.warning("init extensions failed.")
+    logger.warning(str(e))
+    logger.warning(traceback.print_exc())

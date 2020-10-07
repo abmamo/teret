@@ -1,14 +1,15 @@
+# datetime
 from datetime import datetime
 
-# import database and login manager from application
-from app.extensions import login
-from app.extensions import db
+# extensions
+from app.extensions import login, db
 
-# import hashing and hash checking functions
+# hashing
 from werkzeug.security import generate_password_hash, check_password_hash
+# db user class
 from flask_login import UserMixin
 
-# define flask login user loader by id
+# user loader
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
