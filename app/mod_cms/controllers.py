@@ -7,7 +7,8 @@ from flask import (
     session,
     redirect,
     url_for,
-    current_app
+    current_app,
+    abort
 )
 
 # import login manager
