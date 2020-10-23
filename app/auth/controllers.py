@@ -17,7 +17,7 @@ from urllib.parse import urlparse
 from flask_login import current_user, login_user, logout_user
 
 # db model
-from app.mod_auth.models import User
+from app.auth.models import User
 
 # db extension
 from app.extensions import db
@@ -27,14 +27,14 @@ from app.mail import send_mail
 from app.extensions import mail
 
 # import serializer
-from app import ts
+from app.factory import ts
 
 
 # auth module
-mod_auth = Blueprint("auth", __name__, url_prefix="/")
+auth = Blueprint("auth", __name__, url_prefix="/")
 
 # Set the route and accepted methods
-@mod_auth.route("/signin", methods=["GET", "POST"])
+@auth.route("/signin", methods=["GET", "POST"])
 def signin():
     if request.method == "POST":
         try:
@@ -78,7 +78,7 @@ def signin():
     return render_template("signin.html")
 
 
-@mod_auth.route("/signup", methods=["GET", "POST"])
+@auth.route("/signup", methods=["GET", "POST"])
 def signup():
     if current_app.config["MAX_USERS_NOT_REACHED"]:
         if request.method == "POST":
@@ -144,7 +144,7 @@ def signup():
     return redirect(url_for("signin"))
 
 
-@mod_auth.route("/confirm/<token>", methods=["GET", "POST"])
+@auth.route("/confirm/<token>", methods=["GET", "POST"])
 def confirm_email(token):
     # check validity of token passed using the serializer
     try:
@@ -169,7 +169,7 @@ def confirm_email(token):
         abort(500)
 
 
-@mod_auth.route("/reset", methods=["GET", "POST"])
+@auth.route("/reset", methods=["GET", "POST"])
 def request_reset():
     if request.method == "POST":
         try:
@@ -214,7 +214,7 @@ def request_reset():
     return render_template("request_reset.html")
 
 
-@mod_auth.route("/reset/<token>", methods=["GET", "POST"])
+@auth.route("/reset/<token>", methods=["GET", "POST"])
 def reset_with_token(token):
     # check validity of token passed using the serializer
     try:
@@ -250,7 +250,7 @@ def reset_with_token(token):
     return render_template("reset_with_token.html", token=token)
 
 
-@mod_auth.route("/signout")
+@auth.route("/signout")
 def signout():
     logout_user()
     flash("signed out.")

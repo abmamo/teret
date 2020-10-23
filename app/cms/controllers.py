@@ -15,24 +15,24 @@ from flask import (
 from flask_login import login_required
 
 # import post model
-from app.mod_cms.models import Post
+from app.cms.models import Post
 
 # import slug creation libs
 from slugify import slugify
 
 # import db session
 from app.extensions import db
-from app import uploads
+from app.factory import uploads
 
 # import os to remove files
 import os
 
 
 # blueprint
-mod_cms = Blueprint("cms", __name__, url_prefix="/cms")
+cms = Blueprint("cms", __name__, url_prefix="/cms")
 
 # basic routes
-@mod_cms.route("/", methods=["GET"])
+@cms.route("/", methods=["GET"])
 @login_required
 def home():
     try:
@@ -48,7 +48,7 @@ def home():
         # return error page
         abort(500)
 
-@mod_cms.route("/editor", methods=["GET"])
+@cms.route("/editor", methods=["GET"])
 @login_required
 def editor():
     try:
@@ -61,7 +61,7 @@ def editor():
         abort(500)
 
 
-@mod_cms.route("/upload", methods=["POST"])
+@cms.route("/upload", methods=["POST"])
 @login_required
 def upload():
     # image upload url doesn't render anything
@@ -77,7 +77,7 @@ def upload():
         return ""
 
 
-@mod_cms.route("/save", methods=["POST"])
+@cms.route("/save", methods=["POST"])
 @login_required
 def save():
     if request.method == "POST":
@@ -138,7 +138,7 @@ def save():
         return redirect(url_for("cms.home"))
 
 
-@mod_cms.route("/edit/<string:slug>", methods=["GET", "POST"])
+@cms.route("/edit/<string:slug>", methods=["GET", "POST"])
 @login_required
 def edit(slug):
     try:
@@ -153,7 +153,7 @@ def edit(slug):
         abort(500)
 
 
-@mod_cms.route("/publish/<string:slug>", methods=["POST"])
+@cms.route("/publish/<string:slug>", methods=["POST"])
 @login_required
 def publish(slug):
     try:
@@ -174,7 +174,7 @@ def publish(slug):
         abort(500)
 
 
-@mod_cms.route("/unpublish/<string:slug>", methods=["POST"])
+@cms.route("/unpublish/<string:slug>", methods=["POST"])
 @login_required
 def unpublish(slug):
     try:
@@ -194,7 +194,7 @@ def unpublish(slug):
         abort(500)
 
 
-@mod_cms.route("/delete/<string:slug>", methods=["POST"])
+@cms.route("/delete/<string:slug>", methods=["POST"])
 @login_required
 def delete(slug):
     # need to add ways to depelete post images

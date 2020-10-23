@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code&family=Indie+Flower&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
 
 body {
   display: flex;
@@ -11,6 +11,7 @@ main {
   flex: 1 0 auto;
 }
 
+/* nav */
 header {
   align-items: center;
   display: flex;
@@ -25,7 +26,7 @@ header {
 }
 
 header:before {
-  background: #346873;
+  background: #ffffff;
   background-size: cover;
   content: "";
   position: absolute;
@@ -36,40 +37,9 @@ header:before {
   z-index: -1;
 }
 
-.header-title,
-.header-subtitle,
-.logo-text,
-.sub-text {
-  color: #f4f4f4;
-  font-family: "Fira Code", monospace !important;
-}
-
-.sub-text {
-  letter-spacing: 0.1em;
-  font-size: 1em;
-  color: #f4f4f4 !important;
-}
-
-.links-wrapper {
-  padding-left: 25%;
-  margin-top: 2.5%;
-}
-
-.link {
-  letter-spacing: 0.15em;
-  color: #f4f4f4;
-  transition: 0.5s;
-}
-
-.link:hover {
-  text-transform: lowercase;
-  letter-spacing: 0.25em;
-  color: #ced375;
-}
-
 .nav-extended,
 .nav-header {
-  background: #346873 !important;
+  background: #ffffff !important;
 }
 
 .nav-wrapper {
@@ -77,34 +47,70 @@ header:before {
 }
 
 .nav-wrapper a {
-  font-family: "Fira Code", monospace !important;
+  font-family: "Poppins", monospace !important;
 }
 
+.link {
+  letter-spacing: 0.15em;
+  color: #000000;
+  transition: 0.5s;
+}
+
+.link:hover {
+  background: #EEB21B !important;
+}
+
+.link a {
+  color: #000000;
+}
+
+.link:hover,
+.link:hover a {
+  color: #ffffff;
+}
+/* text */
+.header-title {
+  color: #000000;
+  font-family: "Poppins", monospace !important;
+  font-weight: bold;
+}
+
+.tag-title {
+  color: #000000;
+  font-family: "Source Code Pro", monospace !important;
+  font-weight: bold;
+  text-transform: uppercase !important;
+  font-size: 0.95em !important;
+}
+/* social icons */
 .fa-github,
 .fa-linkedin {
   font-size: 2em;
-  color: #333;
+  color: #000000;
 }
 
 .fa-github:hover,
 .fa-linkedin:hover {
-  color: blue;
+  color: #EEB21B;
 }
 
 .social-icon {
-  color: #333;
+  color: #000000;
 }
-
+/* cards */
 .card-title {
-  font-size: 1.5em;
-  font-family: "Heebo", serif !important;
-  border-bottom: #ced375 2px solid;
+  font-size: 1.15em;
+  font-family: "Poppins", serif !important;
+  font-weight: bold;
+  border-bottom: #EEB21B 2px solid;
 }
 
 .card-time {
   color: #333 !important;
-  font-family: "Fira Code", monospace !important;
+  font-family: "Source Code Pro", monospace !important;
   font-size: 0.875em !important;
+  font-weight: bold;
+  letter-spacing: 0.05em !important;
   letter-spacing: 0.05em;
   margin-left: 0 !important;
 }
@@ -114,59 +120,66 @@ header:before {
   margin-top: 0px !important;
 }
 
+/* form */
 input {
   width: 100%;
   padding: 16px 20px;
   margin: 16px 16px;
   box-sizing: border-box;
-  font-family: "Fira Code", monospace !important;
+  font-family: "Poppins", monospace !important;
   font-size: 1.5em;
   outline: none;
-  color: #f4f4f4 !important;
+  color: #000000 !important;
 }
 
 .input-field input {
-  border-bottom: 2px solid #f4f4f4 !important;
+  border-bottom: 2px solid #000000 !important;
 }
 
 .input-field input::placeholder {
-  color: #f4f4f4 !important;
+  color: #000000 !important;
   opacity: 1; /* Firefox */
 }
 
 .input-field input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #f4f4f4 !important;
+  color: #000000 !important;
 }
 
 .input-field input::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: #f4f4f4 !important;
+  color: #000000 !important;
 }
 
 .input-field input + label {
-  color: #f4f4f4 !important;
+  color: #000000 !important;
 }
 
 .input-field input:focus + label {
-  color: #ced375 !important;
-  font-family: "Fira Code", monospace !important;
+  color: #EEB21B !important;
+  font-family: "Poppins", monospace !important;
 }
 
 .row .input-field input:focus {
-  border-bottom: 1px solid #ced375 !important;
-  box-shadow: 0 1px 0 0 #ced375 !important;
+  border-bottom: 1px solid #EEB21B !important;
+  box-shadow: 0 1px 0 0 #EEB21B !important;
 }
 
 .form-button {
-  background: #ced375 !important;
-  font-family: "Fira Code", monospace !important;
+  background: #EEB21B !important;
+  font-family: "Poppins", monospace !important;
   padding: 1.5%;
   color: #333 !important;
   margin-bottom: 2.5% !important;
 }
 
-/* Alert */
+.form-button:hover {
+  background: transparent !important;
+  border: 2px solid #000000;
+  cursor: pointer;
+}
+
+/* snackbar */
 #toast-container {
   top: 10% !important;
   left: 10% !important;
@@ -176,18 +189,19 @@ input {
 }
 
 #toast-container .toast {
-  background: #f4f4f4 !important;
+  background: transparent !important;
   color: #333 !important;
+  border: 2px solid #000000;
 }
 
 .material-icons {
   display: inline-flex;
   vertical-align: top;
-  color: #f4f4f4 !important;
+  color: #000000 !important;
 }
 
 .card-time .material-icons {
-  color: #ced375 !important;
+  color: #EEB21B !important;
 }
 
 .back-btn {
@@ -198,15 +212,19 @@ input {
 }
 
 .content {
-  font-family: "Fira Code", monospace;
+  font-family: "Poppins", monospace;
   font-size: 1em !important;
   line-height: 0.25em;
 }
 
 .tagline {
-  border-bottom: 2px solid #ced375 !important;
+  border-bottom: 2px solid #EEB21B !important;
 }
 
 .tagline a {
-  color: #f4f4f4 !important;
+  color: #000000 !important;
+}
+
+.tagline a:hover {
+  color: #EEB21B !important;
 }

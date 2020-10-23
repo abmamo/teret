@@ -1,5 +1,5 @@
 # import factory
-from app import create_app
+from app.factory import create_app
 
 # create app
 app = create_app()

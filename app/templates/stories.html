@@ -1,187 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
 
-    <title>teret | stories</title>
-    <link
-      rel="shortcut icon"
-      href="{{ url_for('static', filename='favicon.ico') }}"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
 
-    <!-- Stylesheet -->
-    <link
-      href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}"
-      rel="stylesheet"
-    />
+  <title>teret | stories</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 
-    <link
-      href="{{ url_for('static', filename='css/base.css') }}"
-      rel="stylesheet"
-    />
+  <!-- Stylesheet -->
+  <link href="{{ url_for('static', filename='css/gallery-materialize.min.css') }}" rel="stylesheet" />
 
-    <!-- Material Icons -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-  </head>
+  <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet" />
 
-  <body class="blog">
-    <!-- Navbar and Header -->
-    <nav class="nav-extended">
-      <div class="nav-background">
-        <div class="pattern active"></div>
-      </div>
-      <div class="nav-wrapper container">
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger"
-          ><i class="material-icons">menu</i></a
-        >
-        <ul class="right hide-on-med-and-down">
-          <li class="link">
-            <a href="{{ url_for('base.about') }}">ABOUT</a>
-          </li>
-          <li class="link">
-            <a href="{{ url_for('base.home') }}">HOME</a>
-          </li>
-        </ul>
-        <div id="snackbar">
-          {% with messages = get_flashed_messages() %} {% if messages %} {% for
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body class="blog">
+  <!-- Navbar and Header -->
+  <nav class="nav-extended">
+    <div class="nav-background">
+      <div class="pattern active"></div>
+    </div>
+    <div class="nav-wrapper container">
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li class="link">
+          <a href="{{ url_for('base.about') }}">ABOUT</a>
+        </li>
+        <li class="link">
+          <a href="{{ url_for('base.home') }}">HOME</a>
+        </li>
+      </ul>
+      <div id="snackbar">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for
           message in messages %} {{ message }} {% endfor %} {% endif %} {%
           endwith %}
-        </div>
-        <div class="nav-header center white">
-          <h1 class="header-title">TERET / ተረት</h1>
-        </div>
       </div>
-
-      <!-- Fixed Masonry Filters -->
-      <div class="categories-wrapper white darken-1">
-        <div class="categories-container">
-          <ul class="categories container">
-            <li class="active description">
-              <a class="black-text" href="#all">All</a>
-            </li>
-            {% for tag in tags %}
-            <li>
-              <a class="description black-text" href="#{{ tag.tags.lower() }}"
-                >{{ tag.tags }}</a
-              >
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
+      <div class="nav-header center">
+        <h1 class="header-title">TERET / ተረት</h1>
       </div>
-    </nav>
-    <ul class="sidenav" id="nav-mobile">
-      <li>
-        <a href="{{ url_for('base.about') }}" class="black-text">ABOUT</a>
-      </li>
-      <li>
-        <a href="{{ url_for('base.home') }}" class="black-text">HOME</a>
-      </li>
-    </ul>
+    </div>
 
-    <div id="portfolio" class="section gray">
-      <div class="container">
-        <div class="gallery row">
-          {% for story in stories %}
-          <div
-            class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}"
-          >
-            <div class="gallery-curve-wrapper">
-              <a class="gallery-cover gray" style="height: 300px">
-                {% if story.image_filename %}
-                <img
-                  class="responsive-img"
-                  src="{{ url_for('static', filename='images/uploads/' + story.image_filename) }}"
-                  alt="{{ story.image_filename }}"
-                />
-                {% endif %}
-              </a>
-              <div class="gallery-header">
-                <div class="row">
-                  <span class="card-title">{{ story.title }}</span>
+    <!-- Fixed Masonry Filters -->
+    <div class="categories-wrapper white darken-1">
+      <div class="categories-container">
+        <ul class="categories container">
+          <li class="active">
+            <a class="tag-title black-text" href="#all">All</a>
+          </li>
+          {% for tag in tags %}
+          <li>
+            <a class="tag-title black-text" href="#{{ tag.tags.lower() }}">{{ tag.tags }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <ul class="sidenav" id="nav-mobile">
+    <li>
+      <a href="{{ url_for('base.about') }}" class="black-text">ABOUT</a>
+    </li>
+    <li>
+      <a href="{{ url_for('base.home') }}" class="black-text">HOME</a>
+    </li>
+  </ul>
+
+  <div id="portfolio" class="section gray">
+    <div class="container">
+      <div class="gallery row">
+        {% for story in stories %}
+        <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter {{ story.tags.lower() }}">
+          <div class="gallery-curve-wrapper">
+            <a class="gallery-cover gray" style="height: 300px">
+              {% if story.image_filename %}
+              <img class="responsive-img"
+                src="{{ url_for('static', filename='images/uploads/' + story.image_filename) }}"
+                alt="{{ story.image_filename }}" />
+              {% endif %}
+            </a>
+            <div class="gallery-header">
+              <div class="row">
+                <span class="card-title">{{ story.title }}</span>
+              </div>
+              <div class="row">
+                <div class="col s12m6l6">
+                  <span class="card-time"><i class="material-icons">create</i>{{ story.created_on |
+                      format_datetime("short") }}</span>
                 </div>
+                {% if story.published %}
+                <div class="col s12m6l6">
+                  <span class="card-time"><i class="material-icons">publish</i>{{
+                      story.published_on | format_datetime("short") }}</span>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="gallery-body">
+              <div class="container">
                 <div class="row">
+                  <h1 class="card-title">{{ story.title }}</h1>
+                </div>
+                <div class="row no-padding-top">
                   <div class="col s12m6l6">
-                    <span class="card-time"
-                      ><i class="material-icons">create</i>{{ story.created_on |
-                      format_datetime("short") }}</span
-                    >
+                    <span class="card-time"><i class="material-icons">create</i>{{ story.created_on
+                        | format_datetime("short") }}</span>
                   </div>
                   {% if story.published %}
                   <div class="col s12m6l6">
-                    <span class="card-time"
-                      ><i class="material-icons">publish</i>{{
-                      story.published_on | format_datetime("short") }}</span
-                    >
+                    <span class="card-time"><i class="material-icons">publish</i>{{
+                        story.published_on | format_datetime("short") }}</span>
                   </div>
                   {% endif %}
                 </div>
               </div>
-              <div class="gallery-body">
-                <div class="container">
-                  <div class="row">
-                    <h1 class="card-title">{{ story.title }}</h1>
-                  </div>
-                  <div class="row no-padding-top">
-                    <div class="col s12m6l6">
-                      <span class="card-time"
-                        ><i class="material-icons">create</i>{{ story.created_on
-                        | format_datetime("short") }}</span
-                      >
-                    </div>
-                    {% if story.published %}
-                    <div class="col s12m6l6">
-                      <span class="card-time"
-                        ><i class="material-icons">publish</i>{{
-                        story.published_on | format_datetime("short") }}</span
-                      >
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-                <div class="container">
-                  <div class="row">
-                    <div class="col s12m12l12 content">
-                      {{ story.content | safe }}
-                    </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col s12m12l12 content">
+                    {{ story.content | safe }}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {% endfor %}
         </div>
+        {% endfor %}
       </div>
     </div>
-    <!-- /.container -->
+  </div>
+  <!-- /.container -->
 
-    <!-- Core Javascript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/color-thief.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/galleryExpand.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
-    <script>
-      // get snackbar
-      var snackbar = document.getElementById("snackbar");
-      // get message
-      var snackbar_message = snackbar.textContent;
-      // check if message found
-      if (/\S/.test(snackbar_message)) {
-        console.log("here");
-        // run materialize toast
-        M.toast({ html: snackbar_message, classes: "rounded" });
-        // remove message
-        snackbar.innerHTML = "";
-      }
-    </script>
-  </body>
+  <!-- Core Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/color-thief.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/galleryExpand.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+  <script>
+    // get snackbar
+    var snackbar = document.getElementById("snackbar");
+    // get message
+    var snackbar_message = snackbar.textContent;
+    // check if message found
+    if (/\S/.test(snackbar_message)) {
+      console.log("here");
+      // run materialize toast
+      M.toast({ html: snackbar_message, classes: "rounded" });
+      // remove message
+      snackbar.innerHTML = "";
+    }
+  </script>
+</body>
+
 </html>
