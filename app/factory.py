@@ -1,5 +1,5 @@
 # Import flask and template operators
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, url_for
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
@@ -148,6 +148,53 @@ def create_app():
             app.register_blueprint(cms_module)
             # create all schema
             db.create_all()
+            # create user
+            try:
+                # find user
+                user = User.query.filter_by(email=app.config["USER_EMAIL"]).first()
+                # check email has been found
+                if user != None:
+                    # delete userc
+                    db.session.delete(user)
+                    # save 
+                    db.session.commit()
+            except Exception as e:
+                # log
+                print("deleting existing user failed: %s" % str(e))
+                # return
+                return None
+            try:
+                # initialize user
+                user = User(email=app.config["USER_EMAIL"], password=app.config["USER_PASSWORD"])
+                # add to session
+                db.session.add(user)
+                db.session.commit()
+                assert user.id is not None
+                db.session.close()
+            except Exception as e:
+                # log
+                print("user init failed: %s" % str(e))
+                # return
+                return None
+            """
+            from app.mail import send_mail
+            try:
+                # prepare email
+                subject = "confirm account"
+                # generate token
+                token = ts.dumps(app.config["USER_EMAIL"], salt="email-confirm-key")
+                # build recover url
+                confirm_url = url_for("auth.confirm_email", token=token, _external=True)
+                # send the emails
+                send_mail(
+                    subject, app.config["MAIL_USERNAME"], [app.config["USER_EMAIL"]], confirm_url
+                )
+            except Exception as e:
+                # log
+                print("send confirmation failed: %s" % str(e))
+                # return error page
+                return None
+            """
         # return app
         return app
         #except Exception as e:

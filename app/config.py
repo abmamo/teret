@@ -38,4 +38,8 @@ MAIL_USE_SSL = True
 MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
 MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 # set max users
-MAX_USERS_NOT_REACHED = True
+USER_EMAIL = os.environ.get("USER_EMAIL")
+USER_PASSWORD = os.environ.get("USER_PASSWORD")
+# server name
+#SERVER_NAME = os.environ.get("SERVER_NAME")
+DOMAIN = os.environ.get("DOMAIN")

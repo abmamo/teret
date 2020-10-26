@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>teret | editor</title>
-    <link
-      rel="shortcut icon"
-      href="{{ url_for('static', filename='favicon.ico') }}"
-    />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
 
-    <link href="{{ url_for('static', filename='summernote/summernote.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/editor.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', filename='summernote/summernote.js') }}"></script>
-  </head>
-  <body>
-    <div class="container">
+<head>
+  <title>teret | editor</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/blackboard.css">
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+
+  <link href="{{ url_for('static', filename='summernote/summernote.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/editor.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='summernote/summernote.js') }}"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
+  </style>
+</head>
+
+<body>
+  <div class="container">
     <form method="post" action="{{ url_for('cms.save') }}" enctype=multipart/form-data>
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <div class="form-group">
@@ -30,61 +33,62 @@
         <input id="title" name="title" type="text" class="form-control">
       </div>
       <div class="form-group">
-          <label for="title">tags</label>
-          <input id="tags" name="tags" type="text" class="form-control">
+        <label for="title">tags</label>
+        <input id="tags" name="tags" type="text" class="form-control">
       </div>
       <div class="form-group">
-          <label for="title">image</label>
-          <input type = "file" name = "image" placeholder = "file" class="form-control"/>
+        <label for="title">image</label>
+        <input type="file" name="image" placeholder="file" class="form-control" />
       </div>
       <textarea id="summernote" name="content"></textarea>
       <div class="row submit-container">
-            <button class="submit-buttom" type="submit" name="action">SAVE</button>
+        <button class="submit-buttom" type="submit" name="action">SAVE</button>
       </div>
     </form>
-    </div>
-    <script>
-      var csrftoken = $('meta[name=csrf-token]').attr('content')
-      $.ajaxSetup({
-          beforeSend: function(xhr, settings) {
-              if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
-                  xhr.setRequestHeader("X-CSRFToken", csrftoken)
-              }
-          }
-      })
-    </script>
-    <script>
-        $('#summernote').summernote({
-            height: ($(window).height() - 300),
-            codemirror: { // codemirror options
-              theme: 'monokai'
-            },
-            callbacks: {
-                onImageUpload: function(image) {
-                    uploadImage(image[0]);
-                }
-            }
-        });
+  </div>
+  <script>
+    var csrftoken = $('meta[name=csrf-token]').attr('content')
+    $.ajaxSetup({
+      beforeSend: function (xhr, settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken)
+        }
+      }
+    })
+  </script>
+  <script>
+    $('#summernote').summernote({
+      height: ($(window).height() - 300),
+      codemirror: { // codemirror options
+        theme: 'blackboard'
+      },
+      callbacks: {
+        onImageUpload: function (image) {
+          uploadImage(image[0]);
+        }
+      }
+    });
 
-        function uploadImage(image) {
-            var data = new FormData();
-            data.append("image", image);
-            $.ajax({
-                url: "{{ url_for('cms.upload') }}",
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: data,
-                type: "post",
-                success: function(url) {
-                    var image = $('<img>').attr('src', url);
-                    $('#summernote').summernote("insertNode", image[0]);
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-            });
-        }   
-    </script>
-  </body>
+    function uploadImage(image) {
+      var data = new FormData();
+      data.append("image", image);
+      $.ajax({
+        url: "{{ url_for('cms.upload') }}",
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: data,
+        type: "post",
+        success: function (url) {
+          var image = $('<img>').attr('src', url);
+          $('#summernote').summernote("insertNode", image[0]);
+        },
+        error: function (data) {
+          console.log(data);
+        }
+      });
+    }   
+  </script>
+</body>
+
 </html>

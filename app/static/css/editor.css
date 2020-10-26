@@ -1,14 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code&family=Indie+Flower&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
 
 body {
-  background-color: #346873;
+  background-color: #ffffff;
   padding-top: 5%;
 }
 
 label {
-  color: #f4f4f4;
-  font-family: "Fira Code", monospace;
+  color: #000000;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1.15em !important;
+  letter-spacing: 0.15em !important;
+  font-weight: lighter;
 }
 
 .submit-container {
@@ -17,14 +20,24 @@ label {
 }
 
 .submit-container button {
-  padding: 2.5%;
-  font-family: "Fira Code", monospace;
+  padding: 1%;
+  font-family: "Poppins", sans-serif;
   font-size: 1.1em;
   letter-spacing: 0.1em;
-  background-color: #ced375 !important;
-  color: #f4f4f4 !important;
+  background-color: #EEB21B !important;
+  color: #ffffff !important;
+  cursor: pointer;
+  transition: 0.5s all;
+}
+
+.submit-container button:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000;
   cursor: pointer;
 }
+
+
 
 /* Alert */
 #toast-container {
@@ -36,7 +49,7 @@ label {
 }
 
 #toast-container .toast {
-  background: #ced375 !important;
+  background: #EEB21B !important;
   color: #f4f4f4 !important;
 }
 

@@ -24,15 +24,3 @@ def home():
         current_app.logger.warning("stories failed.")
         # render error page
         abort(500)
-
-
-@base.route("/about", methods=["GET"])
-def about():
-    try:
-        # render about page
-        return render_template("about.html")
-    except Exception as e:
-        # log
-        current_app.logger.warning("about failed.")
-        # render error page
-        abort(500)

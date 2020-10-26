@@ -64,7 +64,7 @@ def signin():
             # get next from argument
             next_page = request.args.get("next")
             if not next_page or urlparse(next_page).netloc != "" or next_page == "/":
-                next_page = url_for("cms.editor")
+                next_page = url_for("cms.home")
         except Exception as e:
             # log
             current_app.logger.warning("login user failed.")
@@ -76,73 +76,6 @@ def signin():
         return redirect(next_page)
     # return sign in page
     return render_template("signin.html")
-
-
-@auth.route("/signup", methods=["GET", "POST"])
-def signup():
-    if current_app.config["MAX_USERS_NOT_REACHED"]:
-        if request.method == "POST":
-            try:
-                # get data from forms
-                email = request.form["email"]
-                password = request.form["password"]
-            except Exception as e:
-                # log
-                current_app.logger.warning("form data failed.")
-                # return error page
-                abort(500)
-            try:
-                # find user
-                user = User.query.filter_by(email=email).first()
-                # check email has been found
-                if user != None:
-                    # return to sign up page
-                    return redirect(url_for("auth.signup"))
-            except Exception as e:
-                # log
-                current_app.logger.warning("exists validation failed.")
-                # return error page
-                abort(500)
-            try:
-                # initialize user
-                user = User(email=email, password=password)
-                # add to session
-                db.session.add(user)
-                db.session.commit()
-                db.session.close()
-            except Exception as e:
-                # log
-                current_app.logger.warning("user init failed.")
-                # return error page
-                abort(500)
-            try:
-                # prepare email
-                subject = "confirm account."
-                # generate token
-                token = ts.dumps(email, salt="email-confirm-key")
-                # build recover url
-                confirm_url = url_for("auth.confirm_email", token=token, _external=True)
-                # send the emails
-                send_mail(
-                    subject, current_app.config["MAIL_USERNAME"], [email], confirm_url
-                )
-                # update user count
-                current_app.config["MAX_USERS_NOT_REACHED"] = False
-            except Exception as e:
-                # log
-                current_app.logger.warning("form data failed.")
-                # return error page
-                abort(500)
-            # update user
-            flash("account created. confirm email address.")
-            # return to login
-            return redirect(url_for("auth.signin"))
-        # render signup page
-        return render_template("signup.html")
-    # sign up not active
-    flash("signup not active.")
-    return redirect(url_for("signin"))
-
 
 @auth.route("/confirm/<token>", methods=["GET", "POST"])
 def confirm_email(token):
