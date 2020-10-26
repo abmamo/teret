@@ -5,7 +5,12 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  font-family: "Poppins", serif !important;
+  font-family: "Poppins", monospace;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.25em !important;
+  font-size: 16px !important;
 }
 
 main {
@@ -75,6 +80,9 @@ nav {
   transition: 0.5s;
   padding-top: 0.25% !important;
   padding-bottom: 0.25% !important;
+  color: #443B2F !important;
+  letter-spacing: 0.1em;
+  transition: 0.5s !important;
 }
 
 .link:hover {
@@ -246,7 +254,11 @@ input {
 
 /* content */
 .content {
+  flex-direction: column;
   font-family: "Poppins", monospace;
-  font-size: 1.1em !important;
-  line-height: 0.25em;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.25em !important;
+  font-size: 16px !important;
 }
