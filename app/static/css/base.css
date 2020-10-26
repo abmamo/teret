@@ -55,6 +55,14 @@ nav {
   font-family: "Poppins", monospace !important;
 }
 
+.header-title {
+  font-family: "Poppins", monospace !important;
+  font-weight: bold !important;
+  font-size: 2em !important;
+  color: #000000 !important;
+  letter-spacing: 00.15em !important;
+}
+
 .tag-title {
   font-family: "Source Code Pro", monospace !important;
   font-weight: bold !important;
@@ -65,8 +73,8 @@ nav {
   letter-spacing: 0.15em;
   color: #000000;
   transition: 0.5s;
-  padding-top: 0.5% !important;
-  padding-bottom: 0.5% !important;
+  padding-top: 0.25% !important;
+  padding-bottom: 0.25% !important;
 }
 
 .link:hover {
@@ -146,9 +154,14 @@ nav {
 .material-icons {
   display: inline-flex;
   vertical-align: sub;
-  color: #EEB21B !important;
   font-weight: bold !important;
   transition: 0.3s all !important;
+}
+
+.card-time .material-icons {
+  color: #EEB21B !important;
+  margin-right: 00.5em !important;
+  margin-left: 00.5em !important;
 }
 
 .no-padding-top {
@@ -217,10 +230,10 @@ input {
 
 /* snackbar */
 #toast-container {
-  top: 10% !important;
-  left: 10% !important;
-  bottom: auto !important;
-  right: auto !important;
+  right: 10% !important;
+  bottom: 10% !important;
+  top: auto !important;
+  left: auto !important;
   background: transparent !important;
   max-width: 45%; 
 }

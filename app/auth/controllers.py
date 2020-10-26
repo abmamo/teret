@@ -43,7 +43,7 @@ def signin():
             password = request.form["password"]
         except Exception as e:
                 # log
-                current_app.logger.warning("form data failed.")
+                current_app.logger.warning("getting request data failed with: %s" % str(e))
                 # return error page
                 abort(500)
         try:
@@ -51,11 +51,13 @@ def signin():
             user = User.query.filter_by(email=email).first()
             # check user has been found
             if user is None or not user.check_password(password):
-                flash("invalid credentials.")
+                # alert user
+                flash("invalid credentials")
+                # redirect to sign in page
                 return redirect(url_for("auth.signin"))
         except Exception as e:
                 # log
-                current_app.logger.warning("exists validation failed.")
+                current_app.logger.warning("exists validation failed with: %s" % str(e))
                 # return error page
                 abort(500)
         try:
@@ -63,15 +65,16 @@ def signin():
             login_user(user)
             # get next from argument
             next_page = request.args.get("next")
+            # check if there is next page in url
             if not next_page or urlparse(next_page).netloc != "" or next_page == "/":
                 next_page = url_for("cms.home")
         except Exception as e:
             # log
-            current_app.logger.warning("login user failed.")
+            current_app.logger.warning("sign in failed with: %s" % str(e))
             # return error page
             abort(500)
         # alert user
-        flash("signed in.")
+        flash("signed in")
         # return response
         return redirect(next_page)
     # return sign in page
@@ -93,11 +96,12 @@ def confirm_email(token):
         db.session.commit()
         db.session.close()
         # alert user
-        flash("email address confirmed.")
+        flash("email confirmed")
+        # return to signin page
         return redirect(url_for("auth.signin"))
     except:
         # log
-        current_app.logger.warning("confirm failed.")
+        current_app.logger.warning("confirm failed")
         # return error page
         abort(500)
 
@@ -110,7 +114,7 @@ def request_reset():
             email = request.form["email"]
         except Exception as e:
             # log
-            current_app.logger.warning("form data failed.")
+            current_app.logger.warning("getting request data failed with: %s" % str(e))
             # return error page
             abort(500)
         try:
@@ -118,12 +122,13 @@ def request_reset():
             user = User.query.filter_by(email=email).first()
             # check if user has been found
             if user is None:
-                flash("invalid credentials.")
+                # alert user
+                flash("invalid credentials")
                 # return to reset page
                 return render_template("request_reset.html")
         except Exception as e:
                 # log
-                current_app.logger.warning("exists validation failed.")
+                current_app.logger.warning("exists validation failed with: %s" % str(e))
                 # return error page
                 abort(500)
         try:
@@ -137,13 +142,13 @@ def request_reset():
             send_mail(subject, current_app.config["MAIL_USERNAME"], [email], recover_url)
         except Exception as e:
             # log
-            current_app.logger.warning("send reset failed.")
+            current_app.logger.warning("send reset failed with: %s" % str(e))
             # return error page
             abort(500)
         # alert user
-        flash("reset link sent.")
+        flash("reset link sent")
+        # redirect to home
         return redirect(url_for("base.home"))
-    flash("reset password.")
     return render_template("request_reset.html")
 
 
@@ -161,7 +166,7 @@ def reset_with_token(token):
             password = request.form["password"]
         except Exception as e:
             # log
-            current_app.logger.warning("form data failed.")
+            current_app.logger.warning("getting request data failed with: %s" % str(e))
             # return error page
             abort(500)
         try:
@@ -174,17 +179,21 @@ def reset_with_token(token):
             db.session.close()
         except Exception as e:
                 # log
-                current_app.logger.warning("password reset failed.")
+                current_app.logger.warning("password reset failed with: %s" % str(e))
                 # return error page
                 abort(500)
         # alert user
         flash("password successfully reset.")
+        # redirect to sign in
         return redirect(url_for("auth.signin"))
     return render_template("reset_with_token.html", token=token)
 
 
 @auth.route("/signout")
 def signout():
+    # log out user
     logout_user()
-    flash("signed out.")
+    # alert user
+    flash("signed out")
+    # redirect to home
     return redirect(url_for("base.home"))

@@ -21,6 +21,6 @@ def home():
         return render_template("stories.html", tags=tags, stories=stories)
     except Exception as e:
         # log
-        current_app.logger.warning("stories failed.")
+        current_app.logger.warning("stories failed with: %s" % str(e))
         # render error page
         abort(500)

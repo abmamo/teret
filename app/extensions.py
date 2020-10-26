@@ -21,13 +21,16 @@ logger = logging.getLogger(__name__)
 
 try:
     # init extensions
+    # csrf
     csrf = CSRFProtect()
+    # auth
     login = LoginManager()
+    # mail
     mail = Mail()
+    # migration
     migrate = Migrate()
+    # db orm
     db = SQLAlchemy()
 except Exception as e:
     # log
-    logger.warning("init extensions failed.")
-    logger.warning(str(e))
-    logger.warning(traceback.print_exc())
+    logger.warning("init extensions failed with: %s" % str(e))

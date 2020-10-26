@@ -13,10 +13,12 @@ logger = logging.getLogger(__name__)
 
 def send_mail(subject, sender, recipients, text_body):
     try:
+        # create message
         msg = Message(subject, sender=sender, recipients=recipients)
+        # set message body
         msg.body = text_body
+        # send message
         mail.send(msg)
     except Exception as e:
         # log
-        logger.warning(str(e))
-        logger.warning(traceback.print_exc())
+        logger.warning("sending mail failed with: %s" % str(e))
