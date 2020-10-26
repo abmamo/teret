@@ -1,5 +1,7 @@
 # flask blueprint
 from flask import Blueprint
+# date utils
+import babel
 
 macros = Blueprint('macros',
                __name__,

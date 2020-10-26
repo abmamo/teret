@@ -22,9 +22,6 @@ from flask_uploads import UploadSet, IMAGES, configure_uploads
 # import config
 import app.config as config
 
-# date utils
-import babel
-
 # sys
 import sys
 

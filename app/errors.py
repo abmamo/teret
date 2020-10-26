@@ -1,5 +1,5 @@
 # flask blueprint
-from flask import Blueprint
+from flask import Blueprint, render_template
 # csrf error
 from flask_wtf.csrf import CSRFError
 
