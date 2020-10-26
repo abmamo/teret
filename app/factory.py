@@ -11,7 +11,7 @@ from flask_login import LoginManager
 from flask_mail import Mail, Message
 
 # import csrf protections
-from flask_wtf.csrf import CSRFProtect, CSRFError
+from flask_wtf.csrf import CSRFProtect
 
 # import serializer for generating tokens
 from itsdangerous import URLSafeTimedSerializer
@@ -70,79 +70,16 @@ def create_app():
             def load_user(id):
                 return User.query.get(int(id))
 
-            # Sample HTTP error handling
-            @app.errorhandler(400)
-            def not_found(error):
-                # error code
-                status_code = 400
-                # message
-                message = "bad request."
-                # return error page
-                return (
-                    render_template("error.html", message=message, status_code=status_code),
-                    400,
-                )
-
-            @app.errorhandler(404)
-            def not_found(error):
-                # error code
-                status_code = 404
-                # message
-                message = "resource not found."
-                # return error page
-                return (
-                    render_template("error.html", message=message, status_code=status_code),
-                    404,
-                )
-
-            @app.errorhandler(500)
-            def server_error(error):
-                # error code
-                status_code = 500
-                # message
-                message = "internal server error."
-                # return error page
-                return (
-                    render_template("error.html", message=message, status_code=status_code),
-                    500,
-                )
-
-            @app.errorhandler(502)
-            def server_error(error):
-                # error code
-                status_code = 502
-                # message
-                message = "bad gateway."
-                # return error page
-                return (
-                    render_template("error.html", message=message, status_code=status_code),
-                    502,
-                )
-
-            @app.errorhandler(CSRFError)
-            def handle_csrf_error(e):
-                return (
-                    render_template("error.html", message=e.description, status_code=400),
-                    400,
-                )
-
-            # date formatting
-            @app.template_filter()
-            def format_datetime(value, format="medium"):
-                if format == "full":
-                    format = "EEEE, d. MMMM y 'at' HH:mm"
-                elif format == "medium":
-                    format = "EE dd.MM.y HH:mm"
-                elif format == "short":
-                    format = "MMM d. y"
-                return babel.dates.format_datetime(value, format)
-
-            # Import a module / component using its blueprint handler variable (mod_auth)
+            # import blueprints
+            from app.errors import errors as error_module
+            from app.macros import macros as macros_module
             from app.auth.controllers import auth as auth_module
             from app.base.controllers import base as base_module
             from app.cms.controllers import cms as cms_module
 
-            # Register blueprint(s)
+            # register blueprint(s)
+            app.register_blueprint(error_module)
+            app.register_blueprint(macros_module)
             app.register_blueprint(auth_module)
             app.register_blueprint(base_module)
             app.register_blueprint(cms_module)
