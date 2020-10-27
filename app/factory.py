@@ -22,12 +22,18 @@ from flask_uploads import UploadSet, IMAGES, configure_uploads
 # config
 import app.config as config
 
+# logging
+import logging
+
 # global variables
 # uploading
 uploads = None
 # timed serializer
 ts = None
 
+logging.basicConfig(filename="teret.log",
+                    level=logging.DEBUG,
+                    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s")
 
 def create_app(environment="development"):
         #try:

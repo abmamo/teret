@@ -1,3 +1,4 @@
+*.log
 *.db
 *.env
 app/static/images/uploads/
