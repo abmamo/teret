@@ -36,7 +36,7 @@ jobs:
           envkey_MAIL_PASSWORD = "N9dJbqsrcAAGw8z"
           envkey_USER_EMAIL = "major.abenezer@gmail.com"
           envkey_USER_PASSWORD = "testpassword"
-          file_name: .env
+        file_name: .env
       - name: test with pytest
         run: |
           python3 -m pytest ./tests
