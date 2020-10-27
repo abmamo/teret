@@ -183,7 +183,7 @@ def reset_with_token(token):
                 # return error page
                 abort(500)
         # alert user
-        flash("password successfully reset.")
+        flash("password successfully reset")
         # redirect to sign in
         return redirect(url_for("auth.signin"))
     return render_template("reset_with_token.html", token=token)
