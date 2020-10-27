@@ -5,21 +5,13 @@
   <title>teret | editor</title>
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/3.4.1/paper/bootstrap.min.css"
+    crossorigin="anonymous">
   <link rel="stylesheet" type="text/css"
     href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/blackboard.min.css">
-  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css">
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>>
-
   <link href="{{ url_for('static', filename='summernote/summernote.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='css/editor.css') }}" rel="stylesheet">
-  <script src="{{ url_for('static', filename='summernote/summernote.js') }}"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
@@ -48,6 +40,12 @@
       </div>
     </form>
   </div>
+  <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
+  <script src="{{ url_for('static', filename='summernote/summernote.js') }}"></script>
   <script>
     var csrftoken = $('meta[name=csrf-token]').attr('content')
     $.ajaxSetup({
@@ -64,12 +62,14 @@
       fontNames: ["Poppins", "Source Code Pro"],
       fontNamesIgnoreCheck: ["Poppins", "Source Code Pro"],
       fontSizes: ['8', '9', '10', '11', '12', '16', '18', '24', '36', '48', '64', '82', '150'],
-      codemirror: { // codemirror options
+      tabsize: 2,
+      codemirror: {
         theme: 'blackboard'
       },
       toolbar: [
         // [groupName, [list of button]]
-        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['cmds', ['undo', 'redo', 'clear']],
+        ['style', ['style']],
         ['font', ['strikethrough', 'superscript', 'subscript']],
         ['fontsize', ['fontsize']],
         ['fontname', ['fontname']],
@@ -78,9 +78,13 @@
         ['height', ['height']],
         ['table', ['table']],
         ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
+        ['view', ['fullscreen', 'codeview', 'help']],
+        ['codemirror', ['codemirror']]
       ],
       callbacks: {
+        onInit: function () {
+          $('.summernote').summernote('codeview.activate');
+        },
         onImageUpload: function (image) {
           uploadImage(image[0]);
         }
