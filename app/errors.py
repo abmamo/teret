@@ -13,11 +13,9 @@ errors = Blueprint('errors',
 def not_found(error):
     # error code
     status_code = 400
-    # message
-    message = "bad request."
     # return error page
     return (
-        render_template("error.html", message=message, status_code=status_code),
+        render_template("error.html", message=str(error), status_code=status_code),
         400,
     )
 
@@ -25,11 +23,9 @@ def not_found(error):
 def not_found(error):
     # error code
     status_code = 404
-    # message
-    message = "resource not found."
     # return error page
     return (
-        render_template("error.html", message=message, status_code=status_code),
+        render_template("error.html", message=str(error), status_code=status_code),
         404,
     )
 
@@ -37,11 +33,9 @@ def not_found(error):
 def server_error(error):
     # error code
     status_code = 500
-    # message
-    message = "internal server error."
     # return error page
     return (
-        render_template("error.html", message=message, status_code=status_code),
+        render_template("error.html", message=str(error), status_code=status_code),
         500,
     )
 
@@ -49,11 +43,9 @@ def server_error(error):
 def server_error(error):
     # error code
     status_code = 502
-    # message
-    message = "bad gateway."
     # return error page
     return (
-        render_template("error.html", message=message, status_code=status_code),
+        render_template("error.html", message=str(error), status_code=status_code),
         502,
     )
 
