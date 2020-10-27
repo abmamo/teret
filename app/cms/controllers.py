@@ -44,7 +44,7 @@ def home():
         return render_template("cms.html", tags=tags, stories=stories)
     except Exception as e:
         # log
-        current_app.logger.warning("dashboard failed.")
+        current_app.logger.warning("dashboard failed with: %s" % str(e))
         # return error page
         abort(500)
 
@@ -56,7 +56,7 @@ def editor():
         return render_template("editor.html")
     except Exception as e:
         # log
-        current_app.logger.warning("editor failed.")
+        current_app.logger.warning("editor failed with: %s" % str(e))
         # return error page
         abort(500)
 
@@ -70,9 +70,9 @@ def upload():
         image_filename = uploads.save(request.files["image"])
         image_url = uploads.url(image_filename)
         return image_url
-    except:
+    except Exception as e:
         # log
-        current_app.logger.warning("upload failed.")
+        current_app.logger.warning("upload failed with: %s" % str(e))
         # if image can't be saved returned empty string as url
         return ""
 
@@ -89,7 +89,7 @@ def save():
             tags = request.form["tags"]
         except Exception as e:
             # log
-            current_app.logger.warning("form data failed.")
+            current_app.logger.warning("form data failed with: %s" % str(e))
             # return error page
             abort(500)
         # try and get main image if not just keep it empty
@@ -98,7 +98,7 @@ def save():
             image_url = uploads.url(image_filename)
         except Exception as e:
             # log
-            current_app.logger.warning("file data failed.")
+            current_app.logger.warning("file data failed with: %s" % str(e))
             # set to empty
             image_filename = ""
             image_url = ""
@@ -129,7 +129,7 @@ def save():
             db.session.close()
         except Exception as e:
             # log
-            current_app.logger.warning("post create failed.")
+            current_app.logger.warning("post create failed with: %s" % str(e))
             # return error page
             abort(500)
         # alert user
@@ -148,7 +148,7 @@ def edit(slug):
         return render_template("edit.html", story=story)
     except Exception as e:
         # log
-        current_app.logger.warning("edit failed.")
+        current_app.logger.warning("edit failed with: %s" % str(e))
         # return error page
         abort(500)
 
@@ -169,7 +169,7 @@ def publish(slug):
         return redirect(url_for("cms.home"))
     except Exception as e:
         # log
-        current_app.logger.warning("publish failed.")
+        current_app.logger.warning("publish failed with: %s" % str(e))
         # return error page
         abort(500)
 
@@ -189,7 +189,7 @@ def unpublish(slug):
         return redirect(url_for("cms.home"))
     except Exception as e:
         # log
-        current_app.logger.warning("unpublish failed.")
+        current_app.logger.warning("unpublish failed with: %s" % str(e))
         # return error page
         abort(500)
 
@@ -207,8 +207,11 @@ def delete(slug):
         os.remove(path)
     except:
         pass
+    # delete post
     db.session.delete(post)
     db.session.commit()
     db.session.close()
-    flash("deleted.")
+    # alert user
+    flash("deleted")
+    # redirect to cms
     return redirect(url_for("cms.home"))

@@ -46,6 +46,12 @@ nav {
   border-bottom: 2px solid #000000 !important;
 }
 
+.sidenav-trigger {
+  color: #EEB21B !important;
+  background: #ffffff !important;
+  transition: 0.3s all;
+}
+
 .nav-extended,
 .nav-header {
   background: #ffffff !important;
@@ -142,11 +148,12 @@ nav {
 }
 
 .card-title {
-  font-size: 1.15em;
+  font-size: 1.25em;
   font-family: "Poppins", serif !important;
   font-weight: bold;
   border-bottom: #EEB21B 2px solid;
-  line-height: 1.6;
+  line-height: 1.75;
+  letter-spacing: 0.1em !important;
 }
 
 .card-time {
@@ -154,8 +161,7 @@ nav {
   font-family: "Source Code Pro", monospace !important;
   font-size: 0.75em !important;
   font-weight: bold;
-  letter-spacing: 0.05em !important;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em !important;
   margin-left: 0 !important;
 }
 
@@ -221,6 +227,10 @@ input {
 .row .input-field input:focus {
   border-bottom: 1px solid #EEB21B !important;
   box-shadow: 0 1px 0 0 #EEB21B !important;
+}
+
+form .btn-floating {
+  margin: 1% !important;
 }
 
 .form-button {
