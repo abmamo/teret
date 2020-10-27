@@ -17,6 +17,10 @@
 
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css"
+    href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/blackboard.min.css">
 </head>
 
 <body class="blog">
@@ -135,6 +139,9 @@
   <script src="{{ url_for('static', filename='js/color-thief.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/galleryExpand.js') }}"></script>
   <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
   <script>
     // get snackbar
     var snackbar = document.getElementById("snackbar");
@@ -148,6 +155,24 @@
       // remove message
       snackbar.innerHTML = "";
     }
+  </script>
+  <script>
+    $('pre').each(function () {
+
+      var $this = $(this),
+        $code = $this.html(),
+        $unescaped = $('<div/>').html($code).text();
+
+      $this.empty();
+
+      CodeMirror(this, {
+        value: $unescaped,
+        mode: 'javascript',
+        lineNumbers: !$this.is('.inline'),
+        readOnly: true
+      });
+
+    });
   </script>
 </body>
 
