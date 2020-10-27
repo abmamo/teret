@@ -31,11 +31,11 @@ jobs:
         with:
           envkey_DOMAIN: "http://localhost:5000"
           envkey_ENVIRONMENT: "testing"
-          envkey_MAIL_SERVER: "mail.privateemail.com"
-          envkey_MAIL_USERNAME: "info@abmamo.com"
-          envkey_MAIL_PASSWORD: "N9dJbqsrcAAGw8z"
-          envkey_USER_EMAIL: "major.abenezer@gmail.com"
-          envkey_USER_PASSWORD: "testpassword"
+          envkey_MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
+          envkey_MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          envkey_MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          envkey_USER_EMAIL: ${{ secrets.USER_EMAIL}}
+          envkey_USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
           file_name: .env
       - name: test with pytest
         run: |
