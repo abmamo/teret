@@ -146,6 +146,7 @@ nav {
   font-family: "Poppins", serif !important;
   font-weight: bold;
   border-bottom: #EEB21B 2px solid;
+  line-height: 1.6;
 }
 
 .card-time {

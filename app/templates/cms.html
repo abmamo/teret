@@ -86,6 +86,10 @@
               </div>
               <div class="container">
                 <div class="row">
+                  <span class="card-time"><i class="tiny material-icons">create</i>{{ story.created_on
+                    | format_datetime("short") }}</span>
+                </div>
+                <div class="row">
                   {% if story.published %}
                   <span class="card-time"><i class="tiny material-icons">album</i>{{
                         story.published_on | format_datetime("short") }}</span>
@@ -97,10 +101,14 @@
               <div class="title-wrapper">
                 <div class="container">
                   <div class="row">
-                    <span class="card-tag">{{ story.tags }}</span>{% if story.published %}
+                    <span class="card-tag">{{ story.tags }}</span>
+                    <span class="card-time"><i class="tiny material-icons">create</i>{{ story.created_on
+                      | format_datetime("short") }}</span>
+                    {% if story.published %}
                     <span class="card-time"> <i class="tiny material-icons">album</i> {{
                         story.published_on | format_datetime("short") }}</span>
                     {% endif %}
+
                   </div>
                 </div>
                 <div class="container">
