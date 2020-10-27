@@ -125,7 +125,7 @@ def request_reset():
                 # alert user
                 flash("invalid credentials")
                 # return to reset page
-                return render_template("request_reset.html")
+                return render_template("reset.html")
         except Exception as e:
                 # log
                 current_app.logger.warning("exists validation failed with: %s" % str(e))
@@ -149,7 +149,7 @@ def request_reset():
         flash("reset link sent")
         # redirect to home
         return redirect(url_for("base.home"))
-    return render_template("request_reset.html")
+    return render_template("reset.html")
 
 
 @auth.route("/reset/<token>", methods=["GET", "POST"])
@@ -182,11 +182,11 @@ def reset_with_token(token):
                 current_app.logger.warning("password reset failed with: %s" % str(e))
                 # return error page
                 abort(500)
-        # alert user
+        # alert userw
         flash("password successfully reset")
         # redirect to sign in
         return redirect(url_for("auth.signin"))
-    return render_template("reset_with_token.html", token=token)
+    return render_template("change.html", token=token)
 
 
 @auth.route("/signout")
