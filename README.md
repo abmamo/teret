@@ -12,7 +12,7 @@ blogging engine built using flask + summernotejs + SQLAlchemy + SQLite (or any b
   ```
     python3 -m venv env
   ```
-3. create .env file
+3. create .env file (this is where configuration variables will be stored for the app)
   ```
     mv .env.sample .env
   ```
