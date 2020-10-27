@@ -37,9 +37,6 @@ class Config:
     MAIL_USE_SSL = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-    # set max users
-    USER_EMAIL = os.environ.get("USER_EMAIL")
-    USER_PASSWORD = os.environ.get("USER_PASSWORD")
     # server name
     SERVER_NAME = os.environ.get("SERVER_NAME")
     SESSION_COOKIE_DOMAIN = os.environ.get("SERVER_NAME")
@@ -50,15 +47,26 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.test.db")
     DEBUG = True
     TESTING = True
+    WTF_CSRF_ENABLED = False
+    CSRF_ENABLED = False
+    # set max users
+    USER_EMAIL = "test@test.com"
+    USER_PASSWORD = "testpassword"
 
 class DevelopmentConfig(Config):
     # db 
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.dev.db")
     DEBUG = True
     TESTING = True
+    # set max users
+    USER_EMAIL = os.environ.get("USER_EMAIL")
+    USER_PASSWORD = os.environ.get("USER_PASSWORD")
 
 
 class ProductionConfig(Config):
     # db
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.db")
     DEBUG = False
+    # set max users
+    USER_EMAIL = os.environ.get("USER_EMAIL")
+    USER_PASSWORD = os.environ.get("USER_PASSWORD")
