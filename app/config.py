@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 
-class Config: 
+class Config:
+    APP_NAME = "TERET / ተረት"
     # app dir
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     DATABASE_CONNECT_OPTIONS = {}

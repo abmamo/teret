@@ -41,7 +41,7 @@ def home():
         # sort stories by creation date
         stories = Post.query.all()[::-1]
         # render cms page
-        return render_template("cms.html", tags=tags, stories=stories)
+        return render_template("cms.html", tags=tags, stories=stories, app_name=current_app.config["APP_NAME"])
     except Exception as e:
         # log
         current_app.logger.warning("dashboard failed with: %s" % str(e))

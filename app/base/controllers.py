@@ -18,7 +18,7 @@ def home():
         # sort stories by latest
         stories = Post.query.filter_by(published=True).all()[::-1]
         # render stories page
-        return render_template("stories.html", tags=tags, stories=stories)
+        return render_template("stories.html", tags=tags, stories=stories, app_name=current_app.config["APP_NAME"])
     except Exception as e:
         # log
         current_app.logger.warning("stories failed with: %s" % str(e))
