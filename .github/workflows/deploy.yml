@@ -29,8 +29,9 @@ jobs:
       - name: create env file
         uses: SpicyPizza/create-envfile@v1
         with:
-          envkey_DOMAIN: "http://localhost:5000"
+          envkey_DOMAIN: "http://127.0.0.1:5000"
           envkey_ENVIRONMENT: "testing"
+          envkey_SERVER_NAME: "127.0.0.1:5000"
           envkey_MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
           envkey_MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
           envkey_MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
