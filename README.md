@@ -5,7 +5,7 @@ blogging engine built using flask + summernotejs + SQLAlchemy + SQLite (or any b
 
 1. clone the respository and navigate to folder
   ```
-    git clone git@github.com:abmamo/teret.git &&
+    git clone https://github.com/abmamo/teret.git &&
     cd teret
   ```
 2. create a virtual environment
