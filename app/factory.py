@@ -30,14 +30,14 @@ import logging
 uploads = None
 # timed serializer
 ts = None
-
+# configure logger
 logging.basicConfig(filename="teret.log",
                     level=logging.DEBUG,
                     format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s")
 
 def create_app(environment="development"):
     try:
-        # wsgi app object
+        # web wsgi app object
         app = Flask(__name__)
         # configuration
         if environment == "production":
@@ -49,18 +49,19 @@ def create_app(environment="development"):
         else:
             # dev
             app.config.from_object(config.DevelopmentConfig)
+        # get global variable upload
         global uploads
-        # Configure the image uploading via Flask-Uploads
+        # configure the image uploading via Flask-Uploads
         uploads = UploadSet("uploads", IMAGES)
         configure_uploads(app, uploads)
+        # get global variable ts
         global ts
         # initialize serializer with the app secret key
         ts = URLSafeTimedSerializer(app.config["SECRET_KEY"])
         # import extensions
         from app.extensions import csrf, login, mail, migrate, db
-
+        # init extensions with app context
         with app.app_context():
-            # init extensions
             # csrf
             csrf.init_app(app)
             # login
@@ -73,21 +74,18 @@ def create_app(environment="development"):
             db.init_app(app)
             # migration
             migrate.init_app(app, db)
-            # import model
+            # import models
             from app.auth.models import User
-
             # initialise login manager
             @login.user_loader
             def load_user(id):
                 return User.query.get(int(id))
-
             # import blueprints
             from app.errors import errors as error_module
             from app.macros import macros as macros_module
             from app.auth.controllers import auth as auth_module
             from app.base.controllers import base as base_module
             from app.cms.controllers import cms as cms_module
-
             # register blueprint(s)
             app.register_blueprint(error_module)
             app.register_blueprint(macros_module)
@@ -102,7 +100,7 @@ def create_app(environment="development"):
                 user = User.query.filter_by(email=app.config["USER_EMAIL"]).first()
                 # check email has been found
                 if user != None:
-                    # don't recreat user
+                    # don't recreate user is already existent
                     pass
                 else:
                     try:
@@ -115,14 +113,15 @@ def create_app(environment="development"):
                         assert user.id is not None
                     except Exception as e:
                         # log
-                        print("user init failed: %s" % str(e))
+                        print("user confirm failed: %s" % str(e))
                         # return
                         return None
             except Exception as e:
                 # log
-                print("deleting existing user failed: %s" % str(e))
+                print("init user failed: %s" % str(e))
                 # return
                 return None
+            # send confirmation email
             if user.confirmed == False:
                 # import mail send function
                 from app.mail import send_mail
