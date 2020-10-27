@@ -130,7 +130,7 @@
                 <div class="col s3 m3 l3">
                   <form action="{{ url_for('cms.edit', slug = story.slug) }}" method="POST">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                    <button class="btn-floating btn-large waves-effect waves-light blue">
+                    <button class="btn-floating btn-large waves-effect waves-light blue" type="submit" name="action">
                       <i class="material-icons">mode_edit</i>
                     </button>
                   </form>
@@ -138,7 +138,7 @@
                 <div class="col s3 m3 l3">
                   <form action="{{ url_for('cms.delete', slug = story.slug) }}" method="POST">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                    <button class="btn-floating btn-large waves-effect waves-light red">
+                    <button class="btn-floating btn-large waves-effect waves-light red" type="submit" name="action">
                       <i class="material-icons">delete</i>
                     </button>
                   </form>
@@ -146,7 +146,7 @@
                 <div class="col s3 m3 l3">
                   <form action="{{ url_for('cms.publish', slug = story.slug) }}" method="POST">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                    <button class="btn-floating btn-large waves-effect waves-light green">
+                    <button class="btn-floating btn-large waves-effect waves-light green" type="submit" name="action">
                       <i class="material-icons">vertical_align_top</i>
                     </button>
                   </form>
@@ -154,7 +154,7 @@
                 <div class="col s3 m3 l3">
                   <form action="{{ url_for('cms.unpublish', slug = story.slug) }}" method="POST">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                    <button class="btn-floating btn-large waves-effect waves-light yellow">
+                    <button class="btn-floating btn-large waves-effect waves-light yellow" type="submit" name="action">
                       <i class="material-icons">vertical_align_bottom</i>
                     </button>
                   </form>
