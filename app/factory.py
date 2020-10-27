@@ -102,48 +102,49 @@ def create_app(environment="development"):
                 user = User.query.filter_by(email=app.config["USER_EMAIL"]).first()
                 # check email has been found
                 if user != None:
-                    # delete userc
-                    db.session.delete(user)
-                    # save 
-                    db.session.commit()
+                    # don't recreat user
+                    pass
+                else:
+                    try:
+                        # initialize user
+                        user = User(email=app.config["USER_EMAIL"], password=app.config["USER_PASSWORD"])
+                        # add to session
+                        db.session.add(user)
+                        db.session.commit()
+                        # assert user properly created
+                        assert user.id is not None
+                    except Exception as e:
+                        # log
+                        print("user init failed: %s" % str(e))
+                        # return
+                        return None
             except Exception as e:
                 # log
                 print("deleting existing user failed: %s" % str(e))
                 # return
                 return None
-            try:
-                # initialize user
-                user = User(email=app.config["USER_EMAIL"], password=app.config["USER_PASSWORD"])
-                # add to session
-                db.session.add(user)
-                db.session.commit()
-                # assert user properly created
-                assert user.id is not None
-            except Exception as e:
-                # log
-                print("user init failed: %s" % str(e))
-                # return
-                return None
-            # import mail send function
-            from app.mail import send_mail
-            try:
-                # prepare email
-                subject = "confirm account"
-                # generate token
-                token = ts.dumps(app.config["USER_EMAIL"], salt="email-confirm-key")
-                # build recover url
-                confirm_url = url_for("auth.confirm_email", token=token, _external=True)
-                print("account confirmation sent or use link below: ")
-                print(confirm_url)
-                # send the emails
-                send_mail(
-                    subject, app.config["MAIL_USERNAME"], [app.config["USER_EMAIL"]], confirm_url
-                )
-            except Exception as e:
-                # log
-                print("send confirmation failed: %s" % str(e))
-                # return error page
-                return None
+            if user.confirmed == False:
+                # import mail send function
+                from app.mail import send_mail
+                try:
+                    # prepare email
+                    subject = "confirm account"
+                    # generate token
+                    token = ts.dumps(user.email, salt="email-confirm-key")
+                    # build recover url
+                    confirm_url = url_for("auth.confirm_email", token=token, _external=True)
+                    # alert user
+                    print("account confirmation sent or use link below: ")
+                    print(confirm_url)
+                    # send the emails
+                    send_mail(
+                        subject, app.config["MAIL_USERNAME"], [user.email], confirm_url
+                    )
+                except Exception as e:
+                    # log
+                    print("send confirmation failed: %s" % str(e))
+                    # return error page
+                    return None
         # return app
         return app
     except Exception as e:
