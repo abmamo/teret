@@ -55,7 +55,7 @@
           </li>
           {% for tag in tags %}
           <li>
-            <a class="tag-title black-text" href="#{{ tag.tags.lower() }}">{{ tag.tags }}</a>
+            <a class="tag-title black-text" href="#{{ tag.lower() }}">{{ tag.lower() }}</a>
           </li>
           {% endfor %}
         </ul>

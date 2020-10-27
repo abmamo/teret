@@ -36,7 +36,7 @@ logging.basicConfig(filename="teret.log",
                     format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s")
 
 def create_app(environment="development"):
-        #try:
+    try:
         # wsgi app object
         app = Flask(__name__)
         # configuration
@@ -94,7 +94,7 @@ def create_app(environment="development"):
             app.register_blueprint(auth_module)
             app.register_blueprint(base_module)
             app.register_blueprint(cms_module)
-            # create all schema
+            # create all tables
             db.create_all()
             # create user
             try:
@@ -117,14 +117,14 @@ def create_app(environment="development"):
                 # add to session
                 db.session.add(user)
                 db.session.commit()
+                # assert user properly created
                 assert user.id is not None
-                db.session.close()
             except Exception as e:
                 # log
                 print("user init failed: %s" % str(e))
                 # return
                 return None
-            """
+            # import mail send function
             from app.mail import send_mail
             try:
                 # prepare email
@@ -133,6 +133,8 @@ def create_app(environment="development"):
                 token = ts.dumps(app.config["USER_EMAIL"], salt="email-confirm-key")
                 # build recover url
                 confirm_url = url_for("auth.confirm_email", token=token, _external=True)
+                print("account confirmation sent or use link below: ")
+                print(confirm_url)
                 # send the emails
                 send_mail(
                     subject, app.config["MAIL_USERNAME"], [app.config["USER_EMAIL"]], confirm_url
@@ -142,12 +144,10 @@ def create_app(environment="development"):
                 print("send confirmation failed: %s" % str(e))
                 # return error page
                 return None
-            """
         # return app
         return app
-        #except Exception as e:
+    except Exception as e:
         # log
-        #print("factory failed.")
-        #print(str(e))
-        # exit
-        #sys.exit(1)
+        print("factory failed with: %s" % str(e))
+        # return failure
+        return None

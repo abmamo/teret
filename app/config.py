@@ -40,7 +40,8 @@ class Config:
     USER_EMAIL = os.environ.get("USER_EMAIL")
     USER_PASSWORD = os.environ.get("USER_PASSWORD")
     # server name
-    #SERVER_NAME = os.environ.get("SERVER_NAME")
+    SERVER_NAME = os.environ.get("SERVER_NAME")
+    SESSION_COOKIE_DOMAIN = os.environ.get("SERVER_NAME")
     DOMAIN = os.environ.get("DOMAIN")
 
 class TestingConfig(Config):

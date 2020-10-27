@@ -13,10 +13,10 @@ base = Blueprint("base", __name__, url_prefix="/")
 @base.route("/", methods=["GET"])
 def home():
     try:
-        # server side render of tags and stories
-        tags = Post.query.filter_by(published=True).distinct(Post.tags).all()
         # sort stories by latest
         stories = Post.query.filter_by(published=True).all()[::-1]
+        # get tags
+        tags = list(set([post.tags for post in stories]))
         # render stories page
         return render_template("stories.html", tags=tags, stories=stories, app_name=current_app.config["APP_NAME"])
     except Exception as e:

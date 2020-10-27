@@ -1,6 +1,6 @@
 # flask blueprint
 from flask import Blueprint
-# date utils
+# date parsing util
 import babel
 
 macros = Blueprint('macros',

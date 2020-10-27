@@ -36,10 +36,10 @@ cms = Blueprint("cms", __name__, url_prefix="/cms")
 @login_required
 def home():
     try:
-        # get tags and stories
-        tags = Post.query.distinct(Post.tags).all()
         # sort stories by creation date
         stories = Post.query.all()[::-1]
+        # get tags
+        tags = list(set([post.tags for post in stories]))
         # render cms page
         return render_template("cms.html", tags=tags, stories=stories, app_name=current_app.config["APP_NAME"])
     except Exception as e:

@@ -1,10 +1,8 @@
-# import factory
+# app factory
 from app.factory import create_app
 # env
 from dotenv import load_dotenv
 import os
-import sys
-
 # load env
 load_dotenv()
 # get environment
