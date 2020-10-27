@@ -1,12 +1,13 @@
+import os
 import pytest
-from app import create_app
-from app.mod_auth.models import User
+from app.factory import create_app
+from app.auth.models import User
 
 
 @pytest.fixture(scope="module")
 def test_client():
     # create app
-    app = create_app()
+    app = create_app(environment="testing")
     # expose wekzeug client
     testing_client = app.test_client()
     # establish application context
@@ -14,7 +15,11 @@ def test_client():
     ctx.push()
     # testing happens
     yield testing_client
-
+    # if test db exists delete
+    if os.path.exists(os.path.join(app.config["BASE_DIR"], "teret.test.db")):
+        # get base dir
+        os.remove(os.path.join(app.config["BASE_DIR"], "teret.test.db"))
+    # remove app context
     ctx.pop()
 
 

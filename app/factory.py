@@ -1,41 +1,48 @@
-# Import flask and template operators
+# dependencies
 from flask import Flask, render_template, abort, url_for
 
-# Import SQLAlchemy
+# orm
 from flask_sqlalchemy import SQLAlchemy
 
-# import login
+# login manager
 from flask_login import LoginManager
 
-# import mail manager
+# mail
 from flask_mail import Mail, Message
 
-# import csrf protections
+# csrf
 from flask_wtf.csrf import CSRFProtect
 
-# import serializer for generating tokens
+# serializer for generating tokens
 from itsdangerous import URLSafeTimedSerializer
 
-# import image upload plugins
+# uploads
 from flask_uploads import UploadSet, IMAGES, configure_uploads
 
-# import config
+# config
 import app.config as config
 
-# sys
-import sys
-
 # global variables
+# uploading
 uploads = None
+# timed serializer
 ts = None
 
 
-def create_app():
+def create_app(environment="development"):
         #try:
-        # Define the WSGI application object
+        # wsgi app object
         app = Flask(__name__)
-        # Configurations
-        app.config.from_object(config)
+        # configuration
+        if environment == "production":
+            # production
+            app.config.from_object(config.ProductionConfig)
+        elif environment == "testing":
+            # testing
+            app.config.from_object(config.TestingConfig)
+        else:
+            # dev
+            app.config.from_object(config.DevelopmentConfig)
         global uploads
         # Configure the image uploading via Flask-Uploads
         uploads = UploadSet("uploads", IMAGES)
@@ -53,6 +60,7 @@ def create_app():
             # login
             login.init_app(app)
             login.login_view = "auth.signin"
+            login.login_message = "please sign in"
             # mail
             mail.init_app(app)
             # db
