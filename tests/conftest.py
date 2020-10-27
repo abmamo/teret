@@ -29,17 +29,11 @@ def test_db(test_app):
         test_db.drop_all()
 
 @pytest.fixture(scope="module")
-def test_user(test_db):
-    # insert user data
-    test_user = User("test_one@test.com", "testonepassword")
-    # add users to database
-    test_db.session.add(test_user)
-    # commit changes
-    test_db.session.commit()
-    # yield
-    yield test_user
-    # delete user
-    test_db.session.delete(test_user)
-    # save changes
-    # commit changes
-    test_db.session.commit()
+def test_user(test_app):
+    with test_app.app_context():
+        # insert user data
+        test_user = User.query.filter_by(email=test_app.config["USER_EMAIL"]).first()
+        assert test_user is not None
+        assert test_user.email == test_app.config["USER_EMAIL"]
+        assert test_user.check_password(test_app.config["USER_PASSWORD"])
+        assert not test_user.configrmed

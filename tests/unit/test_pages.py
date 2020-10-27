@@ -14,7 +14,7 @@ def test_home_page(test_app):
         response = test_client.get('/')
         assert response.status_code == 200
 
-def test_signin_page(test_app, test_user):
+def test_signin_page(test_app):
     """
     GIVEN a Flask application
     WHEN the '/signin' page is requested (GET)
@@ -26,7 +26,7 @@ def test_signin_page(test_app, test_user):
         test_client = test_app.test_client()
         response = test_client.get('/signin')
         assert response.status_code == 200
-        data = {"email": "major.abenezer@gmail.com", "password": "testpassword"}
+        data = {"email": test_app.config["USER_EMAIL"], "password": test_app.config["USER_PASSWORD"]}
         response = test_client.post('/signin', data=data)
         assert response.status_code == 302
 
@@ -42,6 +42,9 @@ def test_forgot_page(test_app):
         test_client = test_app.test_client()
         response = test_client.get('/reset')
         assert response.status_code == 200
+        data = {"email": test_app.config["USER_EMAIL"]}
+        response = test_client.post('/reset', data=data)
+        assert response.status_code == 302
 
 def test_nonexistent_page(test_app):
     # with app context
