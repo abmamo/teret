@@ -1,7 +1,7 @@
 # teret [![Actions Status](https://github.com/abmamo/teret/workflows/teret/badge.svg)](https://github.com/abmamo/teret/actions)
-blogging engine built using flask + summernotejs + SQLAlchemy + SQLite/PostgreSQL.
+blogging engine built using flask + summernotejs + SQLAlchemy + SQLite (or any backend supported by SQLAlchemy).
 
-### Quickstart
+### quickstart
 
 1. clone the respository and navigate to folder
   ```
@@ -10,14 +10,19 @@ blogging engine built using flask + summernotejs + SQLAlchemy + SQLite/PostgreSQ
   ```
 2. create a virtual environment
   ```
-      python3 -m venv env
+    python3 -m venv env
   ```
-2. install dependencies
+3. create .env file
   ```
-      pip install -r requirements.txt
+    mv .env.sample .env
+  ```
+  then edit .env to make sure configurations are not placeholder values
+4. install dependencies
+  ```
+    pip install -r requirements.txt
   ```
 3. run application
   ```
       python wsgi.py
   ```
-4. Head over to http://localhost:5000/auth/signup to create an account. An email will be sent to the account used for signing up. Once you confirm your account you will be redirected to the signin page and once you sign in to the CMS.
+4. head over to http://127.0.0.1:5000 to get started. An account will be created from config variables in .env
