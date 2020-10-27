@@ -69,6 +69,7 @@ def upload():
         # try saving image and return url on disk
         image_filename = uploads.save(request.files["image"])
         image_url = uploads.url(image_filename)
+        # return image url
         return image_url
     except Exception as e:
         # log

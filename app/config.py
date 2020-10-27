@@ -1,10 +1,11 @@
 # env management
 from dotenv import load_dotenv
+import os
 # load env
 load_dotenv()
-import os
 
 class Config:
+    # blog name
     APP_NAME = "TERET / ተረት"
     # app dir
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
