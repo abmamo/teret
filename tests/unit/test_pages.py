@@ -52,6 +52,6 @@ def test_nonexistent_page(test_app):
         # expose wekzeug client
         test_client = test_app.test_client()
         response = test_client.get('/get')
-        assert response.status_code == 404
+        assert response.status_code == 302
 
 
