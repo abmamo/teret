@@ -38,4 +38,4 @@ def story(slug):
         # alert user
         flash("story not found")
         # redirect to homepage
-        return redirect(url_for('base.hom'))
+        return redirect(url_for('base.home'))
