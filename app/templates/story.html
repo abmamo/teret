@@ -50,22 +50,6 @@
         </span>
       </div>
     </div>
-
-    <!-- Fixed Masonry Filters -->
-    <div class="categories-wrapper white darken-1">
-      <div class="categories-container">
-        <ul class="categories container">
-          <li class="active">
-            <a class="tag-title black-text" href="#all">All</a>
-          </li>
-          {% for tag in tags %}
-          <li>
-            <a class="tag-title black-text" href="#{{ tag.lower() }}">{{ tag.lower() }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
   </nav>
   <!-- side nav-->
   <ul class="sidenav" id="nav-mobile">
@@ -77,36 +61,29 @@
     </li>
   </ul>
 
-  <div class="section gray">
-    <div class="container">
-      <div class="gallery row">
-        {% for story in stories %}
-        <div class="col l4 m6 s12 gallery-item gallery-filter {{ story.tags.lower() }}">
-          <div class="gallery-curve-wrapper">
-            <div class="gallery-header">
-              <div class="container">
-                <div class="row">
-                  <span class="card-tag">{{ story.tags }}</span>
-                </div>
-              </div>
-              <div class="container">
-                <div class="row card-link">
-                  <a href="{{ url_for('base.story', slug=story.slug) }}"><span
-                      class="card-title">{{ story.title }}</span></a>
-                </div>
-              </div>
-              <div class="container">
-                <div class="row">
-                  {% if story.published %}
-                  <span class="card-time"><i class="tiny material-icons">album</i>{{
-                        story.published_on | format_datetime("short") }}</span>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
+  <div class="section white story-container">
+    <div class="gallery-body">
+      <div class="title-wrapper">
+        <div class="container">
+          <div class="row">
+            <span class="card-tag">{{ story.tags }}</span>{% if story.published %}
+            <span class="card-time"> <i class="tiny material-icons">album</i> {{
+                story.published_on | format_datetime("short") }}</span>
+            {% endif %}
           </div>
         </div>
-        {% endfor %}
+        <div class="container">
+          <div class="row">
+            <span class="card-title">{{ story.title }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <p class="description content">
+            {{ story.content | safe }}
+          </p>
+        </div>
       </div>
     </div>
   </div>

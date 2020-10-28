@@ -140,6 +140,14 @@ nav {
   border: 2px solid #000000 !important;
 }
 
+.card-link a{
+  color: #000000 !important
+}
+
+.card-link a:hover .card-title {
+  border-color: #000000 !important;
+}
+
 .card-tag {
   font-family: "Source Code Pro", monospace !important;
   font-size: 0.875em !important;
@@ -154,6 +162,7 @@ nav {
   border-bottom: #EEB21B 2px solid;
   line-height: 1.75;
   letter-spacing: 0.1em !important;
+  transition: 0.3s all;
 }
 
 .card-time {
@@ -272,4 +281,18 @@ form .btn-floating {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.25em !important;
   font-size: 16px !important;
+}
+
+.story {
+  background: #ffffff !important;
+  line-height: 1.25em !important;
+  font-size: 16px !important;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+
+}
+
+.story-container {
+  width: 100vw !important;
+  height: 100vh !important;
 }
