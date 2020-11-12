@@ -1,5 +1,5 @@
 # teret [![Actions Status](https://github.com/abmamo/teret/workflows/teret/badge.svg)](https://github.com/abmamo/teret/actions)
-blogging engine built using flask + summernotejs + SQLAlchemy + SQLite (or any backend supported by SQLAlchemy).
+blogging application with a WYSIWYG editor built using Flask + SummernoteJS + SQLite (or any other relational database supported by SQLAlchemy)
 
 ### quickstart
 
@@ -12,7 +12,7 @@ blogging engine built using flask + summernotejs + SQLAlchemy + SQLite (or any b
   ```
     python3 -m venv env
   ```
-3. create .env file (this is where configuration variables will be stored for the app)
+3. create .env file (this is where configuration variables will be stored for the app such as app name, log in info)
   ```
     mv .env.sample .env
   ```
