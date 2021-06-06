@@ -47,21 +47,21 @@ class Config:  # pylint: disable=too-few-public-methods
     # Uploads
     # UPLOADS_DEFAULT_DEST = BASE_DIR + 'app/static/images/'
     UPLOADS_DEFAULT_DEST = "./app/static/images/"
-    UPLOADS_DEFAULT_URL = os.environ.get("DOMAIN") + "/static/images/"
+    UPLOADS_DEFAULT_URL = os.getenv("DOMAIN", "http://localhost:5000") + "/static/images/"
     # UPLOADED_IMAGES_DEST = os.path.join(BASE_DIR, '/app/static/images/')
     UPLOADS_IMAGES_DEST = "./app/static/images/"
-    UPLOADED_IMAGES_URL = os.environ.get("DOMAIN") + "/static/images/"
+    UPLOADED_IMAGES_URL = os.getenv("DOMAIN", "http://localhost:5000") + "/static/images/"
     # email configuration
-    MAIL_SERVER = os.environ.get("MAIL_SERVER")
+    MAIL_SERVER = os.environ.get("MAIL_SERVER") or ""
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_USERNAME = os.getenv("MAIL_USERNAME", "write@teret.com")
+    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD", "teret-admin-email")
     # server name
-    SERVER_NAME = os.environ.get("SERVER_NAME")
-    SESSION_COOKIE_DOMAIN = os.environ.get("SERVER_NAME")
-    DOMAIN = os.environ.get("DOMAIN")
+    SERVER_NAME = os.getenv("SERVER_NAME", "http://localhost:5000")
+    SESSION_COOKIE_DOMAIN = os.getenv("SERVER_NAME", "http://localhost:5000")
+    DOMAIN = os.getenv("DOMAIN", "http://localhost:5000")
     # user has to confirm
     USER_CONFIRMED = True
 

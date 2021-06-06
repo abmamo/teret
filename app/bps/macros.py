@@ -30,4 +30,4 @@ def format_datetime(value, date_format="medium"):
         date_format = "EE dd.MM.y HH:mm"
     elif date_format == "short":
         date_format = "MMM d. y"
-    return babel.dates.format_datetime(value, format)
+    return babel.dates.format_datetime(value, date_format)

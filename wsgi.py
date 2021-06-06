@@ -6,7 +6,7 @@ import os
 # load env
 load_dotenv()
 # get environment
-environment = os.environ.get("ENVIRONMENT")
+environment = os.getenv("ENVIRONMENT", "development")
 # create app
 app = create_app(environment=environment)
 # run app

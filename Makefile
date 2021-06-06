@@ -1,5 +1,7 @@
-include .env
-export $(shell sed 's/=.*//' .env)
+ifneq ("$(wildcard $($(CURDIR)/.env))","")
+    include .env
+	export $(shell sed 's/=.*//' .env)
+endif
 
 help:
 	@echo "list of available app commands"
