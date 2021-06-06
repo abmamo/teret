@@ -12,7 +12,6 @@ help:
 	@echo "prod        	- run app in prod mode."
 	@echo "lint        	- lint app."
 	@echo "test        	- test app."
-	@echo "load-test       - load test app using locust."
 	@echo "latest          - get latest version."
 	@echo "release         - trigger deploy job."
 	@echo

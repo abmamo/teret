@@ -1,4 +1,4 @@
-# teret [![Actions Status](https://github.com/abmamo/teret/workflows/teret/badge.svg)](https://github.com/abmamo/teret/actions)
+# teret [![test](https://github.com/abmamo/teret/actions/workflows/test.yaml/badge.svg?branch=master)](https://github.com/abmamo/teret/actions/workflows/test.yaml) [![deploy](https://github.com/abmamo/teret/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/abmamo/teret/actions/workflows/deploy.yml)
 blogging application with a WYSIWYG editor built using Flask + SummernoteJS + SQLite (or any other relational database supported by SQLAlchemy)
 
 ### quickstart
