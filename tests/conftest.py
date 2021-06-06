@@ -10,21 +10,28 @@ from app.factory import create_app
 from app.bps.auth.models import User
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session", autouse=True)
 def test_app():
     """
     test app fixture
     """
     # create app
     app = create_app(environment="testing")
-    app.config["TESTING"] = True
-    app.config["DEBUG"] = False
     # yield test app
     yield app
     # if test db exists delete
     if os.path.exists(os.path.join(app.config["BASE_DIR"], "teret.test.db")):
         # get base dir
         os.remove(os.path.join(app.config["BASE_DIR"], "teret.test.db"))
+
+
+@pytest.fixture(scope="session", autouse=True)
+def test_client(test_app):  # pylint: disable=redefined-outer-name
+    """
+    test client fixture
+    """
+    # yield test app client
+    yield test_app.test_client()
 
 
 @pytest.fixture(scope="module")
