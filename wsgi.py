@@ -1,14 +1,24 @@
-# app factory
-from app.factory import create_app
-# env
-from dotenv import load_dotenv
+"""
+    wsgi.py: app entry point
+"""
+# os
 import os
-# load env
+
+# env manager
+from dotenv import load_dotenv
+
+# app factory/creation function
+from app.factory import create_app
+
+# load env vars
 load_dotenv()
-# get environment
-environment = os.getenv("ENVIRONMENT", "development")
 # create app
-app = create_app(environment=environment)
-# run app
+app = create_app(
+    # get environment or use development as default
+    environment=os.environ.get("ENVIRONMENT", "development")
+)
+
+# if executed as script (in dev / testing)
 if __name__ == "__main__":
-    app.run()
+    # run app
+    app.run(host=os.environ.get("HOST", "0.0.0.0"), port=int(os.environ.get("PORT", 5000)))

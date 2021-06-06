@@ -47,10 +47,10 @@ class Config:  # pylint: disable=too-few-public-methods
     # Uploads
     # UPLOADS_DEFAULT_DEST = BASE_DIR + 'app/static/images/'
     UPLOADS_DEFAULT_DEST = "./app/static/images/"
-    UPLOADS_DEFAULT_URL = os.getenv("DOMAIN", "http://localhost:5000") + "/static/images/"
+    UPLOADS_DEFAULT_URL = os.getenv("DOMAIN", "http://127.0.0.1:5000") + "/static/images/"
     # UPLOADED_IMAGES_DEST = os.path.join(BASE_DIR, '/app/static/images/')
     UPLOADS_IMAGES_DEST = "./app/static/images/"
-    UPLOADED_IMAGES_URL = os.getenv("DOMAIN", "http://localhost:5000") + "/static/images/"
+    UPLOADED_IMAGES_URL = os.getenv("DOMAIN", "http://127.0.0.1:5000") + "/static/images/"
     # email configuration
     MAIL_SERVER = os.environ.get("MAIL_SERVER") or ""
     MAIL_PORT = 465
