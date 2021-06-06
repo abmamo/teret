@@ -28,6 +28,14 @@ jobs:
       - name: lint
         run: |
           PYTHONPATH=./app pylint app && PYTHONPATH=./tests pylint tests
+      - name: .env
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_DEBUG: False
+          envkey_DOMAIN: http://127.0.0.1:5000
+          envkey_ENVIRONMENT: testing
+          envkey_SERVER_NAME: 127.0.0.1:5000
+          file_name: .env
       - name: test
         run: |
           python3 -m pytest --cov-report term-missing --cov=./app ./tests -v && rm -f .coverage*
