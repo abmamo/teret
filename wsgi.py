@@ -21,4 +21,8 @@ app = create_app(
 # if executed as script (in dev / testing)
 if __name__ == "__main__":
     # run app
-    app.run(host=os.environ.get("HOST", "0.0.0.0"), port=int(os.environ.get("PORT", 5000)))
+    app.run(
+        use_reloader=True,
+        host=os.environ.get("HOST", "0.0.0.0"),
+        port=int(os.environ.get("PORT", 5000)),
+    )
