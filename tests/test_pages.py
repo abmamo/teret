@@ -1,4 +1,6 @@
-import pytest
+"""
+    test_pages.py: test page availability
+"""
 
 
 def test_home_page(test_app):
