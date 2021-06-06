@@ -8,9 +8,9 @@ import logging
 from flask_login import LoginManager
 
 # mail
-from flask_mail import Mail, Message
+from flask_mail import Mail
 
-# csrf 
+# csrf
 from flask_wtf.csrf import CSRFProtect
 
 # db migration
@@ -40,8 +40,10 @@ migrate = Migrate()
 # db orm
 db = SQLAlchemy()
 # initialize serializer with the app secret key
+# pylint: disable=invalid-name
 ts = None
 # uploads
+# pylint: disable=invalid-name
 uploads = None
 
 
@@ -81,12 +83,12 @@ def register_extensions(app):
     # log
     logger.debug("register: ts")
     # serializer
-    global ts
+    global ts  # pylint: disable=global-statement
     ts = URLSafeTimedSerializer(app.config["SECRET_KEY"])
     # log
     logger.debug("register: uploads")
     # get global variable upload
-    global uploads
+    global uploads  # pylint: disable=global-statement
     # configure the image uploading via Flask-Uploads
     uploads = UploadSet("uploads", IMAGES)
     configure_uploads(app, uploads)

@@ -1,31 +1,63 @@
+"""
+    models.py: auth bp db models
+"""
 # datetime
 from datetime import datetime
 
-# extensions
-from app.extensions import login, db
-
 # hashing
 from werkzeug.security import generate_password_hash, check_password_hash
+
 # db user class
 from flask_login import UserMixin
 
+# redirect
+from flask import url_for
 
-class IdMixin(object):
+# import mail send function
+from app.mail import send_mail
+
+# extensions
+from app.extensions import db, ts
+
+
+class IdMixin(
+    object
+):  # pylint: disable=useless-object-inheritance,too-few-public-methods
+    """
+    id generator class
+    """
+
     id = db.Column(db.Integer, primary_key=True)
 
 
-class DateTimeMixin(object):
+class DateTimeMixin(
+    object
+):  # pylint: disable=useless-object-inheritance,too-few-public-methods
+    """
+    timestamp class
+    """
+
     created_on = db.Column(db.DateTime, default=datetime.now)
     updated_on = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
 
-class ConfirmMixin(object):
+class ConfirmMixin(
+    object
+):  # pylint: disable=useless-object-inheritance,too-few-public-methods
+    """
+    confirmation class
+    """
+
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_at = db.Column(db.DateTime, default=datetime.now)
 
 
-# Define a base model for other models to inherit
+# pylint: disable=useless-object-inheritance,too-few-public-methods
 class User(IdMixin, UserMixin, ConfirmMixin, DateTimeMixin, db.Model):
+    """
+    user class
+    """
+
     __tablename__ = "users"
     email = db.Column(db.String(128), nullable=False, unique=True)
     password = db.Column(db.String(192), nullable=False)
@@ -36,19 +68,29 @@ class User(IdMixin, UserMixin, ConfirmMixin, DateTimeMixin, db.Model):
         self.password = generate_password_hash(password)
 
     def set_password(self, password):
+        """
+        set user password
+
+        params:
+            - password: user password
+        """
         self.password = generate_password_hash(password)
 
     def check_password(self, password):
+        """
+        check user password against hash
+
+        params:
+            - password: user password
+        """
         return check_password_hash(self.password, password)
 
     def __repr__(self):
+        """
+        string representation of user
+        """
         return "<User {}>".format(self.email)
 
-
-# user loader
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
 
 def register_user(app):
     """
@@ -62,10 +104,11 @@ def register_user(app):
         # create all tables
         db.create_all()
         # create user
-        create_user(app, User, db)
+        # pylint: disable=bad-option-value
+        create_user(app)
 
 
-def create_user(app, User, db):
+def create_user(app):  # pylint: disable=inconsistent-return-statements
     """
     create admin user
 
@@ -80,7 +123,7 @@ def create_user(app, User, db):
         # find user
         user = User.query.filter_by(email=app.config["USER_EMAIL"]).first()
         # check email has been found
-        if user != None:
+        if user is not None:
             # check password
             if user.check_password(app.config["USER_PASSWORD"]):
                 pass
@@ -90,19 +133,15 @@ def create_user(app, User, db):
                 # save changes
                 db.session.commit()
         else:
-            try:
-                # initialize user
-                user = User(email=app.config["USER_EMAIL"], password=app.config["USER_PASSWORD"])
-                # add to session
-                db.session.add(user)
-                db.session.commit()
-                # assert user properly created
-                assert user.id is not None
-            except Exception as e:
-                # log
-                app.logger.error("user creation failed: %s" % str(e))
-                # return
-                return None
+            # initialize user
+            user = User(
+                email=app.config["USER_EMAIL"], password=app.config["USER_PASSWORD"]
+            )
+            # add to session
+            db.session.add(user)
+            db.session.commit()
+            # assert user properly created
+            assert user.id is not None
         # disable email confirmation by default (change in config.ppy)
         if app.config["USER_CONFIRMED"]:
             user.confirmed = True
@@ -110,26 +149,17 @@ def create_user(app, User, db):
             db.session.commit()
         else:
             # send confirmation email
-            if user.confirmed == False:
-                # import mail send function
-                from app.mail import send_mail
-                try:
-                    # prepare email
-                    subject = "confirm account"
-                    # generate token
-                    token = ts.dumps(user.email, salt="email-confirm-key")
-                    # build recover url
-                    confirm_url = url_for("auth.confirm_email", token=token, _external=True)
-                    # alert user
-                    print("account confirmation sent or use link below: ")
-                    print(confirm_url)
-                    # send the emails
-                    send_mail(
-                        subject, app.config["MAIL_USERNAME"], [user.email], confirm_url
-                    )
-                except Exception as e:
-                    # log
-                    print("send confirmation failed: %s" % str(e))
-                    # return error page
-                    return None
-
+            if user.confirmed is False:
+                # prepare email
+                subject = "confirm account"
+                # generate token
+                token = ts.dumps(user.email, salt="email-confirm-key")
+                # build recover url
+                confirm_url = url_for("auth.confirm_email", token=token, _external=True)
+                # alert user
+                print("account confirmation sent or use link below: ")
+                print(confirm_url)
+                # send the emails
+                send_mail(
+                    subject, app.config["MAIL_USERNAME"], [user.email], confirm_url
+                )

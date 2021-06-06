@@ -1,10 +1,20 @@
+"""
+    conftest.py: contains all pytest configurations & fixtures for testing
+"""
 import os
 import pytest
+
+# app deps
+from app.extensions import db
 from app.factory import create_app
-from app.auth.models import User
+from app.bps.auth.models import User
+
 
 @pytest.fixture(scope="module")
 def test_app():
+    """
+    test app fixture
+    """
     # create app
     app = create_app(environment="testing")
     # yield test app
@@ -16,24 +26,29 @@ def test_app():
 
 
 @pytest.fixture(scope="module")
-def test_db(test_app):
+def test_db(test_app):  # pylint: disable=redefined-outer-name
+    """
+    test db fixture
+    """
     # with app context
     with test_app.app_context():
-        # import db extension
-        from app.extensions import db as test_db
         # create database tables
-        test_db.create_all()
+        db.create_all()
         # yield session
-        yield test_db
+        yield db
         # drop all tables created
-        test_db.drop_all()
+        db.drop_all()
+
 
 @pytest.fixture(scope="module")
-def test_user(test_app):
+def test_user(test_app):  # pylint: disable=redefined-outer-name
+    """
+    test user fixture
+    """
     with test_app.app_context():
         # insert user data
-        test_user = User.query.filter_by(email=test_app.config["USER_EMAIL"]).first()
-        assert test_user is not None
-        assert test_user.email == test_app.config["USER_EMAIL"]
-        assert test_user.check_password(test_app.config["USER_PASSWORD"])
-        assert not test_user.configrmed
+        user = User.query.filter_by(email=test_app.config["USER_EMAIL"]).first()
+        assert user is not None
+        assert user.email == test_app.config["USER_EMAIL"]
+        assert user.check_password(test_app.config["USER_PASSWORD"])
+        assert not user.confirmed

@@ -1,68 +1,72 @@
-# Import flask dependencies
+"""
+    controller.py: contains all handlers for cms bp
+"""
+# import os to remove files
+import os
+
+# flask dependencies
 from flask import (
     Blueprint,
     request,
     render_template,
     flash,
-    session,
     redirect,
     url_for,
     current_app,
-    abort
+    abort,
 )
 
 # import login manager
 from flask_login import login_required
 
-# import post model
-from app.bps.cms.models import Post
-
 # import slug creation libs
 from slugify import slugify
+
+# import post model
+from app.bps.cms.models import Post
 
 # import db session
 from app.extensions import db, uploads
 
-# import os to remove files
-import os
-
-
 # blueprint
 cms = Blueprint("cms", __name__, url_prefix="/cms")
 
-# basic routes
+
 @cms.route("/", methods=["GET"])
 @login_required
 def home():
-    try:
-        # sort stories by creation date
-        stories = Post.query.all()[::-1]
-        # get tags
-        tags = list(set([post.tags for post in stories]))
-        # render cms page
-        return render_template("cms.html", tags=tags, stories=stories, app_name=current_app.config["APP_NAME"])
-    except Exception as e:
-        # log
-        current_app.logger.warning("dashboard failed with: %s" % str(e))
-        # return error page
-        abort(500)
+    """
+    cms dashboard page
+    """
+    # sort stories by creation date
+    stories = Post.query.all()[::-1]
+    # get tags
+    tags = list({post.tags for post in stories})
+    # render cms page
+    return render_template(
+        "cms.html",
+        tags=tags,
+        stories=stories,
+        app_name=current_app.config["APP_NAME"],
+    )
+
 
 @cms.route("/editor", methods=["GET"])
 @login_required
 def editor():
-    try:
-        # render summernote editor page
-        return render_template("editor.html")
-    except Exception as e:
-        # log
-        current_app.logger.warning("editor failed with: %s" % str(e))
-        # return error page
-        abort(500)
+    """
+    editor page
+    """
+    # render summernote editor page
+    return render_template("editor.html")
 
 
 @cms.route("/upload", methods=["POST"])
 @login_required
 def upload():
+    """
+    upload image
+    """
     # image upload url doesn't render anything
     try:
         # try saving image and return url on disk
@@ -70,16 +74,19 @@ def upload():
         image_url = uploads.url(image_filename)
         # return image url
         return image_url
-    except Exception as e:
+    except Exception as error:  # pylint: disable=broad-except
         # log
-        current_app.logger.warning("upload failed with: %s" % str(e))
+        current_app.logger.warning("upload failed with: %s" % str(error))
         # if image can't be saved returned empty string as url
         return ""
 
 
 @cms.route("/save", methods=["POST"])
 @login_required
-def save():
+def save():  # pylint: disable=inconsistent-return-statements
+    """
+    save post
+    """
     if request.method == "POST":
         try:
             # get post data from form
@@ -87,18 +94,18 @@ def save():
             slug = slugify(title)
             content = request.form["content"]
             tags = request.form["tags"]
-        except Exception as e:
+        except Exception as error:  # pylint: disable=broad-except
             # log
-            current_app.logger.warning("form data failed with: %s" % str(e))
+            current_app.logger.warning("form data failed with: %s" % str(error))
             # return error page
             abort(500)
         # try and get main image if not just keep it empty
         try:
             image_filename = uploads.save(request.files["image"])
             image_url = uploads.url(image_filename)
-        except Exception as e:
+        except Exception as error:  # pylint: disable=broad-except
             # log
-            current_app.logger.warning("file data failed with: %s" % str(e))
+            current_app.logger.warning("file data failed with: %s" % str(error))
             # set to empty
             image_filename = ""
             image_url = ""
@@ -127,9 +134,9 @@ def save():
             # commit the changes
             db.session.commit()
             db.session.close()
-        except Exception as e:
+        except Exception as error:  # pylint: disable=broad-except
             # log
-            current_app.logger.warning("post create failed with: %s" % str(e))
+            current_app.logger.warning("post create failed with: %s" % str(error))
             # return error page
             abort(500)
         # alert user
@@ -141,72 +148,67 @@ def save():
 @cms.route("/edit/<string:slug>", methods=["GET", "POST"])
 @login_required
 def edit(slug):
-    try:
-        # edit specific story
-        story = Post.query.filter_by(slug=slug).first()
-        # render edit page
-        return render_template("edit.html", story=story)
-    except Exception as e:
-        # log
-        current_app.logger.warning("edit failed with: %s" % str(e))
-        # return error page
-        abort(500)
+    """
+    edit post
+    """
+    # edit specific story
+    story = Post.query.filter_by(slug=slug).first()
+    # render edit page
+    return render_template("edit.html", story=story)
 
 
 @cms.route("/publish/<string:slug>", methods=["POST"])
 @login_required
 def publish(slug):
-    try:
-        # get post by id
-        post = Post.query.filter_by(slug=slug).first()
-        # set published to True
-        post.published = True
-        # commit changes to database
-        db.session.commit()
-        db.session.close()
-        # alert user
-        flash("published.")
-        return redirect(url_for("cms.home"))
-    except Exception as e:
-        # log
-        current_app.logger.warning("publish failed with: %s" % str(e))
-        # return error page
-        abort(500)
+    """
+    publish post
+    """
+    # get post by id
+    post = Post.query.filter_by(slug=slug).first()
+    # set published to True
+    post.published = True
+    # commit changes to database
+    db.session.commit()
+    db.session.close()
+    # alert user
+    flash("published.")
+    return redirect(url_for("cms.home"))
 
 
 @cms.route("/unpublish/<string:slug>", methods=["POST"])
 @login_required
 def unpublish(slug):
-    try:
-        # get post by id
-        post = Post.query.filter_by(slug=slug).first()
-        # set published to false
-        post.published = False
-        # commit changes to database
-        db.session.commit()
-        db.session.close()
-        flash("unpublished.")
-        return redirect(url_for("cms.home"))
-    except Exception as e:
-        # log
-        current_app.logger.warning("unpublish failed with: %s" % str(e))
-        # return error page
-        abort(500)
+    """
+    unpublish post
+    """
+    # get post by id
+    post = Post.query.filter_by(slug=slug).first()
+    # set published to false
+    post.published = False
+    # commit changes to database
+    db.session.commit()
+    db.session.close()
+    # alert
+    flash("unpublished.")
+    # redirect
+    return redirect(url_for("cms.home"))
 
 
 @cms.route("/delete/<string:slug>", methods=["POST"])
 @login_required
 def delete(slug):
+    """
+    delete post
+    """
     # need to add ways to depelete post images
     post = Post.query.filter_by(slug=slug).first()
-    try:
-        path = os.path.join(
-            os.getcwd(), "app/static/images/uploads", post.image_filename
-        )
+    post_image_path = os.path.join(
+        os.getcwd(), "app/static/images/uploads", post.image_filename
+    )
+    # if path exists
+    if post_image_path:
         # delete the image associated with the post stored on disk
-        os.remove(path)
-    except:
-        pass
+        os.remove(post_image_path)
     # delete post
     db.session.delete(post)
     db.session.commit()

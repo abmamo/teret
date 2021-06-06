@@ -40,8 +40,8 @@ ifeq ($(DB_URI),)
 APP_PORT := ${DEFAULT_APP_PORT}
 endif
 # docker container names
-APP_CONTAINER_NAME_DEV := portfolio-dev
-APP_CONTAINER_NAME_PROD := portfolio-prod
+APP_CONTAINER_NAME_DEV := teret-dev
+APP_CONTAINER_NAME_PROD := teret-prod
 
 # virtualenv commands
 install:
@@ -55,10 +55,10 @@ prod:
 	@echo "config: prod"
 	@BG_ENABLED=${BG_DISABLED} FLASK_APP=${FLASK_APP} FLASK_ENV=production ENVIRONMENT=production PORT=${APP_PORT} python3 -m flask run --host=0.0.0.0 --no-reload
 lint:
-	@black src && black tests
-	@PYTHONPATH=./src pylint src && pylint tests
+	@black app && black tests
+	@PYTHONPATH=./app pylint app && pylint tests
 test:
-	@FLASK_APP=${FLASK_APP} FLASK_ENV=testing ENVIRONMENT=testing PORT=${APP_PORT} pytest --cov-report term-missing --cov=src tests -v && sleep 2.5 && rm -f .coverage*
+	@FLASK_APP=${FLASK_APP} FLASK_ENV=testing ENVIRONMENT=testing PORT=${APP_PORT} pytest --cov-report term-missing --cov=app tests -v && sleep 2.5 && rm -f .coverage*
 load-test:
 	make dev & locust -f $(CURDIR)/tests/test_load.py
 latest:

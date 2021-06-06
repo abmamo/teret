@@ -12,16 +12,24 @@
 """
 # io
 import os
+import pathlib
+
 # env management
 from dotenv import load_dotenv
+
 # load env
 load_dotenv()
 
-class Config:
+
+class Config:  # pylint: disable=too-few-public-methods
+    """
+    base config object
+    """
+
     # blog name
-    APP_NAME = "TERET / ተረት"
-    # app dir
-    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    APP_NAME = os.getenv("APP_NAME") or "TERET / ተረት"
+    # base dir
+    BASE_DIR = str(pathlib.Path(__file__).parent.parent.absolute())
     DATABASE_CONNECT_OPTIONS = {}
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # application threads. a common general assumption is
@@ -57,8 +65,13 @@ class Config:
     # user has to confirm
     USER_CONFIRMED = True
 
-class TestingConfig(Config):
-    # db 
+
+class TestingConfig(Config):  # pylint: disable=too-few-public-methods
+    """
+    testing config object
+    """
+
+    # db
     DB_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.test.db")
     DEBUG = True
     TESTING = True
@@ -68,8 +81,13 @@ class TestingConfig(Config):
     USER_EMAIL = "test@test.com"
     USER_PASSWORD = "testpassword"
 
-class DevelopmentConfig(Config):
-    # db 
+
+class DevelopmentConfig(Config):  # pylint: disable=too-few-public-methods
+    """
+    dev config object
+    """
+
+    # db
     DB_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.dev.db")
     DEBUG = True
     TESTING = True
@@ -78,13 +96,18 @@ class DevelopmentConfig(Config):
     USER_PASSWORD = os.environ.get("USER_PASSWORD")
 
 
-class ProductionConfig(Config):
+class ProductionConfig(Config):  # pylint: disable=too-few-public-methods
+    """
+    prod config object
+    """
+
     # db
     DB_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.db")
     DEBUG = False
     # set max users
     USER_EMAIL = os.environ.get("USER_EMAIL")
     USER_PASSWORD = os.environ.get("USER_PASSWORD")
+
 
 # importable config dict that maps each configuration
 # class from above to a keyword (can be used to get
