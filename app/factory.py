@@ -10,14 +10,18 @@ from flask import Flask
 # app extensions
 from app.extensions import register_extensions
 
-# app blueprints
-from app.bps.register import register_blueprints
-
 # app user
 from app.bps.auth.models import register_user
 
 # config
 from app.config import config_dict
+
+# import blueprints
+from app.bps.errors import errors as error_module
+from app.bps.macros import macros as macros_module
+from app.bps.auth.controllers import auth as auth_module
+from app.bps.base.controllers import base as base_module
+from app.bps.cms.controllers import cms as cms_module
 
 # configure logger
 logging.basicConfig(
@@ -39,10 +43,14 @@ def create_app(environment="development"):
     app = Flask(__name__)
     # config here
     app.config.from_object(config_dict[environment])
-    # register extendions
+    # register exts.
     register_extensions(app=app)
-    # register blueprints
-    register_blueprints(app=app)
+    # register bps
+    app.register_blueprint(error_module)
+    app.register_blueprint(macros_module)
+    app.register_blueprint(auth_module)
+    app.register_blueprint(base_module)
+    app.register_blueprint(cms_module)
     # register user
     register_user(app=app)
     # return app
