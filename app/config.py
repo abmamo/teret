@@ -73,7 +73,7 @@ class TestingConfig(Config):  # pylint: disable=too-few-public-methods
 
     # db
     DB_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.test.db")
-    DEBUG = True
+    DEBUG = False
     TESTING = True
     WTF_CSRF_ENABLED = False
     CSRF_ENABLED = False

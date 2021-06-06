@@ -30,7 +30,4 @@ jobs:
           PYTHONPATH=./app pylint app && PYTHONPATH=./tests pylint tests
       - name: test
         run: |
-          python3 -m venv env
-          env/bin/pip3 install --upgrade pip
-          env/bin/pip3 install -r requirements.txt
-          env/bin/python3 -m pytest --cov-report term-missing --cov=./app ./tests -v && rm -f .coverage*
+          python3 -m pytest --cov-report term-missing --cov=./app ./tests -v && rm -f .coverage*
