@@ -1,18 +1,17 @@
 # flask
-flask
-flask-sqlalchemy
-flask-migrate
-flask-uploads
-flask-login
-flask-mail
-flask-wtf
+flask==1.1.2
+flask-sqlalchemy==2.5.1
+flask-migrate==3.0.1
+flask-uploads==0.2.1
+flask-login==0.5.0
+flask-mail==0.9.1
+flask-wtf==0.15.1
 flask-minify==0.32
+werkzeug==0.16.1
 # env
-python-dotenv
+python-dotenv==0.15.0
 # slugify
-python-slugify
-# load testing
-locust==1.5.3
+python-slugify==5.0.2
 # env
 python-dotenv==0.15.0
 # linting
