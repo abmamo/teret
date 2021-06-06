@@ -11,7 +11,7 @@ from flask import Flask
 from app.extensions import register_extensions
 
 # app blueprints
-from app.bps import register_blueprints
+from app.bps.register import register_blueprints
 
 # app user
 from app.bps.auth.models import register_user

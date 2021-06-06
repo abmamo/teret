@@ -18,6 +18,7 @@ def test_app():
     # create app
     app = create_app(environment="testing")
     app.config["TESTING"] = True
+    app.config["DEBUG"] = False
     # yield test app
     yield app
     # if test db exists delete
