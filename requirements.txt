@@ -1,4 +1,4 @@
-babel
+# flask
 flask
 flask-sqlalchemy
 flask-migrate
@@ -6,6 +6,25 @@ flask-uploads
 flask-login
 flask-mail
 flask-wtf
-werkzeug==0.16.0
+flask-minify==0.32
+# env
 python-dotenv
+# slugify
 python-slugify
+# load testing
+locust==1.5.3
+# env
+python-dotenv==0.15.0
+# linting
+black==21.5b2
+pylint==2.8.3
+flake8==3.9.2
+# macros
+babel==2.9.1
+# logging
+structlog==21.1.0
+# testing
+pytest-cov==2.12.1
+pytest==6.2.1
+# prod
+#uwsgi==2.0.19.1

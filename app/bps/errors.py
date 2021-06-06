@@ -1,3 +1,6 @@
+"""
+    errors.py: contains functions to render error pages
+"""
 # flask blueprint
 from flask import Blueprint, render_template
 # csrf error

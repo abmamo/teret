@@ -17,21 +17,26 @@ from urllib.parse import urlparse
 from flask_login import current_user, login_user, logout_user
 
 # db model
-from app.auth.models import User
+from app.bps.auth.models import User
 
 # db extension
-from app.extensions import db
+from app.extensions import db, login
 
 # send mail functions
 from app.mail import send_mail
 from app.extensions import mail
 
 # import serializer
-from app.factory import ts
+from app.extensions import ts
 
 
 # auth module
 auth = Blueprint("auth", __name__, url_prefix="/")
+
+# initialise login manager
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 # Set the route and accepted methods
 @auth.route("/signin", methods=["GET", "POST"])

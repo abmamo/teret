@@ -15,14 +15,13 @@ from flask import (
 from flask_login import login_required
 
 # import post model
-from app.cms.models import Post
+from app.bps.cms.models import Post
 
 # import slug creation libs
 from slugify import slugify
 
 # import db session
-from app.extensions import db
-from app.factory import uploads
+from app.extensions import db, uploads
 
 # import os to remove files
 import os

@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, abort, current_app, flash, redirect, url_for
 
 # db models
-from app.cms.models import Post
+from app.bps.cms.models import Post
 
 # blueprint
 base = Blueprint("base", __name__, url_prefix="/")

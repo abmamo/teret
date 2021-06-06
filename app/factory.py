@@ -1,166 +1,47 @@
+"""
+    factory.py: contains function to configure & create flask web app
+"""
 # dependencies
-from flask import Flask, render_template, abort, url_for
+from flask import Flask
 
-# orm
-from flask_sqlalchemy import SQLAlchemy
+# app extensions
+from app.extensions import register_extensions, db
 
-# login manager
-from flask_login import LoginManager
+# app blueprints
+from app.bps import register_blueprints
 
-# mail
-from flask_mail import Mail, Message
-
-# csrf
-from flask_wtf.csrf import CSRFProtect
-
-# serializer for generating tokens
-from itsdangerous import URLSafeTimedSerializer
-
-# uploads
-from flask_uploads import UploadSet, IMAGES, configure_uploads
+# app user
+from app.bps.auth.models import register_user, create_user
 
 # config
-import app.config as config
+from app.config import config_dict
 
-# logging
+# app logging
 import logging
 
-# global variables
-# uploading
-uploads = None
-# timed serializer
-ts = None
 # configure logger
 logging.basicConfig(filename="teret.log",
                     level=logging.DEBUG,
                     format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s")
 
-def create_user(app, environment, User, db):
-    with app.app_context():
-        # create user
-        try:
-            # find user
-            user = User.query.filter_by(email=app.config["USER_EMAIL"]).first()
-            # check email has been found
-            if user != None:
-                # check password
-                if user.check_password(app.config["USER_PASSWORD"]):
-                    pass
-                else:
-                    # update password
-                    user.set_password(app.config["USER_PASSWORD"])
-                    # save changes
-                    db.session.commit()
-            else:
-                try:
-                    # initialize user
-                    user = User(email=app.config["USER_EMAIL"], password=app.config["USER_PASSWORD"])
-                    # add to session
-                    db.session.add(user)
-                    db.session.commit()
-                    print("user created: %s" % str(user.id))
-                    # assert user properly created
-                    assert user.id is not None
-                except Exception as e:
-                    # log
-                    print("user confirm failed: %s" % str(e))
-                    # return
-                    return None
-        except Exception as e:
-            # log
-            print("init user failed: %s" % str(e))
-            # return
-            return None
-        # send confirmation email
-        if user.confirmed == False:
-            # import mail send function
-            from app.mail import send_mail
-            try:
-                # prepare email
-                subject = "confirm account"
-                # generate token
-                token = ts.dumps(user.email, salt="email-confirm-key")
-                # build recover url
-                confirm_url = url_for("auth.confirm_email", token=token, _external=True)
-                # alert user
-                print("account confirmation sent or use link below: ")
-                print(confirm_url)
-                # send the emails
-                send_mail(
-                    subject, app.config["MAIL_USERNAME"], [user.email], confirm_url
-                )
-            except Exception as e:
-                # log
-                print("send confirmation failed: %s" % str(e))
-                # return error page
-                return None
-
 
 def create_app(environment="development"):
-    try:
-        # web wsgi app object
-        app = Flask(__name__)
-        # configuration
-        if environment == "production":
-            # production
-            app.config.from_object(config.ProductionConfig)
-        elif environment == "testing":
-            # testing
-            app.config.from_object(config.TestingConfig)
-        else:
-            # dev
-            app.config.from_object(config.DevelopmentConfig)
-        # get global variable upload
-        global uploads
-        # configure the image uploading via Flask-Uploads
-        uploads = UploadSet("uploads", IMAGES)
-        configure_uploads(app, uploads)
-        # get global variable ts
-        global ts
-        # initialize serializer with the app secret key
-        ts = URLSafeTimedSerializer(app.config["SECRET_KEY"])
-        # import extensions
-        from app.extensions import csrf, login, mail, migrate, db
-        # init extensions with app context
-        with app.app_context():
-            # csrf
-            csrf.init_app(app)
-            # login
-            login.init_app(app)
-            login.login_view = "auth.signin"
-            login.login_message = "please sign in"
-            # mail
-            mail.init_app(app)
-            # db
-            db.init_app(app)
-            # migration
-            migrate.init_app(app, db)
-            # import models
-            from app.auth.models import User
-            # initialise login manager
-            @login.user_loader
-            def load_user(id):
-                return User.query.get(int(id))
-            # import blueprints
-            from app.errors import errors as error_module
-            from app.macros import macros as macros_module
-            from app.auth.controllers import auth as auth_module
-            from app.base.controllers import base as base_module
-            from app.cms.controllers import cms as cms_module
-            # register blueprint(s)
-            app.register_blueprint(error_module)
-            app.register_blueprint(macros_module)
-            app.register_blueprint(auth_module)
-            app.register_blueprint(base_module)
-            app.register_blueprint(cms_module)
-            # create all tables
-            db.create_all()
-            # create user
-            create_user(app, environment, User, db)
-        # return app
-        return app
-    except Exception as e:
-        # log
-        print("factory failed with: %s" % str(e))
-        # return failure
-        return None
+    """
+    create web app
+
+    params:
+        - environment: current environment
+
+    """
+    # web wsgi app object
+    app = Flask(__name__)
+    # config here
+    app.config.from_object(config_dict[environment])
+    # register extendions
+    register_extensions(app=app)
+    # register blueprints
+    register_blueprints(app=app)
+    # register user
+    register_user(app=app)
+    # return app
+    return app

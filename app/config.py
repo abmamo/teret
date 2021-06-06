@@ -1,6 +1,19 @@
+"""
+    config.py: contains 3 API configuration classes DevelopmentConfig, TestingConfig,
+    & ProductionConfig.
+
+    in addition, it also has a config dict that maps the above 3 classes to a string
+
+    config_dict = {
+        "development": DevelopmentConfig,
+        "testing": TestingConfig,
+        "production": ProductionConfig,
+    }
+"""
+# io
+import os
 # env management
 from dotenv import load_dotenv
-import os
 # load env
 load_dotenv()
 
@@ -41,10 +54,12 @@ class Config:
     SERVER_NAME = os.environ.get("SERVER_NAME")
     SESSION_COOKIE_DOMAIN = os.environ.get("SERVER_NAME")
     DOMAIN = os.environ.get("DOMAIN")
+    # user has to confirm
+    USER_CONFIRMED = True
 
 class TestingConfig(Config):
     # db 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.test.db")
+    DB_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.test.db")
     DEBUG = True
     TESTING = True
     WTF_CSRF_ENABLED = False
@@ -55,7 +70,7 @@ class TestingConfig(Config):
 
 class DevelopmentConfig(Config):
     # db 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.dev.db")
+    DB_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.dev.db")
     DEBUG = True
     TESTING = True
     # set max users
@@ -65,8 +80,19 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     # db
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.db")
+    DB_URI = "sqlite:///" + os.path.join(Config.BASE_DIR, "teret.db")
     DEBUG = False
     # set max users
     USER_EMAIL = os.environ.get("USER_EMAIL")
     USER_PASSWORD = os.environ.get("USER_PASSWORD")
+
+# importable config dict that maps each configuration
+# class from above to a keyword (can be used to get
+# the configuration just using one key word w/o having
+# to import all 3 classes i.e. config_dict["development"]
+# returns DevelopmentConfig)
+config_dict = {
+    "development": DevelopmentConfig,
+    "testing": TestingConfig,
+    "production": ProductionConfig,
+}
