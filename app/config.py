@@ -59,9 +59,9 @@ class Config:  # pylint: disable=too-few-public-methods
     MAIL_USERNAME = os.getenv("MAIL_USERNAME", "write@teret.com")
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD", "teret-admin-email")
     # server name
-    SERVER_NAME = os.getenv("SERVER_NAME", "http://localhost:5000")
-    SESSION_COOKIE_DOMAIN = os.getenv("SERVER_NAME", "http://localhost:5000")
-    DOMAIN = os.getenv("DOMAIN", "http://localhost:5000")
+    SERVER_NAME = os.getenv("SERVER_NAME", "http://127.0.0.1:5000")
+    SESSION_COOKIE_DOMAIN = os.getenv("SERVER_NAME", "http://127.0.0.1:5000")
+    DOMAIN = os.getenv("DOMAIN", "http://127.0.0.1:5000")
     # user has to confirm
     USER_CONFIRMED = True
 
