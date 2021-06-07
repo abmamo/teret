@@ -9,11 +9,11 @@ flask-wtf==0.15.1
 flask-minify==0.32
 werkzeug==0.16.1
 # env
-python-dotenv==0.15.0
+python-dotenv==0.17.1
 # slugify
 python-slugify==5.0.2
 # env
-python-dotenv==0.15.0
+python-dotenv==0.17.1
 # linting
 black==21.5b2
 pylint==2.8.3
